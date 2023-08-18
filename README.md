@@ -216,3 +216,32 @@ for tc in range(1,T+1):
     partial(0,0)
     print(f'#{tc}',min(memo)-B)
 ```
+
+## 2023 08 18 friday
+
+### 백준 1357 뒤집힌 덧셈
+
+```python
+def rev(x):
+    x = reversed(list(str(x)))
+    x = ''.join(x)
+    return int(x)
+
+a, b = map(int, input().split())
+print(rev(rev(a)+rev(b)))
+```
+
+### 백준 5576 콘테스트
+
+```python
+W = []
+K = []
+for i in range(20):
+    if i <10:
+        W.append(int(input()))
+    else:
+        K.append(int(input()))
+W.sort()
+K.sort()
+print(W[-1]+W[-2]+W[-3],K[-1]+K[-2]+K[-3])
+```

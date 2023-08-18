@@ -245,3 +245,188 @@ W.sort()
 K.sort()
 print(W[-1]+W[-2]+W[-3],K[-1]+K[-2]+K[-3])
 ```
+
+### swea solving club 5105 미로의 거리
+
+```python
+
+
+def bfs(sti, stj, N):
+    visited = [[0]*N for _ in range(N)] # visited 생성
+    q = []                              # 큐 생성
+    q.append((sti,stj))                 # 시작점 인큐
+    visited[sti][stj] = 1               # 시작점 인큐 표시
+    while q:                            # 큐가 비워질 때 까지
+        i, j = q.pop(0)                 # 디큐
+        if maze[i][j] == 3:             # 처리
+            return visited[i][j]-2      # 지나온 칸 수 리턴
+        # 인접하고 인큐된 적이 없으면...
+        # 인큐, 인큐표시
+        for di, dj in [[0,1],[1,0],[0,-1],[-1,0]]:
+            ni, nj = i+di, j+dj
+            if 0<=ni<N and 0<=nj<N and maze[ni][nj]!=1 and visited[ni][nj] ==0:
+                q.append((ni, nj))
+                visited[ni][nj] = visited[i][j] +1
+    return 0        # 3인 칸에 도달할 수 없는 경우
+
+
+def find_start(N):
+    for i in range(N):
+        for j in range(N):
+            if maze[i][j] == 2:
+                return i, j
+
+T = int(input())
+for tc in range(1,T +1):
+    N = int(input())
+    maze = [list(map(int, input())) for _ in range(N)]
+    sti, stj = find_start(N)
+    ans = bfs(sti, stj, N)
+    print(f'#{tc} {ans}')
+
+```
+
+
+### swea 1226 미로 
+
+```python
+
+
+def bfs(sti, stj, N):
+    visited = [[0]*N for _ in range(N)] # visited 생성
+    q = []                              # 큐 생성
+    q.append((sti,stj))                 # 시작점 인큐
+    visited[sti][stj] = 1               # 시작점 인큐 표시
+    while q:                            # 큐가 비워질 때 까지
+        i, j = q.pop(0)                 # 디큐
+        if maze[i][j] == 3:             # 처리
+            return 1    
+        # 인접하고 인큐된 적이 없으면...
+        # 인큐, 인큐표시
+        for di, dj in [[0,1],[1,0],[0,-1],[-1,0]]:
+            ni, nj = i+di, j+dj
+            if 0<=ni<N and 0<=nj<N and maze[ni][nj]!=1 and visited[ni][nj] ==0:
+                q.append((ni, nj))
+                visited[ni][nj] = 1
+    return 0        # 3인 칸에 도달할 수 없는 경우
+
+
+def find_start(N):
+    for i in range(N):
+        for j in range(N):
+            if maze[i][j] == 2:
+                return i, j
+
+for _ in range(1,11):
+    tc = int(input())
+    N = 16
+    maze = [list(map(int, input())) for _ in range(N)]
+    sti, stj = find_start(N)
+    ans = bfs(sti, stj, N)
+    print(f'#{tc} {ans}')
+
+```
+
+### swea solving club 5102 노드의 거리
+
+```python
+
+def bfs(S, G, V):
+    visited = [0]*(V+1)    # visited 생성
+    q = []                                       # 큐 생성
+    q.append(S)                          # 시작점 인큐
+    visited[S] = 1                      # 시작점 인큐 표시
+    while q:                            # 큐가 비워질 때 까지
+        i = q.pop(0)                 # 디큐
+        if i == G:                     # 처리
+            return visited[i] -1    # 지나온 칸 수 리턴
+        # 인접하고 인큐된 적이 없으면...
+        # 인큐, 인큐표시
+        for j in range(1,V+1):
+            if arr[i][j] == 1 and visited[j] ==0:
+                q.append(j)
+                visited[j] = visited[i] + 1
+    return 0        # G에 도달할 수 없는 경우
+
+T =int(input())
+for tc in range(1,T+1):
+    V,E = map(int, input().split())
+    arr = [[0]*(V+1) for _ in range(V+1)]
+    for _ in range(E):
+        a,b = map(int, input().split())
+        arr[a][b] =1
+        arr[b][a] =1
+    S,G = map(int, input().split())
+    ans = bfs(S, G, V)
+    print(f'#{tc} {ans}')
+
+```
+
+### swea 1227 미로2
+
+```python
+
+def bfs(sti,stj,arr):
+    visited = [[0]*100 for ___ in range(100)]
+    q = []
+    q.append((sti,stj))
+    visited[sti][stj] = 1
+    while q:
+        i,j = q.pop(0)
+        if arr[i][j] == 3:
+            return 1
+        for di, dj in [[0,1],[1,0],[0,-1],[-1,0]]:
+            ni, nj = i+di, j+dj
+            if 0<=ni<100 and 0<=nj<100 and arr[ni][nj]!=1 and visited[ni][nj]==0 :
+                q.append((ni,nj))
+                visited[ni][nj] = 1
+    return  0
+
+def sij(arr):
+    for i in range(100):
+        for j in range(100):
+            if arr[i][j] == 2:
+                return i,j
+
+for _ in range(1,11):
+    tc = int(input())
+    arr = [list(map(int,input())) for __ in range(100)]
+    sti, stj = sij(arr)
+    ans = bfs(sti,stj,arr)
+    print(f'#{tc}',ans)
+
+```
+
+### swea 1238 Contact
+
+```python
+
+def bfs(S, arr):
+    visited= [0]*101
+    q = []
+    q.append(S)
+    visited[S] = 1
+    while q:
+        i = q.pop(0)
+        for j in range(101):
+            if arr[i][j] == 1 and visited[j] == 0:
+                q.append(j)
+                visited[j] = visited[i] + 1
+    return visited
+for tc in range(1,11):
+    N, S = map(int,input().split())
+    lst = list(map(int, input().split()))
+    arr = [[0]*101 for _ in range(101)]
+    for i in range(N//2):
+        arr[lst[2*i]][lst[2*i+1]] = 1
+    result = bfs(S,arr)
+    ans = 0
+    for i in range(101):
+        if result[i] == max(result):
+            if i > ans :
+                ans = i
+    print(f'#{tc}',ans)
+
+
+```
+

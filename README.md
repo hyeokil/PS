@@ -430,3 +430,60 @@ for tc in range(1,11):
 
 ```
 
+## 2023 08 21 monday
+
+### 백준 2178 미로 탐색
+
+```python
+
+from collections import deque
+
+def f(N,M, arr):
+    visited = [[0]*M for _ in range(N)]
+    q = deque([])
+    q.append((0,0))
+    visited[0][0] = 1
+    while q:
+        i,j = q.popleft()
+        if i == N-1 and j == M-1:
+            return visited[i][j]
+        for di,dj in [[0,1],[1,0],[0,-1],[-1,0]]:
+            ni = i+di
+            nj = j+dj
+            if 0<=ni<N and 0<=nj<M and arr[ni][nj] == 1 and visited[ni][nj] ==0:
+                q.append((ni,nj))
+                visited[ni][nj] = visited[i][j] + 1
+    return -1
+
+
+
+N,M = map(int, input().split())
+arr = [list(map(int, input())) for _ in range(N)]
+ans = f(N,M,arr)
+
+print(ans)
+
+```
+
+### swea solving club 5176 이진탐색
+
+```python
+
+def in_order(root):
+    global value
+    if root <= N:
+        in_order(root*2)
+        arr[root]=value
+        value += 1
+        in_order(root*2+1)
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [0]*(N+1)
+    value = 1
+    in_order(1)
+    print(f'#{tc}',arr[1],arr[N//2])
+
+```
+

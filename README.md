@@ -487,3 +487,231 @@ for tc in range(1,T+1):
 
 ```
 
+## 2023 08 22 tuesday
+
+### 백준 11650 좌표 정렬하기
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+lst = []
+for i in range(N):
+    a = list(map(int, input().split()))
+    lst.append(a)
+lst.sort(key=lambda x:(x[0],x[1]))
+for i in lst:
+    print(*i)
+
+```
+
+### swea solving club 1231 중위순회
+
+```python
+
+def inorder(p,N): # 완전 이진 트리의 마지막 정점
+    if p<=N:
+        inorder(p*2,N)            # 왼쪽 자식으로 이동
+        print(tree[p], end='')    # 중위 순회에서 할일, 전위는 윗줄로감
+        inorder(p*2+1,N)          # 오른쪽 자식으로 이동
+
+T = 10
+for tc in range(1,T+1):
+    N = int(input())
+    tree = [0]*(N+1)    # N번 노드까지 있는 완전 이진 트리
+    for _ in range(N):
+        arr = list(input().split())
+        tree[int(arr[0])] = arr[1]
+    # 중위 순회
+    print(f'#{tc} ',end='')
+    inorder(1,N)
+    print()
+
+```
+
+### swea solving club 5174 subtree
+
+```python
+
+def subtree(N):
+    global node
+    if N :
+        node += 1
+        subtree(left[N])
+        subtree(right[N])
+
+
+T = int(input())
+for tc in range(1,T+1):
+    E,N = map(int, input().split())
+    lst = list(map(int, input().split()))
+    left = [0]*(E+2)
+    right = [0]*(E+2)
+    for i in range(0,E):
+        if left[lst[i*2]] == 0:
+            left[lst[i*2]] = lst[i*2+1]
+        else:
+            right[lst[i*2]] = lst[i*2+1]
+    node = 0
+    subtree(N)
+    print(f'#{tc}',node)
+
+```
+
+### swea solving club 5177 이진 힙
+
+```python
+
+'''
+완전이진트리 유지
+부모 노드의 값 < 자식노드의 값 유지
+조건 불만족시 만족할때 까지 부모 노드와 값을 바꾼다
+노드 번호는 루트가 1 외쪽에서 오른쪽으로 오른쪽이 없다면 다음 줄로 1씩 증가
+'''
+def enq(i):  # 최소 힙에 값 넣기
+    global last
+    last += 1               # 최소 힙에 들어간 값의 개수이며 위치가 되기도 한다
+    min_heap[last] = i      # 맨 마지막에 값을 넣어준다.
+    c = last                # 1
+    p = c // 2
+    while p > 0 and min_heap[p] > min_heap[c]:  # 조상이 더 크면 바꾼다.
+        min_heap[p], min_heap[c] = min_heap[c], min_heap[p]
+        c = p
+        p = c // 2
+
+
+T = int(input())
+for tc in range(1, T+1):
+    N = int(input())
+    lst = list(map(int, input().split()))
+    last = 0
+    min_heap = [0] * (N+1)              # 최소 힙
+    for i in lst:
+        enq(i)
+    # 조상 노드의 합 구하기
+    ans = last // 2  # 조상 노드
+    s = 0  # 조상 노드의 합
+    while ans:
+        s += min_heap[ans]
+        ans //= 2
+    print(f'#{tc}',s)
+
+```
+
+### swea solving club 1232 사칙연산
+
+```python
+
+def tkclr(n):
+    if tree[n][0] not in ['+','-','*','/']:
+        return tree[n][0]
+    else:
+        l = tkclr(tree[n][1])
+        r = tkclr(tree[n][2])
+        if tree[n][0] == '+':
+            return l+r
+        elif tree[n][0] == '-':
+            return l-r
+        elif tree[n][0] == '*':
+            return l*r
+        else:
+            return l/r
+
+T = 10
+for tc in range(1,T+1):
+    N =int(input())
+    tree = [[0,0,0] for _ in range(N+1)]
+    arr = [list(input().split()) for _ in range(N)]
+    for i in range(N):
+        if arr[i][1] not in ['+','-','*','/']: #  숫자 노드이면
+            n,v = arr[i]
+            n= int(n)
+            v= int(v)
+            tree[n][0] = v
+        else :                  # 연산자 일때
+            n, v, lc,rc = arr[i]
+            tree[int(n)] = [v,int(lc),int(rc)]
+    ans = tkclr(1)
+    print(f'#{tc}',int(ans))
+
+```
+
+### swea solving club 5178 노드의 합
+
+```python
+
+def nodesum(L):
+    if tree[L] != 0:
+        return tree[L]
+    else:
+        if L*2+1 <= N :
+            tree[L] = nodesum(L*2)+nodesum(L*2+1)
+        else:
+            tree[L] = nodesum(L*2)
+        return tree[L]
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M,L = map(int,input().split())
+    tree = [0]*(N+1)
+    for i in range(M):
+        p,v = map(int, input().split())
+        tree[p] = v
+    ans = nodesum(L)
+    print(f'#{tc}',ans)
+
+```
+
+### 백준 2491 수열
+
+```python
+
+N = int(input())
+lst = list(map(int, input().split()))
+mxup = 1
+mxdn = 1
+up = 1
+down = 1
+for i in range(1,N):
+    if lst[i-1] < lst[i]:
+        up +=1
+        down = 1
+    elif lst[i-1] > lst[i]:
+        up = 1
+        down +=1
+    else:
+        up += 1
+        down +=1
+    if up > mxup:
+        mxup = up
+    if down > mxdn:
+        mxdn = down
+print(max(mxdn,mxup))
+
+```
+
+### 백준 2559 수열
+
+```python
+
+import sys
+input = sys.stdin.readline
+N,K = map(int, input().split())
+lst = list(map(int, input().split()))
+lst1 = []
+lst1.append(lst[0])
+maxs = -9999999
+for i in range(1,N):
+    lst1.append(lst[i]+lst1[i-1])
+for i in range(K-1,N):
+    if i == K-1 :
+        s =lst1[i]
+    else:
+        s = lst1[i]-lst1[i-K]
+    if s > maxs :
+        maxs =s
+print(maxs)
+
+```
+

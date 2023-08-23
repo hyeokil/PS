@@ -715,3 +715,245 @@ print(maxs)
 
 ```
 
+### 백준 1764 듣보잡
+
+```python
+
+N,M = map(int, input().split())
+heard = []
+for i in range(N):
+    s = input()
+    heard.append(s)
+see = []
+for i in range(M):
+    s= input()
+    see.append(s)
+h = set(heard)
+p = set(see)
+ans = h.intersection(p)
+ans = sorted(list(ans))
+print(len(ans))
+for i in ans:
+    print(i)
+
+```
+
+### 백준 11047 동전 0
+
+```python
+
+N,K= map(int, input().split())
+coin = []
+for i in range(N):
+    coin.append(int(input()))
+cnt = 0
+while K >0:
+    for i in range(N-1,0,-1):
+        if K >= coin[i] :
+            cnt += K // coin[i]
+            K = K%coin[i]
+            break
+    else:
+        cnt += K
+        break
+print(cnt)
+
+```
+
+### 백준 17219 비밀번호 찾기
+
+```python
+
+N,M = map(int,input().split())
+pw = {}
+for _ in range(N):
+    s= list(input().split())
+    pw[s[0]] = s[1]
+for _ in range(M):
+    s = input()
+    print(pw[s])
+
+```
+
+### 백준 2630 색종이 만들기
+
+```python
+
+N = int(input())
+arr = [list(map(int, input().split()))for _ in range(N)]
+white = 0
+blue = 0
+K = N
+while K>0:
+    for i in range(0,N,K):
+        for j in range(0,N,K):
+            cnt = 0
+            for k in range(K):
+                for l in range(K):
+                    if arr[i+k][j+l] == 1 :
+                        cnt += 1
+                    elif arr[i+k][j+l] == -1 :
+                        cnt = -130
+            if cnt == 0:
+                white +=1
+                for k in range(K):
+                    for l in range(K):
+                        arr[i+k][j+l] = -1
+            elif cnt == K**2:
+                blue += 1
+                for k in range(K):
+                    for l in range(K):
+                        arr[i+k][j+l] = -1
+    K //= 2
+print(white)
+print(blue)
+```
+
+### 백준 11399 ATM
+
+```python
+
+N = int(input())
+lst = list(map(int, input().split()))
+lst.sort()
+lst1= [lst[0]]
+
+for i in range(1,N):
+    lst1.append(lst[i]+lst1[i-1])
+print(sum(lst1))
+```
+
+### swea solving club 1240 단순 2진 암호코드
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N, M = map(int, input().split())
+    arr = [list(input()) for _ in range(N)]
+    for i in range(N):
+        for j in range(M-1,-1,-1):
+            if arr[i][j] == '1':
+                pw = arr[i][j-55:j+1]
+                break
+    horse = 0
+    Wkrtn = 0
+    for i in range(0,56,7):
+        s = ''.join(pw[i:i+7])
+        if s == '0001101':
+            s = 0
+        elif s == '0011001':
+            s =1
+        elif s== '0010011':
+            s =2
+        elif s== '0111101':
+            s = 3
+        elif s=='0100011':
+            s= 4
+        elif s == '0110001':
+            s = 5
+        elif s=='0101111':
+            s=6
+        elif s=='0111011':
+            s=7
+        elif s=='0110111':
+            s=8
+        else :
+            s=9
+        if (i//7+1)%2 == 1:
+            horse+=s
+        else:
+            Wkrtn +=s
+    if (horse*3+Wkrtn)%10 != 0:
+        print(f'#{tc}',0)
+    else:
+        print(f'#{tc}',horse+Wkrtn)
+
+```
+
+### swea solving club 5185 이진수
+
+```python
+
+bin = {'0':'0000','1':'0001','2':'0010','3':'0011','4':'0100','5':'0101',
+      '6':'0110','7':'0111','8':'1000','9':'1001','A':'1010',
+       'B':'1011','C':'1100','D':'1101','E':'1110','F':'1111'}
+T = int(input())
+for tc in range(1,T+1):
+    N = list(input().split())
+    s = ''
+    for i in range(int(N[0])):
+        s += bin[N[1][i]]
+    print(f'#{tc}',s)
+
+```
+
+### swea solving club 5186 이진수2
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N = float(input())
+    ans = ''
+    while N > 0:
+        N *= 2
+        if N >= 1:
+            N-=1
+            ans+='1'
+        else:
+            ans+='0'
+    if len(ans) >=13:
+        print(f'#{tc} overflow')
+    else:
+        print(f'#{tc}',ans)
+
+```
+
+### swea solving club 4615 재미있는 오셀로 게임
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int, input().split())
+    BRD = [[0]*N for _ in range(N)]
+    n =N//2
+    BRD[n-1][n-1] = 2
+    BRD[n][n] = 2
+    BRD[n-1][n] = 1
+    BRD[n][n-1] = 1
+
+    for i in range(M):
+        C,R,dol = map(int,input().split())
+        C-=1
+        R-=1
+        BRD[R][C] = dol
+        re_c = 2 if dol == 1 else 1
+
+        for dr,dc in [(1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)]:
+            ni = R +dr
+            nj = C +dc
+
+            while 0<=ni<N and 0<=nj<N and BRD[ni][nj] == re_c:
+                ni += dr
+                nj += dc
+
+            if 0<=ni<N and 0<=nj<N and BRD[ni][nj] == dol :
+                while ni != R or nj != C:
+                    ni -= dr
+                    nj -= dc
+                    BRD[ni][nj] =dol
+    gmr = 0
+    qor = 0
+    for i in range(N):
+        for j in range(N):
+            if BRD[i][j] == 1:
+                gmr +=1
+            elif BRD[i][j] == 2:
+                qor +=1
+    print(f'#{tc}',gmr,qor)
+
+
+```
+

@@ -957,3 +957,73 @@ for tc in range(1,T+1):
 
 ```
 
+### 백준 21736 헌내기는 친구가 필요해
+
+```python
+
+def campus(sti, stj):
+    stack = []
+    visited = [[0]*M for _ in range(N)]
+    visited[sti][stj] = 1
+    cnt = 0
+    while True :
+        for di,dj in [(1,0),(0,1),(-1,0),(0,-1)]:
+            ni,nj =sti+di,stj+dj
+            if 0<=ni<N and 0<=nj<M and arr[ni][nj] != 'X' and visited[ni][nj] == 0:
+                if arr[ni][nj] == 'P' :
+                    cnt += 1
+                stack.append((sti,stj))
+                visited[ni][nj] = 1
+                sti,stj = ni,nj
+                break
+        else:
+            if stack:
+                sti, stj = stack.pop()
+            else:
+                break
+    return cnt
+
+def start(arr):
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 'I':
+                return i,j
+
+N,M = map(int, input().split())
+arr = [list(input())for _ in range(N)]
+sti,stj = start(arr)
+ans = campus(sti, stj)
+if ans == 0:
+    print('TT')
+else:
+    print(ans)
+
+```
+
+### 백준 11403 경로 찾기
+
+```python
+
+from collections import deque
+def bfs():
+    ans = [[0] * N for _ in range(N)]
+    for w in range(N):
+        visited = [0]*N
+        q = deque([])
+        q.append(w)
+        while q:
+            i = q.popleft()
+            for j in range(N):
+                if arr[i][j] == 1 and visited[j] == 0:
+                    q.append(j)
+                    visited[j] =1
+                    ans[w][j] = 1
+    return ans
+
+N = int(input())
+arr = [list(map(int, input().split())) for _ in range(N)]
+ans = bfs()
+for i in ans:
+    print(*i)
+
+```

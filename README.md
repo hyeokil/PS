@@ -1027,3 +1027,208 @@ for i in ans:
     print(*i)
 
 ```
+
+
+## 2023 08 25 friday
+
+### swea solving club 1220 Magnetic
+
+```python
+
+
+T = 10
+for tc in range(1,T+1):
+    N= int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    cnt = 0
+    for i in range(N-1,-1,-1):
+        for j in range(N):
+            if arr[i][j] == 1:
+                if i == N-1 :
+                    arr[i][j] = 0
+                else:
+                    for k in range(i+1,N):
+                        if arr[k][j]  == 1:
+                            break
+                        elif arr[k][j] == 2:
+                            cnt +=1
+                            break
+                    else:
+                        arr[i][j] = 0
+    print(f'#{tc}',cnt)
+```
+
+### swea solving club 5356 의석이의 세로로 말해요
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    arr = [input() for _ in range(5)]
+    ans = ''
+    lens = 0
+    for i in arr:
+        if len(i) > lens:
+            lens = len(i)
+    for j in range(lens):
+        for i in range(5):
+            try :
+                ans += arr[i][j]
+            except IndexError:
+                pass
+    print(f'#{tc}',ans)
+
+```
+
+### swea solving club 13976 IM 대비 기지국
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(input()) for _ in range(N+1)]
+    di = [1,0,-1,0]
+    dj = [0,1,0,-1]
+    for i in range(N):
+        for j in range(N):
+            if arr[i][j] == 'A':
+                for k in range(4):
+                    ni,nj = i+di[k],j+dj[k]
+                    if 0<=ni<N and 0<=nj<N and arr[ni][nj] == 'H' :
+                        arr[ni][nj] ='X'
+            if arr[i][j] == 'B':
+                for k in range(4):
+                    for l in range(1,3):
+                        ni,nj = i+di[k]*l,j+dj[k]*l
+                        if 0<=ni<N and 0<=nj<N and arr[ni][nj] == 'H' :
+                            arr[ni][nj] ='X'
+            if arr[i][j] == 'C':
+                for k in range(4):
+                    for l in range(1, 4):
+                        ni, nj = i + di[k] * l, j + dj[k] * l
+                        if 0 <= ni < N and 0 <= nj < N and arr[ni][nj] == 'H':
+                            arr[ni][nj] = 'X'
+    cnt = 0
+    for i in range(N):
+        for j in range(N):
+            if arr[i][j] == 'H':
+                cnt += 1
+    print(f'#{tc}',cnt)
+
+
+```
+
+
+### swea solving club 5658 보물상자 비밀번호
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N,K = map(int, input().split())
+    lst = list(input())
+    n = N//4
+    lst1 = []
+    for i in range(n):
+        a = lst.pop(0)
+        lst.append(a)
+        for i in range(0, N, N // 4):
+            lst1.append(''.join(lst[i:i + N // 4]))
+    lst1 = list(set(lst1))
+    lst2 = []
+    for i in lst1:
+        lst2.append(int(i,16))
+    lst2.sort(reverse=True)
+    print(f'#{tc}',lst2[K-1])
+
+```
+
+### 백준 11727 2 x n 타일링 2
+
+```python
+
+N = int(input())
+dp = [1,3]
+for i in range(2,N):
+    dp.append(dp[i-1]+dp[i-2]*2)
+print(dp[N-1]%10007)
+
+```
+
+### 백준 11286 절대값 힙
+
+```python
+
+import sys
+input = sys.stdin.readline
+import heapq
+N = int(input())
+heap = []
+for _ in range(N):
+    x = int(input())
+    if x != 0 :
+        heapq.heappush(heap,(abs(x),x))
+    else:
+        if heap:
+            print(heapq.heappop(heap)[1])
+        else:
+            print(0)
+
+```
+
+### 백준 11279 최대 힙
+
+```python
+
+import sys
+input = sys.stdin.readline
+import heapq
+N = int(input())
+heap = []
+for _ in range(N):
+    x = int(input())
+    if x != 0 :
+        heapq.heappush(heap,-x)
+    else:
+        if heap:
+            print(-heapq.heappop(heap))
+        else:
+            print(0)
+
+```
+
+### 백준 1927 최소 힙
+
+```python
+
+import sys
+input = sys.stdin.readline
+import heapq
+N = int(input())
+heap = []
+for _ in range(N):
+    x = int(input())
+    if x != 0 :
+        heapq.heappush(heap,x)
+    else:
+        if heap:
+            print(heapq.heappop(heap))
+        else:
+            print(0)
+
+```
+
+### 백준 9095 1,2,3 더하기 
+
+```python
+
+N = int(input())
+for _ in range(N):
+    dp = [0, 1, 2, 4]
+    n = int(input())
+    for i in range(4,n+1):
+        dp.append(dp[i-1] + dp[i-2]+ dp[i-3])
+    print(dp[n])
+
+```

@@ -1380,6 +1380,26 @@ for i in range(len(s)):
 s = ''.join(s)
 print(s)
 
+```
 
+### 백준 10163 색종이
+
+```python
+
+N =  int(input())
+arr = [[0]*1001 for _ in range(1001)]
+for tc in range(1,N+1):
+    x, y, x1,y1 =map(int,input().split())
+    for i in range(x1):
+        for j in range(y1):
+            arr[x+i][y+j] = tc
+for k in range(1,N+1):
+    cnt = 0
+    for i in range(1001):
+        for j in range(1001):
+            if arr[i][j] == k:
+                cnt +=1
+    print(cnt)
 
 ```
+

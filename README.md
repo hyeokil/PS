@@ -1403,3 +1403,40 @@ for k in range(1,N+1):
 
 ```
 
+### swea 11315 오목 판정
+
+```python
+
+def omok():
+    di = [1, 0, 1, 1]
+    dj = [0, 1, 1, -1]
+    cnt = 1
+    for i in range(N):
+        for j in range(N):
+            if arr[i][j] == 'o':
+                for k in range(4):
+                    for l in range(1, 5):
+                        ni, nj = i + di[k] * l, j + dj[k] * l
+                        if 0 <= ni < N and 0 <= nj < N and arr[ni][nj] == 'o':
+                            cnt += 1
+                        else:
+                            cnt = 1
+                            break
+                        if cnt == 5:
+                            return 1
+    return
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [input() for _ in range(N)]
+    ans = omok()
+    if ans == 1:
+        print(f'#{tc}','YES')
+    else:
+        print(f'#{tc}','NO')
+
+```
+
+### 

@@ -1232,3 +1232,154 @@ for _ in range(N):
     print(dp[n])
 
 ```
+
+## 2023 08 28 monday
+
+### 백준 5218 알파벳 거리
+
+```pyhton
+
+def tonum(a):
+    b = ord(a)-64
+    return b
+for tc in range(1,int(input())+1):
+    s1,s2 =input().split()
+    lst = []
+    for i in range(len(s1)):
+        d = tonum(s2[i])-tonum(s1[i])
+        if d<0 :
+            d+=26
+        lst.append(d)
+    print(f'Distances:',*lst)
+
+```
+
+### 백준 1260 DFS와 BFS
+
+```python
+
+from collections import deque
+def dfs(V):
+    visited = [0] * (N+1)
+    st = []
+    st2 = []
+    st2.append(V)
+    visited[V] = 1
+    while True:
+        for w in range(1,N+1):
+            if arr[V][w] == 1 and visited[w] == 0:
+                st.append(V)
+                st2.append(w)
+                visited[w]=1
+                V = w
+                break
+        else:
+            if st:
+                V = st.pop()
+            else:
+                break
+    return st2
+
+def bfs(V):
+    visited = [0]*(N+1)
+    q = deque([])
+    q2 = []
+    q.append(V)
+    q2.append(V)
+    visited[V] = 1
+    while q:
+        i =q.popleft()
+        for j in range(1,N+1):
+            if arr[i][j] == 1 and visited[j] ==0 :
+                q.append(j)
+                q2.append(j)
+                visited[j] = 1
+    return q2
+
+
+N,M,V = map(int, input().split())
+arr = [[0]*(N+1) for _ in range(N+1)]
+lst = [0]*(N+1)
+lst2 = [0]*(N+1)
+for g in range(M):
+    a,b = map(int, input().split())
+    arr[a][b] =1
+    arr[b][a] = 1
+dfs = dfs(V)
+bfs = bfs(V)
+print(*dfs)
+print(*bfs)
+
+```
+
+### 백준 10026 적록색약
+
+```python
+
+from collections import deque
+import copy
+
+N = int(input())
+arr = [list(input()) for _ in range(N)]
+arr1 = copy.deepcopy(arr)
+cnt = 0
+cnt1 = 0 
+di = [1,0,-1,0]
+dj = [0,1,0,-1]
+for i in range(N):
+    for j in range(N):
+        if arr[i][j] == 'R' or arr[i][j] == 'B' or arr[i][j] == 'G' :
+            cnt +=1
+            q= deque()
+            alpha = arr[i][j]
+            q.append((i,j))
+            while q:
+                x,y = q.popleft()
+                for k in range(4):
+                    ni,nj = x+di[k],y+dj[k]
+                    if 0<=ni<N and 0<=nj<N and arr[ni][nj] == alpha :
+                        q.append((ni,nj))
+                        arr[ni][nj] = 0
+for i in range(N):
+    for j in range(N):
+        if arr1[i][j] =='G' :
+            arr1[i][j] = 'R'        
+for i in range(N):
+    for j in range(N):
+        if arr1[i][j] == 'R' or arr1[i][j] == 'B'  :
+            cnt1 +=1
+            q= deque()
+            alpha = arr1[i][j]
+            q.append((i,j))
+            while q:
+                x,y = q.popleft()
+                for k in range(4):
+                    ni,nj = x+di[k],y+dj[k]
+                    if 0<=ni<N and 0<=nj<N and arr1[ni][nj] == alpha :
+                        q.append((ni,nj))
+                        arr1[ni][nj] = 0
+print(cnt, cnt1)
+
+```
+
+### 백준 11655 ROT13
+
+```python
+
+def rot13(s):
+    if ord(s) >= 97 :
+        ss = chr(97+((ord(s)+13)-97)%26)
+        return ss
+    else:
+        ss =chr(65+((ord(s)+13)-65)%26)
+        return ss
+s= list(input())
+for i in range(len(s)):
+    if s[i] in list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+        s[i] = rot13(s[i])
+s = ''.join(s)
+print(s)
+
+
+
+```

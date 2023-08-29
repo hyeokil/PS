@@ -1439,4 +1439,93 @@ for tc in range(1,T+1):
 
 ```
 
-### 
+## 2023 08 29 tuesday
+
+### 백준 1389 케빈 베이컨의 6단계 법칙
+
+```python
+
+from collections import deque
+def bfs(n):
+    visited =[-1]*(N+1)
+    q = deque()
+    q.append(n)
+    visited[n] = 0
+    while q:
+        n = q.popleft()
+        for w in range(1,N+1):
+            if arr[n][w] == 1 and visited[w] == -1:
+                q.append(w)
+                visited[w] = visited[n]+1
+
+    return visited
+N,M = map(int, input().split())
+arr = [[0]*(N+1) for _ in range(N+1)]
+for tc in range(1,M+1):
+    a,b =map(int, input().split())
+    arr[a][b]= 1
+    arr[b][a]= 1
+mins = N**2
+who = 0
+for i in range(1,N+1):
+    s =sum(bfs(i))
+    if s < mins :
+        mins = s
+        who = i
+print(who)
+
+```
+
+### 백준 1541 잃어버린 괄호
+
+```python
+
+lst = list(input())
+s = ''
+lst1 = []
+
+for i in range(len(lst)):
+    if lst[i] not in '+-':
+        if i == len(lst)-1:
+            s+=lst[i]
+            lst1.append(s)
+        s+=lst[i]
+    else:
+        lst1.append(s)
+        lst1.append(lst[i])
+        s=''
+for i in range(len(lst1)):
+    if lst1[i] not in '+-':
+        lst1[i] = int(lst1[i])
+lst2 = []
+while lst1 :
+    for i in range(len(lst1)):
+        if lst1[i] == '+':
+            ss =lst2.pop()
+            ss += lst1[i+1]
+            lst2.append(ss)
+            lst1.pop(0)
+            lst1.pop(0)
+            break
+        else:
+            lst2.append(lst1[i])
+            lst1.pop(0)
+            break
+lst3 = []
+while lst2 :
+    for i in range(len(lst2)):
+        if lst2[i] == '-':
+            ss =lst3.pop()
+            ss -= lst2[i+1]
+            lst3.append(ss)
+            lst2.pop(0)
+            lst2.pop(0)
+            break
+        else:
+            lst3.append(lst2[i])
+            lst2.pop(0)
+            break
+print(*lst3)
+
+
+```

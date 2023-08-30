@@ -1529,3 +1529,221 @@ print(*lst3)
 
 
 ```
+
+## 2023 08 30 wednesday
+
+### 백준 9461 파도반 수열
+
+```python
+
+T = int(input())
+lst = [1,1,1,2,2]
+for tc in range(1,T+1):
+    N = int(input())
+    for i in range(len(lst),N):
+        lst.append(lst[i-2]+lst[i-3])
+    print(lst[N-1])
+
+```
+
+### swea solving club 10966 물놀이를 가자
+
+```python
+
+from collections import deque
+T = int(input())
+for tc in range(1, T + 1):
+    N, M = map(int, input().split())
+    arr = [input() for _ in range(N)]
+    s = 0
+    visited = [[0] * M for _ in range(N)]
+    q = deque()
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 'W':
+                q.append((i, j))
+    while q:
+        x, y = q.popleft()
+        for a, b in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+            ni, nj = x + a, y + b
+            if 0 <= ni < N and 0 <= nj < M and arr[ni][nj] == 'L' and visited[ni][nj] ==0:
+                q.append((ni, nj))
+                visited[ni][nj] = visited[x][y] + 1
+    for k in visited:
+       s += sum(k)
+    print(f'#{tc}',s)
+
+
+```
+
+### swea solving club 5203 베이비진 게임
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    lst = list(map(int, input().split()))
+    p1 = []
+    p2 = []
+    p1w = 0
+    draw = 0
+    for i in range(12):
+        if i%2 == 0:
+            p1.append(lst[i])
+            if p1.count(lst[i]) ==3:
+                p1w = 1
+                break
+            elif lst[i]-1 in p1 and lst[i]+1 in p1:
+                p1w = 1
+                break
+            elif lst[i]-1 in p1 and lst[i]-2 in p1:
+                p1w = 1
+                break
+            elif lst[i]+1 in p1 and lst[i]+2 in p1:
+                p1w = 1
+                break
+        else:
+            p2.append(lst[i])
+            if p2.count(lst[i]) == 3:
+                break
+            elif lst[i] - 1 in p2 and lst[i] + 1 in p2:
+                break
+            elif lst[i] - 1 in p2 and lst[i] - 2 in p2:
+                break
+            elif lst[i] + 1 in p2 and lst[i] + 2 in p2:
+                break
+    else:
+        draw = 1
+    if p1w == 1:
+        print(f'#{tc}',1)
+    elif draw == 1 :
+        print(f'#{tc}',0)
+    else:
+        print(f'#{tc}',2)
+
+```
+
+### swea solving club 5189 전자카트
+
+```python
+
+def f(i, sumV):
+    global minV
+    if sumV > minV:
+        return
+    elif i == N :
+        if minV > sumV + arr[p[i-1]][0] :
+            minV = sumV+ arr[p[i-1]][0]
+            return
+    else:       # p[i]에 들어갈 숫자를 결정
+        for j in range(N):
+            if used[j]==0:   # 아직 사용되기 전이면
+                p[i]=j
+                used[j]=1
+                f(i+1, sumV+arr[p[i-1]][p[i]])
+                used[j] = 0
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    used = [0] *N
+    p = [0]+[-1] * (N-1)+[0]
+    used[0] = 1
+    minV = 101*101
+    f(1,0)
+    print(f'#{tc}',minV)
+
+
+```
+
+### swea solving club 5188 최소합
+
+
+```python
+
+def f(x,y,sumV):
+    global minV
+    if sumV > minV :
+        return
+    if x == N-1 and y == N-1 :
+        if sumV < minV:
+            minV = sumV
+            return
+    else:
+        for i,j in [(1,0),(0,1)]:
+            ni,nj = x+i,y+j
+            if 0<=ni<N and 0<=nj<N :
+                f(ni,nj,sumV+arr[ni][nj])
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    minV = 26*11
+    f(0,0,arr[0][0])
+    print(f'#{tc}',minV)
+
+```
+
+### swea solving club 1247 최적 경로
+
+```python
+
+def f(k, sumV):
+    global minV
+    if sumV > minV :
+        return
+    if k == N+1 :
+        if minV > sumV+(abs(lst1[p[k-1]][0]-lst1[p[k]][0])+abs(lst1[p[k-1]][1]-lst1[p[k]][1])) :
+            minV =sumV+(abs(lst1[p[k-1]][0]-lst1[p[k]][0])+abs(lst1[p[k-1]][1]-lst1[p[k]][1]))
+        return
+    else:
+        for j in range(1,N+1):
+            if used[j]==0:   # 아직 사용되기 전이면
+                p[k]=j
+                used[j]=1
+                f(k+1, sumV+abs(lst1[p[k-1]][0]-lst1[p[k]][0]) + abs(lst1[p[k-1]][1]-lst1[p[k]][1]))
+                used[j] = 0
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    lst = list(map(int,input().split()))
+    lst1 = []
+    sti,stj = lst[0],lst[1]
+    fi,fj = lst[2],lst[3]
+    for i in range(2,N+2):
+        lst1.append([lst[i*2],lst[i*2+1]])
+    used = [0] * (N+2)
+    p = [0]+[-1]*N+[N+1]
+    lst1 = [[sti,stj]]+lst1+[[fi,fj]]
+    used[0] = 1
+    used[N+1]= 1
+    minV =200*12
+    f(1,0)
+    print(f'#{tc}',minV)
+
+
+```
+
+### 백준 11050 이항 계수 1
+
+```python
+
+N,K = map(int, input().split())
+s = 1
+ss = 1
+for i in range(1,N+1):
+    s *= i
+for i in range(1,N-K+1):
+    ss *= i
+for i in range(1,K+1):
+    ss *= i
+print(s//ss)
+
+```
+
+## 2023 08 30 thursday
+
+### 

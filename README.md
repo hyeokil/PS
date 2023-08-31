@@ -1744,6 +1744,232 @@ print(s//ss)
 
 ```
 
-## 2023 08 30 thursday
+## 2023 08 31 thursday
 
-### 
+### 백준 4153 직각삼각형
+
+```python
+
+while True:
+    a,b,c = map(int, input().split())
+    if a== 0 and b == 0 and c == 0 :
+        break
+    if max(a**2,b**2,c**2) != a**2+b**2+c**2-max(a**2,b**2,c**2) :
+        print('wrong')
+    else:
+        print('right')
+
+```
+
+### 백준 1259 팰린드롬수 
+
+```python
+
+while True :
+    a = input()
+    if a == '0':
+        break
+    for i in range(len(a)//2):
+        if a[i] != a[-1-i]:
+            print('no')
+            break
+    else:
+        print('yes')
+
+```
+
+### 백준 11866 요세푸스 문제 0
+
+```python
+
+from collections import deque
+N, K = map(int,input().split())
+lst = deque([i for i in range(1,N+1)])
+st = []
+cnt = 1
+while len(st) < N :
+    a = lst.popleft()
+    if cnt%K == 0:
+        st.append(a)
+    else:
+        lst.append(a)
+    cnt += 1
+print('<',end='')
+print(*st,sep=', ',end='')
+print('>')
+
+```
+
+### swea solving club 1861 정사각형 방
+
+```python
+
+def f(i, j, c, d):
+    global n
+    for di, dj in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+        ni, nj = i + di, j + dj
+        if 0 <= ni < N and 0 <= nj < N and visited[ni][nj] == False and arr[ni][nj] == arr[i][j] + 1:
+            visited[i][j] = True
+            f(ni, nj, c, d+1)
+            visited[i][j] = False
+    else:
+        if n[1] < d:
+            n = [c,d]
+        elif n[1] == d and n[0] > c:
+            n[0] = c
+
+T = int(input())
+for tc in range(1, T + 1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    visited = [[False] * N for _ in range(N)]
+    n = [0, 0]
+    for i in range(N):
+        for j in range(N):
+            f(i, j, arr[i][j], 1)
+    print(f'#{tc}', *n)
+
+```
+
+### swea solving club 5202 화물 도크
+
+```python
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    lst = []
+    for z in range(N):
+        s,e= map(int, input().split())
+        lst.append([e,s])
+    lst.sort(reverse=True)
+    y,x = lst.pop()
+    cnt = 1
+    while lst:
+        j,i =lst.pop()
+        if i>= y :
+            cnt +=1
+            x,y =i,j
+    print(f'#{tc}',cnt)
+
+```
+
+### swea solving club 5201 컨테이너 운반
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int,input().split())
+    lstN = list(map(int, input().split()))
+    lstM = list(map(int, input().split()))
+    lstN.sort()
+    lstM.sort()
+    W = 0
+    for i in range(N):
+        a = lstN.pop()
+        if lstM:
+            b = lstM.pop()
+            if b >= a:
+                W +=a
+            else:
+                lstM.append(b)
+    print(f'#{tc}',W)
+
+```
+
+### swea solving club 2817 부분 수열의 합
+
+```python
+
+def f(x,sumV):
+    global cnt
+    if sumV == K:
+        cnt += 1
+        return
+    if x == N:
+        return
+    bit[x] =0
+    f(x+1,sumV)
+    bit[x] = 1
+    f(x+1,sumV+lst[x])
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N,K = map(int, input().split())
+    lst = list(map(int, input().split()))
+    bit = [0]*N
+    cnt = 0
+    f(0,0)
+    print(f'#{tc}',cnt)
+
+```
+
+### 백준 18870 좌표 압축
+
+```python
+
+N = int(input())
+lst = list(map(int, input().split()))
+lsts = sorted(list(set(lst)))
+dict = {}
+for i in range(len(lsts)):
+    dict[lsts[i]] = i
+for j in range(len(lst)):
+    lst[j] = dict[lst[j]]
+print(*lst)
+
+```
+
+### 백준 7576 토마토
+
+```python
+
+from collections import deque
+M,N =map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(N)]
+cnt =0
+q = deque()
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 0:
+            cnt =1
+        if arr[i][j] == 1:
+            q.append((i,j))
+
+di = [1,0,-1,0]
+dj = [0,1,0,-1]
+while q:
+    x,y = q.popleft()
+    for k in range(4):
+        ni,nj = x+di[k],y+dj[k]
+        if 0<=ni<N and 0<=nj<M and arr[ni][nj] == 0:
+            q.append((ni,nj))
+            arr[ni][nj] = arr[x][y]+1
+
+q =0
+if cnt == 0:
+    print(0)
+else:
+    for i in range(N):
+        if q== -1 :
+            break
+        for j in range(M):
+            if arr[i][j] == 0:
+                q = -1
+                print(-1)
+                break
+    else:
+        maxs = 0
+        for i in arr :
+            s =max(i)-1
+            if s> maxs:
+                maxs = s
+
+        print(maxs)
+
+```
+
+## 2023 09 01 friday

@@ -1973,3 +1973,256 @@ else:
 ```
 
 ## 2023 09 01 friday
+
+### swea solving club 4366 정식이의 은행업무
+
+
+```python
+
+T = int(input())
+for tc in range(1,T+1):
+    bi = input()        # 2진수
+    thr = list(map(int , input()))       # 3진수
+
+    N = len(bi)
+    M = len(thr)
+    ans = 0
+
+    binary = int(bi,2)  # 정수로 변환
+    bin_list = [0]* N   # 각 비트를 반전시킨 수 N개 저장
+    for i in range(N):  # 각 비트를 반전시킨 2진수 만들기
+        bin_list[i] = binary^(1<<i)
+    for i in range(M):
+        num1 = 0    # (thr[j]+1)%3
+        num2 = 0
+        for j in range(M):
+            if i!=j:
+                num1 = num1*3+thr[j]
+                num2 = num2*3+thr[j]
+            else:
+                num1 = num1*3+(thr[j]+1)%3
+                num2 = num2*3+(thr[j]+2)%3
+        if num1 in bin_list:
+            ans = num1
+            break   # for i
+        if num2 in bin_list:
+            ans = num2
+            break   # for i
+    print(f'#{tc}',ans)
+
+```
+
+### 백준 10866 덱
+
+```python
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+N = int(input())
+deq = deque()
+for i in range(N):
+    lst = list(input().split())
+    if lst[0] == 'push_back':
+        deq.append(lst[1])
+    elif lst[0] =='push_front':
+        deq.insert(0,lst[1])
+    elif lst[0] == 'pop_front':
+        if deq:
+            print(deq.popleft())
+        else:
+            print(-1)
+    elif lst[0] == 'pop_back':
+        if deq:
+            print(deq.pop())
+        else:
+            print(-1)
+    elif lst[0] == 'size':
+        print(len(deq))
+    elif lst[0] == 'empty':
+        if deq :
+            print(0)
+        else:
+            print(1)
+    elif lst[0] == 'front':
+        if deq:
+            print(deq[0])
+        else:
+            print(-1)
+    else:
+        if deq:
+            print(deq[-1])
+        else:
+            print(-1)
+
+
+```
+
+### swea solving club 1953 탈주범 검거
+
+```python
+
+def bfs(i,j):
+    visited = [[0]*M for _ in range(N)]
+    q = []
+    q.append((i,j))
+    visited[i][j] = 1
+    while q:
+        x,y = q.pop(0)
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny =x+dx,y+dy
+            if 0<=nx<N and 0<=ny<M and visited[nx][ny] == 0:
+                if arr[x][y] == 1 and (dx,dy) == (1,0):
+                    if arr[nx][ny] in [2,4,7,1] :
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 1 and (dx,dy) == (0,1):
+                    if arr[nx][ny] in [3,6,7,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 1 and (dx,dy) == (-1,0):
+                    if arr[nx][ny] in [2,5,6,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 1 and (dx,dy) == (0,-1):
+                    if arr[nx][ny] in [3,4,5,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 2 and (dx,dy) == (1,0):
+                    if arr[nx][ny] in [2,4,7,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 2 and (dx,dy) == (-1,0):
+                    if arr[nx][ny] in [2,5,6,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 3 and (dx,dy) == (0,1):
+                    if arr[nx][ny] in [3,6,7,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 3 and (dx,dy) == (0,-1):
+                    if arr[nx][ny] in [3,4,5,1]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 4 and (dx,dy) == (-1,0):
+                    if arr[nx][ny] in [1,5,6,2]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 4 and (dx,dy) == (0,1):
+                    if arr[nx][ny] in [1,3,6,7]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 5 and (dx,dy) == (0,1):
+                    if arr[nx][ny] in [1,3,6,7]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 5 and (dx,dy) == (1,0):
+                    if arr[nx][ny] in [1,2,4,7]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 6 and (dx,dy) == (1,0):
+                    if arr[nx][ny] in [1,2,4,7]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 6 and (dx,dy) == (0,-1):
+                    if arr[nx][ny] in [1,3,4,5]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 7 and (dx,dy) == (-1,0):
+                    if arr[nx][ny] in [1,5,6,2]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+                elif arr[x][y] == 7 and (dx,dy) == (0,-1):
+                    if arr[nx][ny] in [1,3,4,5]:
+                        q.append((nx,ny))
+                        visited[nx][ny] = visited[x][y] +1
+    return visited
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M,R,C,L =map(int,input().split()) # N = 행 , M = 열, R = 시작 행, C = 시작 열, L= 시간
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    cnt = 0
+    a = bfs(R,C)
+    for i in a:
+        for j in i:
+            if 0< j <= L:
+                cnt +=1
+
+    print(f'#{tc}',cnt)
+
+```
+
+### 백준 16120 PPAP
+
+```python
+
+from collections import deque
+
+s= deque(list(input()))
+q = []
+while s :
+    a = s.popleft()
+    q.append(a)
+    if len(q)>=4:
+        if q[-4:] == ['P','P','A','P']:
+            q.pop()
+            q.pop()
+            q.pop()
+q =''.join(q)
+if q == 'P':
+    print('PPAP')
+else:
+    print('NP')
+
+
+```
+
+### 백준 28279 덱 2
+
+```python
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+N = int(input())
+deq = deque()
+for i in range(N):
+    lst = list(map( int, input().split()))
+    if lst[0] == 2:
+        deq.append(lst[1])
+    elif lst[0] == 1:
+        deq.insert(0,lst[1])
+    elif lst[0] == 3:
+        if deq:
+            print(deq.popleft())
+        else:
+            print(-1)
+    elif lst[0] == 4:
+        if deq:
+            print(deq.pop())
+        else:
+            print(-1)
+    elif lst[0] == 5:
+        print(len(deq))
+    elif lst[0] == 6:
+        if deq :
+            print(0)
+        else:
+            print(1)
+    elif lst[0] == 7:
+        if deq:
+            print(deq[0])
+        else:
+            print(-1)
+    else:
+        if deq:
+            print(deq[-1])
+        else:
+            print(-1)
+
+```
+
+## 2023 09 01 saturday
+
+### 

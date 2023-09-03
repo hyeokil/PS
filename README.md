@@ -2223,6 +2223,30 @@ for i in range(N):
 
 ```
 
-## 2023 09 02 saturday
+## 2023 09 03 sunday
 
-### 
+### 백준 2018 수들의 합 5
+
+```python
+
+N=int(input())
+cnt = 0
+start = 1
+end = 1  
+s = 0
+while start < N+1:
+        if s == N :
+            cnt += 1
+            s -= start
+            start +=1
+        elif s < N:
+            s += end
+            end +=1
+        elif s > N:
+            s -= start
+            start+=1
+print(cnt)
+
+```
+
+### 백준 

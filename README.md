@@ -2277,4 +2277,23 @@ print(cnt)
 
 ```
 
-### 
+### 백준 1026 보물
+
+```python
+
+N = int(input())
+lstA = list(map(int, input().split()))
+lstB=list(map(int, input().split()))
+lstA.sort()
+lstB.sort(reverse=True)
+s = 0
+for i in range(N):
+    s += lstA[i]*lstB[i]
+    
+print(s)
+
+```
+
+## 2023 09 05 tuesday
+
+###

@@ -2249,4 +2249,32 @@ print(cnt)
 
 ```
 
-### 백준 
+## 2023 09 04 monday
+
+### 백준 1940 주몽
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+M = int(input())
+lst = sorted(list(map(int, input().split())))
+end = N-1
+start = 0
+cnt =0
+while start < end:
+    s = lst[start] + lst[end]
+    if s == M :
+        cnt += 1
+        start += 1
+        end -= 1
+    elif s > M :
+        end -= 1
+    elif s < M :
+        start += 1
+print(cnt)
+
+```
+
+### 

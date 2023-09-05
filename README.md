@@ -2296,4 +2296,121 @@ print(s)
 
 ## 2023 09 05 tuesday
 
+### 백준 13023 ABCDE
+
+```python
+
+# 1
+
+import sys
+input = sys.stdin.readline
+def dfs(x, d):
+    if d == 5:
+        return 1
+    for i in arr[x]:
+        if visited[i] == False:
+            visited[i] = True
+            t = dfs(i, d+1)
+            if t == 1 :
+                return 1
+            visited[i] = False
+            
+    return
+
+N,M = map(int, input().split())
+arr = [[]*N for _ in range(N)]
+for i in range(M):
+    a,b= map(int, input().split())
+    arr[a].append(b)
+    arr[b].append(a)
+visited = [False]*N
+for j in range(N):
+    visited[j] = True
+    if dfs(j, 1) == 1:
+        print(1)
+        break
+    visited[j] = False
+else:
+    print(0)
+
+
+# 2
+
+import sys
+input = sys.stdin.readline
+def dfs(x, cnt, path):
+    # visited = [0] * N
+    st = []
+    st.append((x,cnt,path))
+    # visited[x] = 1
+    while st:
+        x, cnt, path =  st.pop()
+        # if visited[x] == 5:
+        #     return 1
+        for y in arr[x]:
+            if  y not in path:
+                if cnt + 1 == 5:
+                    return 1
+                st.append((y, cnt + 1, path+[y]))
+
+                # visited[y] = visited[x] +1
+                # x = y
+                # break
+        # else:
+        #     if st :
+        #         x = st.pop()
+        #     else:
+        #         break
+    return 0
+
+N,M = map(int, input().split())
+arr = [[]*N for _ in range(N)]
+for i in range(M):
+    a,b = map(int, input().split())
+    arr[a].append(b)
+    arr[b].append(a)
+
+for x in range(N):
+    V = dfs(x, 1, [x])
+    if V == 1:
+        print(1)
+        break
+else :
+    print(0)
+
+```
+
+### 백준 2606 바이러스
+
+```python
+
+from collections import deque
+def bfs(x):
+    global visited
+    visited[x] = 1
+    q =deque()
+    q.append(x)
+    while q:
+        i = q.popleft()
+        for j in arr[i]:
+            if visited[j] == 0 :
+                visited[j] = 1
+                q.append(j)
+    return
+
+N = int(input())
+M = int(input())
+arr = [[]*(N+1) for _ in range(N+1)]
+for i in range(M):
+    a,b = map(int, input().split())
+    arr[a].append(b)
+    arr[b].append(a)
+visited = [0]*(N+1)
+bfs(1)
+print(sum(visited)-1)
+
+```
+
+## 2023 09 06 wednesday
+
 ###

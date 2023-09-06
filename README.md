@@ -2413,4 +2413,68 @@ print(sum(visited)-1)
 
 ## 2023 09 06 wednesday
 
+### 백준 11724 연결 요소의 개수
+
+```python
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+def bfs(x):
+    q = deque()
+    visited[x] = True
+    q.append(x)
+    while q :
+        i = q.popleft()
+        for j in arr[i]:
+            if visited[j] == False :
+                q.append(j)
+                visited[j] = True
+    return
+
+
+
+N,M = map(int, input().split())
+arr =[[]*(N+1) for _ in range(N+1)]
+for tc in range(M):
+    u,v =map(int,input().split())
+    arr[u].append(v)
+    arr[v].append(u)
+visited = [False]*(N+1)
+cnt = 0
+for i in range(1,N+1):
+    if visited[i] == False :
+        bfs(i)
+        cnt += 1
+
+print(cnt)
+```
+
+### 백준 1920 수 찾기
+
+```python
+
+N = int(input())
+lstN = sorted(list(map(int, input().split())))
+M = int(input())
+lstM = list(map(int,input().split()))
+for i in lstM:
+    left = 0
+    right = N-1
+    while left <= right :
+        a = (left+right)//2
+        if i > lstN[a]:
+            left = a+1
+        elif i < lstN[a]:
+            right = a-1
+        else:
+            print(1)
+            break
+    else:
+        print(0)
+
+```
+
+## 2023 09 07 thursday
+
 ###

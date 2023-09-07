@@ -2477,4 +2477,53 @@ for i in lstM:
 
 ## 2023 09 07 thursday
 
+### 백준 18110 solved.ac
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+lst = []
+if N == 0 :
+    print(0)
+else:
+    for q in range(N):
+        n = int(input())
+        lst.append(n)
+    lst.sort()
+    a = int(N*0.15+0.5)
+    print(int((sum(lst[a:N-a])/(N-2*a))+0.5))
+
+```
+
+### 백준 10816 숫자 카드 2
+
+```python
+
+import sys
+input =  sys.stdin.readline
+
+N = int(input())
+lstN = list(map(int, input().split()))
+sN = set(lstN)
+M = int(input())
+lstM = list(map(int, input().split()))
+lstcnt ={}
+for i in sN:
+    lstcnt[i] = 0
+for i in range(N):
+    lstcnt[lstN[i]] += 1
+for i in lstM:
+    try:
+        print(lstcnt[i],end=' ')
+    except KeyError:
+        print(0, end= ' ')
+
+
+```
+
+## 2023 09 08 friday
+
 ###

@@ -2526,4 +2526,51 @@ for i in lstM:
 
 ## 2023 09 08 friday
 
-###
+### 백준 15829 Hashing
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+L = int(input())
+s = input()
+dict = {}
+en = 'abcdefghijklmnopqrstuvwxyz'
+for i in range(26):
+    dict[en[i]] = i+1
+
+
+ans = 0
+for i in range(L):
+    ans += dict[s[i]]*31**i 
+
+print(ans%1234567891)
+
+
+```
+
+### 백준 7568 덩치
+
+```python
+
+N = int(input())
+arr = []
+for tc in range(N):
+    lst = list(map(int, input().split()))
+    arr.append(lst)
+ans = []
+for i in range(N):
+    cnt = 0
+
+    for j in range(N):
+        if i != j and arr[i][0] < arr[j][0] and arr[i][1] < arr[j][1]:
+            cnt += 1
+    ans.append(cnt+1)
+print(*ans)
+
+```
+
+## 2023 09 09 saturday
+
+### 백준 

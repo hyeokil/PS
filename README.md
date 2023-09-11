@@ -2571,6 +2571,51 @@ print(*ans)
 
 ```
 
-## 2023 09 09 saturday
+## 2023 09 11 monday
 
-### 백준 
+### 백준 11723 집합
+
+```python
+import sys
+input = sys.stdin.readline
+M = int(input())
+S = set()
+for m in range(M):
+    lst = input().split()
+    if lst[0] == 'add':
+        S.add(int(lst[1]))
+    elif lst[0] == 'remove' :
+        S.discard(int(lst[1]))
+    elif lst[0] == 'check':
+        if int(lst[1]) in S :
+            print(1)
+        else:
+            print(0)
+    elif lst[0] == 'toggle' :
+        if int(lst[1]) in S :
+            S.discard(int(lst[1]))
+        else:
+            S.add(int(lst[1]))
+    elif lst[0] == 'all' :
+        S = set([i for i in range(1,21)])
+    else:
+        S = set()
+
+
+```
+
+### 백준 11726 2xn 타일링
+
+```python
+
+lst = [1,2,3]
+n = int(input()) -1
+for i in range(len(lst),n+1):
+    lst.append(lst[i-2]+lst[i-1])
+print(lst[n]%10007)
+
+```
+
+## 2023 09 12 tuesday
+
+### 백준

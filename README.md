@@ -2618,4 +2618,83 @@ print(lst[n]%10007)
 
 ## 2023 09 12 tuesday
 
-### 백준
+### 백준 1926 그림
+
+```python
+
+N,M = map(int, input().split())
+arr = [list(map(int, input().split())) for i in range(N)]
+cnt = 0
+ans = 0
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 1:
+            arr[i][j] = -1
+            cnt +=1
+            x = i
+            y = j
+            cnt1 = 1
+            st = []
+            while True :
+                for di,dj in [(1,0),(0,1),(-1,0),(0,-1)]:
+                    ni,nj=x+di,y+dj
+                    if 0<=ni<N and 0<=nj<M and arr[ni][nj] == 1:
+                        arr[ni][nj] = -1
+                        st.append((x,y))
+                        x = ni
+                        y = nj
+                        cnt1 += 1
+                        break
+
+                else:
+                    if st:
+                        x,y = st.pop()
+                    else:
+                        break
+            if cnt1 > ans :
+                ans = cnt1
+print(cnt)
+print(ans)
+
+```
+
+### 백준 1012 유기농 배추
+
+```python
+
+from collections import deque
+T = int(input())
+for tc in range(1,T+1):
+    M,N,K = map(int, input().split())
+    arr= [[0]*M for _ in range(N)]
+    for k in range(K):
+        a,b = map(int, input().split())
+        arr[b][a] = 1
+    cnt = 0
+    q = deque()
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 1:
+                arr[i][j] = -1
+                cnt +=1
+                q.append((i,j))
+                while q :
+                    x,y =q.popleft()
+                    for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+                        nx,ny=x+dx,y+dy
+                        if 0<=nx<N and 0<=ny<M and arr[nx][ny] == 1 :
+                            q.append((nx,ny))
+                            arr[nx][ny] = -1
+    print(cnt)
+
+
+```
+
+## 2023 09 13 wednesday
+
+### 백준 
+
+### 백준 
+
+### 백준 
+

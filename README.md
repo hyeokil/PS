@@ -2690,6 +2690,54 @@ for tc in range(1,T+1):
 
 ```
 
+### 백준 15649 N 과 M (1)
+
+```python
+
+def f(x):
+    if x==M:
+        print(*p)
+        return
+    else:
+        for i in range(N):
+            if used[i] == 0 :
+                p[x] = A[i]
+                used[i] = 1
+                f(x+1)
+                used[i] = 0
+N,M = map(int, input().split())
+A=[i for i in range(1,N+1)]
+used = [0]*N
+p = [0] * M
+f(0)
+
+```
+
+### 백준 15650 N 과 M (2)
+
+```pyhton
+
+N,M= map(int, input().split())
+lst = [i for i in range(1,N+1)]
+bit = [0]*(N+1)
+def partial(x,k):
+    if k == M :
+        result = []
+        for i in range(1,N+1):
+            if bit[i] == 1:
+                result.append(i)
+        print(*result)
+        return
+    if x == N+1:
+        return
+    bit[x] = 1
+    partial(x+1,k+1)
+    bit[x]= 0
+    partial(x+1,k)
+partial(1,0)
+
+```
+
 ## 2023 09 13 wednesday
 
 ### 백준 

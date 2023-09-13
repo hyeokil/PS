@@ -2740,9 +2740,118 @@ partial(1,0)
 
 ## 2023 09 13 wednesday
 
-### 백준 
+### 백준 7569 토마토
 
-### 백준 
+```python
 
-### 백준 
+from collections import deque
+import sys
+input = sys.stdin.readline
+M,N,H = map(int,input().split())
+arr = [list(map(int, input().split())) for _ in range(N*H)]
+q = deque()
+for i in range(N*H):
+    for j in range(M):
+        if arr[i][j] == 1 :
+            q.append((i,j))
+while q:
+    x,y = q.popleft()
+    for dx,dy in [(1,0),(0,1),(-1,0),(0,-1),(-N,0),(N,0)]:
+        nx,ny = x+dx,y+dy
+        if dx == -N or dx == N :
+            if 0<= nx < (N *H) and 0 <= ny < M and arr[nx][ny] == 0:
+                q.append((nx, ny))
+                arr[nx][ny] = arr[x][y] + 1
+        else:
+            if N*(x//N)<=nx<(N*(x//N+1)) and 0<=ny<M and arr[nx][ny] ==0 :
+                q.append((nx,ny))
+                arr[nx][ny] = arr[x][y] + 1
 
+x = 0
+ans = 0
+for i in range(N*H):
+    if x == 1:
+        break
+    for j in range(M):
+        if arr[i][j] > ans :
+            ans = arr[i][j]
+        if arr[i][j] == 0:
+            x = 1
+            break
+if x == 0 :
+    print(ans-1)
+else:
+    print(-1)
+
+
+```
+
+### 백준 11003 최솟값 찾기
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+N,L = map(int, input().split())
+lst= list(map(int, input().split()))
+q = deque()
+for i in range(N):
+    while q and q[-1][0] >= lst[i]:
+        q.pop()
+    q.append((lst[i],i))
+    if i - q[0][1] >= L:
+        q.popleft()
+    print(q[0][0], end=' ')
+
+
+```
+
+### 백준 2583 영역 구하기
+
+```python
+
+from collections import deque
+M,N,K = map(int, input().split())
+arr = [[0]*N for _ in range(M)]
+for tc in range(K):
+    x1,y1,x2,y2 = map(int, input().split())
+    for i in range(y1,y2):
+        for j in range(x1,x2):
+            arr[i][j] =-1
+cnt = 0
+ans = []
+for i in range(M):
+    for j in range(N):
+        if arr[i][j] == 0:
+            q = deque()
+            q.append((i,j))
+            cnt += 1
+            arr[i][j] = 1
+            sumV = 1
+            while q :
+                x,y = q.popleft()
+                for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+                    nx,ny = x + dx, y + dy
+                    if 0<=nx<M and 0<=ny<N and arr[nx][ny] == 0 :
+                        q.append((nx,ny))
+                        arr[nx][ny] = 1
+                        sumV += 1
+            ans.append(sumV)
+ans.sort()
+print(cnt)
+print(*ans)
+
+```
+
+## 2023 09 14 thursday
+
+### 백준
+
+### 백준
+
+### 백준
+
+### 백준
+
+### 백준

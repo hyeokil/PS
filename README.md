@@ -2904,6 +2904,62 @@ while q:
 
 ```
 
+### 백준 12851 숨바꼭질 2
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+N,K = map(int, input().split())
+q = deque()
+q.append(N)
+visited = [0] * 100001
+ans = -1
+cnt = 0
+visited[N] = 1
+while q:
+    x = q.popleft()
+    if ans != -1 and visited[x] > ans :
+        break
+    if x == K :
+        ans = visited[x]
+        cnt +=1
+    else:
+        for i in (2*x,x-1, x+1):
+            if 0<=i<=100000 and (visited[i] == 0 or visited[i] == visited[x] + 1) :
+                q.append(i)
+                visited[i] = visited[x]+1
+print(ans-1)
+print(cnt)
+
+```
+
+### 백준 1966 프린터 큐
+
+```python
+
+from collections import deque
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int, input().split())
+    q = deque(list(map(int, input().split())))
+    idx = deque([i for i in range(N)])
+    cnt = 0
+    while True:
+        x = q.popleft()
+        y = idx.popleft()
+        if q and x < max(q) :
+            q.append(x)
+            idx.append(y)
+        else :
+            cnt +=1
+            if y == M :
+                print(cnt)
+                break
+
+```
+
 ## 2023 09 15 friday
 
 ### 백준

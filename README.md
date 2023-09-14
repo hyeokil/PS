@@ -2846,9 +2846,65 @@ print(*ans)
 
 ## 2023 09 14 thursday
 
-### 백준
+### 백준 2667 단지번호붙이기
 
-### 백준
+```python
+
+from collections import deque
+N = int(input())
+arr = [list(input()) for _ in range(N)]
+q = deque()
+cnt = 0
+ans = []
+for i in range(N):
+    for j in range(N):
+        if arr[i][j] == '1' :
+            arr[i][j] = '0'
+            cnt += 1
+            sumV = 1
+            q.append((i,j))
+            while q :
+                x,y = q.popleft()
+                for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+                    nx,ny =x+dx,y+dy
+                    if 0<=nx<N and 0<=ny<N and arr[nx][ny] == '1':
+                        q.append((nx,ny))
+                        arr[nx][ny] = '0'
+                        sumV+=1
+            ans.append(sumV)
+ans.sort()
+print(cnt)
+for i in ans:
+    print(i)
+
+
+```
+
+### 백준 1697 숨바꼭질
+
+```python
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+N,K = map(int, input().split())
+q = deque()
+q.append((N,0))
+visited = [False]*100001
+while q:
+    x,y = q.popleft()
+    if x == K :
+        print(y)
+        break
+    for i in (x-1, x+1, 2*x):
+        if 0<=i<=100000 and visited[i] == False:
+            q.append((i,y+1))
+            visited[i] = True
+
+
+```
+
+## 2023 09 15 friday
 
 ### 백준
 

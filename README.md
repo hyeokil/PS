@@ -3057,6 +3057,62 @@ B = set(map(int,input().split()))
 print(len(A-B)+len(B-A))
 
 ```
-### 백준 7785 회사에 있는 사람
+### 백준 14502 연구소
+
+```python
+
+from collections import deque
+import copy
+def bfs(arr):
+    q1 = copy.deepcopy(q)
+    arr1 = copy.deepcopy(arr)
+    cnt =0
+    while q1:
+        x,y = q1.popleft()
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny =x+dx,y+dy
+            if 0<=nx<N and 0<=ny<M and arr1[nx][ny] == 0 :
+                arr1[nx][ny] = 2
+                q1.append((nx,ny))
+    for g in range(N):
+        for h in range(M):
+            if arr1[g][h] == 0 :
+                cnt += 1
+    return cnt
+N,M = map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(N)]
+
+q = deque()
+lst0 = []
+ans = 0
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 2:
+            q.append((i,j))
+        if arr[i][j] == 0:
+            lst0.append((i,j))
+for i in range(len(lst0)):
+    arr[lst0[i][0]][lst0[i][1]] = 1
+    for j in range(i+1,len(lst0)):
+        arr[lst0[j][0]][lst0[j][1]] = 1
+        for k in range(j+1,len(lst0)):
+            arr[lst0[k][0]][lst0[k][1]] = 1
+            result = bfs(arr)
+            
+            if result > ans :
+                ans = result
+
+            arr[lst0[k][0]][lst0[k][1]] = 0
+        arr[lst0[j][0]][lst0[j][1]] = 0
+    arr[lst0[i][0]][lst0[i][1]] = 0
+
+
+
+print(ans)
+
+```
+
+## 2023 09 16 saturday
+
 ### 백준 7785 회사에 있는 사람
 ### 백준 7785 회사에 있는 사람

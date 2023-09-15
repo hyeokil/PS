@@ -2962,8 +2962,101 @@ for tc in range(1,T+1):
 
 ## 2023 09 15 friday
 
-### 백준
+### 백준 2346 풍선 터뜨리기
 
-### 백준
+```python
 
-### 백준
+from collections import deque
+N = int(input())
+q = deque(list(map(int,input().split())))
+idx = deque(list(range(1,N+1)))
+ans = []
+cnt = 1
+while True:
+    if cnt > 0 :
+        if q :
+            for i in range(cnt):
+                x = q.popleft()
+                y = idx.popleft()
+                q.append(x)
+                idx.append(y)
+            else:
+                x = q.pop()
+                y = idx.pop()
+                ans.append(y)
+                cnt = x
+        else:
+            break
+    else:
+        if q :
+            for i in range(abs(cnt)):
+                x = q.pop()
+                y = idx.pop()
+                q.appendleft(x)
+                idx.appendleft(y)
+            else:
+                x = q.popleft()
+                y = idx.popleft()
+                ans.append(y)
+                cnt = x
+        else:
+            break
+print(*ans)
+
+```
+ 
+### 백준 14425 문자열 집합
+
+```python
+
+import sys
+input = sys.stdin.readline
+N,M = map(int, input().split())
+Nset = set()
+cnt = 0
+for i in range(N):
+    s = input()
+    Nset.add(s)
+for i in range(M):
+    s = input()
+    if s in Nset:
+        cnt += 1
+print(cnt)
+
+```
+
+### 백준 7785 회사에 있는 사람
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+Nset = set()
+for i in range(N):
+    a,b = input().split()
+    if b == 'enter':
+        Nset.add(a)
+    else:
+        if a in Nset:
+            Nset.discard(a)
+lst = list(Nset)
+lst.sort(reverse=True)
+for i in lst:
+    print(i)
+
+```
+
+### 백준 1269 대칭 차집합
+
+```python
+
+A,B = map(int, input().split())
+A = set(map(int,input().split()))
+B = set(map(int,input().split()))
+print(len(A-B)+len(B-A))
+
+```
+### 백준 7785 회사에 있는 사람
+### 백준 7785 회사에 있는 사람
+### 백준 7785 회사에 있는 사람

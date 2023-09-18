@@ -286,8 +286,7 @@ for tc in range(1,T +1):
 
 ```
 
-
-### swea 1226 미로 
+### swea 1226 미로
 
 ```python
 
@@ -1028,7 +1027,6 @@ for i in ans:
 
 ```
 
-
 ## 2023 08 25 friday
 
 ### swea solving club 1220 Magnetic
@@ -1118,7 +1116,6 @@ for tc in range(1,T+1):
 
 
 ```
-
 
 ### swea solving club 5658 보물상자 비밀번호
 
@@ -1219,7 +1216,7 @@ for _ in range(N):
 
 ```
 
-### 백준 9095 1,2,3 더하기 
+### 백준 9095 1,2,3 더하기
 
 ```python
 
@@ -1659,7 +1656,6 @@ for tc in range(1,T+1):
 
 ### swea solving club 5188 최소합
 
-
 ```python
 
 def f(x,y,sumV):
@@ -1761,7 +1757,7 @@ while True:
 
 ```
 
-### 백준 1259 팰린드롬수 
+### 백준 1259 팰린드롬수
 
 ```python
 
@@ -1975,7 +1971,6 @@ else:
 ## 2023 09 01 friday
 
 ### swea solving club 4366 정식이의 은행업무
-
 
 ```python
 
@@ -3004,7 +2999,7 @@ while True:
 print(*ans)
 
 ```
- 
+
 ### 백준 14425 문자열 집합
 
 ```python
@@ -3057,6 +3052,7 @@ B = set(map(int,input().split()))
 print(len(A-B)+len(B-A))
 
 ```
+
 ### 백준 14502 연구소
 
 ```python
@@ -3112,7 +3108,230 @@ print(ans)
 
 ```
 
-## 2023 09 16 saturday
+## 2023 09 16 sunday
 
-### 백준 7785 회사에 있는 사람
-### 백준 7785 회사에 있는 사람
+### 백준 2343 기타 레슨
+
+```python
+
+N,M = map(int,input().split())
+lst = list(map(int, input().split()))
+s = max(lst)
+e= sum(lst)
+while s<=e:
+  mid = (s+e)//2
+  blue = [0]*M
+  cnt = 0
+  for i in lst:
+    if blue[cnt] + i <= mid :
+      blue[cnt] += i
+    else:
+      cnt += 1
+      if cnt >= M :
+        s = mid + 1
+        break
+      else:
+        blue[cnt] += i
+  else:
+    e = mid - 1
+    
+print(s)
+
+```
+
+## 2023 09 18 monday
+
+### swea solving club 5204 퀵 정렬
+
+```python
+
+def h_par(s,e):
+    p = s
+    i = s
+    j = e
+    while i<=j :
+        while i<=j and lst[i] <= lst[p]:
+            i += 1
+        while i<=j and lst[j] >= lst[p]:
+            j -= 1
+        if i<j :
+            lst[i], lst[j] = lst[j], lst[i]
+
+    lst[p], lst[j] = lst[j], lst[p]
+    return j
+
+def quick_sort(s,e):
+    if s>=e:
+        return -1
+    pivot = h_par(s,e)
+    quick_sort(s,pivot-1)
+    quick_sort(pivot+1,e)
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    lst = list(map(int, input().split()))
+    quick_sort(0,N-1)
+    print(f'#{tc}',lst[N//2])
+
+```
+
+### swea solving club 5204 병합 정렬
+
+```python
+
+def merge(l_lst, r_lst):
+    global cnt
+    result = []
+    l_pos = r_pos = 0
+    while l_pos < len(l_lst) and r_pos < len(r_lst):
+        if l_lst[l_pos] <= r_lst[r_pos] :
+            result.append(l_lst[l_pos])
+            l_pos += 1
+        else:
+            result.append(r_lst[r_pos])
+            r_pos += 1
+    result += l_lst[l_pos:]
+    result += r_lst[r_pos:]
+    if l_pos < r_pos :
+        cnt+= 1
+    return result
+
+def merge_sort(arr):
+    if len(arr) == 1:
+        return arr
+    mid = len(arr)//2
+    l_lst = merge_sort(arr[:mid])
+    r_lst = merge_sort(arr[mid:])
+    result = merge(l_lst,r_lst)
+    return result
+
+T = int(input())
+for tc in range(1,T+1):
+    cnt = 0
+    N = int(input())
+    lst = list(map(int, input().split()))
+    arr = merge_sort(lst)
+    print(f'#{tc}',arr[N//2],cnt)
+
+```
+
+### swea solving club 5207 이진 탐색
+
+```python
+
+def b(t):
+    low = 0
+    high = n - 1
+    lw = 0
+    rw = 0
+    while low <= high :
+        mid = (low+high) // 2
+        if lstN[mid] == t :
+            return 1
+        elif lstN[mid] < t :
+            rw += 1
+            lw = 0
+            if rw >= 2 :
+                break
+            low = mid +1
+        else:
+            lw += 1
+            rw = 0
+            if lw >= 2:
+                break
+            high = mid - 1
+    return 0
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int, input().split())
+    lstN = list(map(int, input().split()))
+    lstM = list(map(int, input().split()))
+    lstN.sort()
+    n = len(lstN)
+    cnt = 0
+    for i in lstM:
+        cnt += b(i)
+    print(f'#{tc}',cnt)
+
+```
+
+### swea solving club 1486 장훈이의 높은 선반
+
+```python
+
+def p(k,curS):
+    global ans
+    if curS >= B :
+        if ans > curS:
+            ans = curS
+        return
+    if k == N :
+        return
+    bit[k] = 0
+    p(k+1,curS)
+    bit[k] = 1
+    p(k+1, curS + lst[k])
+    return
+T = int(input())
+for tc in range(1,T+1):
+    N,B = map(int, input().split())
+    lst = list(map(int, input().split()))
+    bit = [0]*(N+1)
+    ans = sum(lst)+1
+    p(0,0)
+    print(f'#{tc}',ans-B)
+
+```
+
+### 백준 1167 트리의 지름
+
+```python
+
+from collections import deque
+
+def bfs(x):
+    q = deque()
+    visited = [0] * (V + 1)
+    q.append(x)
+    visited[x] = 1
+    while q:
+        a = q.popleft()
+        for b in arr[a].keys():
+            if visited[b] == 0:
+                visited[b] = visited[a] + arr[a][b]
+                q.append(b)
+    return visited.index(max(visited))
+
+
+def bfs1(x):
+    q = deque()
+    visited = [0] * (V + 1)
+    q.append(x)
+    visited[x] = 1
+    while q:
+        a = q.popleft()
+        for b in arr[a].keys():
+            if visited[b] == 0:
+                visited[b] = visited[a] + arr[a][b]
+                q.append(b)
+    return max(visited)
+
+V = int(input())
+arr = [{} for _ in range(V+1)]
+for i in range(V):
+    lst = list(map(int, input().split()))
+    for j in range(1,len(lst),2):
+        if lst[j] != -1 :
+            arr[lst[0]][lst[j]] =lst[j+1]
+
+r = bfs(1)
+ans = bfs1(r)
+print(ans-1)
+
+```
+
+## 2023 09 19 tuesday
+
+###

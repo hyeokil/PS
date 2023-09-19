@@ -3615,6 +3615,62 @@ print(s)
 
 ```
 
+### 백준 1744 수 묶기
+
+```python
+
+import heapq
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+heap = []
+cnt = 0
+for _ in range(N):
+    a = int(input())
+    if a != 0:
+        heapq.heappush(heap,-a)
+    else :
+      cnt = 1
+s = 0
+if heap :
+    if len(heap) == 1:
+        print(-heap[0])
+    else:
+        while len(heap)>=2:
+            x = -heapq.heappop(heap)
+            y = -heapq.heappop(heap)
+            if y > 1 :
+                s += x*y
+            
+            elif  y == 1 :
+                  s+= x+y
+            elif x > 0 and y < 0:
+                if len(heap)%2 == 1:
+                    s+= x
+                    heapq.heappush(heap,-y)
+                else:
+                    if cnt == 1:
+                        s += x
+                    else:
+                        s += x+y
+            else:                
+                if len(heap)%2 == 1 :
+                    if cnt == 1 :
+                        heapq.heappush(heap,-y)
+                    else:
+                        s += x
+                        heapq.heappush(heap,-y)
+                else:
+                    s+=x*y
+        if heap :
+            s-= heap[0]  
+        print(s)
+else:
+    print(0)
+
+```
+
 ## 2023 09 20 wednesday
 
 ###

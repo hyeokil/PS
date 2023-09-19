@@ -2710,7 +2710,7 @@ f(0)
 
 ### 백준 15650 N 과 M (2)
 
-```pyhton
+```python
 
 N,M= map(int, input().split())
 lst = [i for i in range(1,N+1)]
@@ -3334,4 +3334,289 @@ print(ans-1)
 
 ## 2023 09 19 tuesday
 
+### 백준 15652 N과 M (4)
+
+```python
+
+def back(cnt):
+    if cnt == M:
+        print(*path)
+        return
+
+    for num in arr :
+        if num < path[cnt-1] :
+             continue
+        path[cnt] = num
+        back(cnt+1)
+        path[cnt]= 0
+
+N, M = map(int, input().split())
+
+arr = [i for i in range(1,N+1)]
+path = [0] * M
+back(0)
+
+```
+
+### 백준 15652 N과 M (5)
+
+```python
+
+def back(cnt):
+    if cnt == M:
+        print(*path)
+        return
+    for num in arr :
+        if num in path:
+            continue
+        path[cnt] = num
+        back(cnt+1)
+        path[cnt]= 0
+
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
+arr.sort()
+path = [0] * M
+back(0)
+
+```
+
+### 백준 15652 N과 M (6)
+
+
+```python
+
+def back(cnt):
+
+    if cnt == M:
+        print(*path)
+        return
+
+    for num in arr :
+        if num not in path and num > path[cnt-1]:
+            path[cnt] = num
+            back(cnt+1)
+            path[cnt]= 0
+
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
+arr.sort()
+path = [0] * M
+back(0)
+
+```
+
+### 백준 15652 N과 M (7)
+
+```python
+
+def back(cnt):
+
+    if cnt == M:
+        print(*path)
+        return
+
+    for num in arr :
+            path[cnt] = num
+            back(cnt+1)
+            path[cnt]= 0
+
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
+arr.sort()
+path = [0] * M
+back(0)
+
+```
+
+### 백준 15652 N과 M (8)
+
+```python
+
+def back(cnt):
+    if cnt == M:
+        print(*path)
+        return
+    for num in arr :
+        if num >= path[cnt-1]:
+            path[cnt] = num
+            back(cnt+1)
+            path[cnt]= 0
+
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
+arr.sort()
+path = [0] * M
+back(0)
+
+```
+
+### swea solving club 5209 최소 생산 비용
+
+```python
+
+def f(x, curS):
+    global maxs
+    if curS  >= maxs:
+        return
+    if x == N :
+        if curS < maxs:
+            maxs = curS
+        return
+    else:
+        for i in range(N):
+            if bit[i] == 0:
+                bit[i] = 1
+                f(x+1,curS+arr[x][i])
+                bit[i] = 0
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    bit = [0] * N
+    maxs = 1500
+    f(0, 0)
+    print(f'#{tc}',maxs)
+
+```
+
+### swea solving club 1865 동철이의 일 분배
+
+```python
+
+def f(x, curS):
+    global maxs
+    if maxs >= curS:
+        return
+    if x == N :
+        if curS > maxs:
+            maxs = curS
+        return
+    else:
+        for i in range(N):
+            if bit[i] == 0:
+                bit[i] = 1
+                f(x+1,curS*arr[x][i]/100)
+                bit[i] = 0
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int,input().split())) for _ in range(N)]
+    bit = [0]*N
+    maxs = 0
+    f(0,1)
+    print(f'#{tc} {maxs*100:.6f}')
+
+```
+
+### swea solving club 5208 전기버스2
+
+```python
+
+def charge(x,cnt):
+    global mincnt
+    if cnt > mincnt:
+        return
+    elif x >= N-1:
+        mincnt = cnt
+        return
+    else:
+        for i in range(1,stop[x]+1):
+            if  x+stop[x]+stop[x+stop[x]] <= x+i+stop[x+i]:
+                charge(x+i,cnt + 1)
+
+
+T = int(input())
+for tc in range(1, T+1):
+    lst = list(map(int, input().split()))
+    N = lst[0]
+    stop = lst[1:] + [0]*100
+    # print(stop)
+    mincnt = 101
+    charge(0,-1)
+    print(f'#{tc}',mincnt)
+
+```
+
+
+### swea solving club 2819 격자판의 숫자 이어 붙이기
+
+```python 
+
+def f(i,j,ans):
+    if len(ans) == 7 :
+        result.add(ans)
+        return
+    for di,dj in [(1,0),(0,1),(-1,0),(0,-1)]:
+        ni, nj = i+di,j+dj
+        if 0<=ni<4 and 0<=nj<4 :
+            f(ni,nj,ans+arr[ni][nj])
+ 
+T = int(input())
+for tc in range(1,T+1):
+    arr = [list(input().split()) for _ in range(4)]
+    # print(arr)
+    result = set()
+    for i in range(4):
+        for j in range(4):
+            f(i,j,arr[i][j])
+    print(f'#{tc}',len(result))
+
+```
+
+### 백준 1931 회의실 배정
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+lst = []
+for _ in range(N):
+    a,b = map(int, input().split())
+    lst.append((b,a))
+lst.sort(reverse=True)
+y,x = lst.pop()
+cnt = 1
+while lst :
+    j, i = lst.pop()
+    if i >= y :
+        cnt += 1
+        x,y = i,j
+print(cnt)
+
+```
+
+### 백준 1715 카드 정렬하기
+
+```python
+
+import heapq
+import sys
+input = sys.stdin.readline
+N = int(input())
+heap = []
+for _ in range(N):
+    a = int(input())
+    heapq.heappush(heap,a)
+
+s = 0
+
+while len(heap) >=2 :
+    x = heapq.heappop(heap)
+    y= heapq.heappop(heap)
+    s+=x + y
+    heapq.heappush(heap,x+y)
+
+print(s)
+
+```
+
+## 2023 09 20 wednesday
+
 ###
+
+## 2023 09 21 thursday

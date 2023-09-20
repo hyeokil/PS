@@ -3888,5 +3888,33 @@ print(ans-1)
 
 ```
 
+### 백준 13549 숨바꼭질 4
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+N,K = map(int, input().split())
+q = deque()
+q.append((N,f'{N}'))
+visited = [0] * 100001
+ans = -1
+visited[N] = 1
+while q:
+    x,lst = q.popleft()
+    if x == K :
+        ans = visited[x]
+        print(ans - 1)
+        print(lst)
+        break
+    else:
+        for i in (2*x,x-1, x+1):
+            if 0<=i<=100000 and (visited[i] == 0 or visited[i] == visited[x] + 1) :
+                q.append((i,lst+' '+str(i)))
+                visited[i] = visited[x]+1
+
+```
+
 
 ## 2023 09 21 thursday

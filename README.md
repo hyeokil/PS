@@ -3673,6 +3673,220 @@ else:
 
 ## 2023 09 20 wednesday
 
-###
+### swea solving club 1238 Contect
+
+```python
+
+from collections import deque
+def bfs(x):
+    visited = [0]*101
+    q = deque()
+    visited[x] = 1
+    q.append(x)
+    while q:
+        i = q.popleft()
+        for j in range(1,101):
+            if arr[i][j] == 1 and visited[j] == 0:
+                q.append(j)
+                visited[j] = visited[i] + 1
+    return visited
+
+
+T = 10
+for tc in range(1,T+1):
+    N, k = map(int, input().split())
+    arr = [[0]*101 for _ in range(101)]
+    lst = list(map(int, input().split()))
+    for i in range(0,N,2):
+        arr[lst[i]][lst[i+1]] = 1
+
+    V = bfs(k)
+    for i in range(100,0,-1):
+        if V[i] == max(V):
+            print(f'#{tc}',i)
+            break
+
+```
+
+### swea solving club 5248 그룹 나누기
+
+```python
+
+from collections import deque
+
+def bfs(x):
+    q = deque()
+    q.append(x)
+    while q :
+        i = q.popleft()
+        for j in range(1,N+1):
+            if arr[i][j] == 1 and visited[j] == 0 :
+                    q.append(j)
+                    visited[j] = 1
+    return
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int, input().split())
+    arr = [[0]*(N+1) for _ in range(N+1)]
+    lst = list(map(int, input().split()))
+    for i in range(0,len(lst),2):
+        arr[lst[i]][lst[i+1]] = 1
+        arr[lst[i+1]][lst[i]] = 1
+    visited = [0]*(N+1)
+    cnt = 0
+    for k in range(1,N+1):
+        if visited[k] == 0:
+            visited[k] = 1
+            bfs(k)
+            cnt += 1
+
+    print(f'#{tc}',cnt)
+
+```
+
+### swea solving club 5247 연산
+
+```python
+
+from collections import deque
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M = map(int,input().split())
+    visited = [False]*1000001
+    cnt = 1000001
+    q = deque()
+    q.append((N,0))
+    while q :
+        x,y = q.popleft()
+        if x == M :
+            print(f'#{tc}',y)
+            break
+        for i in (x+1,x-1,x*2,x-10):
+            if 0<=i<=1000000 and visited[i] == False:
+                q.append((i,y+1))
+                visited[i] = True
+
+```
+
+### 백준 1300 K번째 수 
+
+```python
+
+N = int(input())
+k = int(input())
+s = 1
+e = k
+ans = 0
+while s<=e :
+    mid = (s+e)//2
+    cnt = 0
+    for i in range(1,N+1):
+        if mid//i < N :
+            cnt += mid//i
+        else:
+            cnt += N
+    if cnt < k :
+        s = mid + 1
+    else:
+        e = mid - 1
+        ans = mid
+print(ans)
+
+```
+
+### 백준 1874 스택 수열
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+st = []
+lst = [i for i in range(1,N+1)]
+lst.sort(reverse=True)
+result= ''
+x = 0
+for _ in range(N):
+    a = int(input())
+    if st :
+        if a in st :
+            while st :
+                b = st.pop()
+                result += '-'
+                if b == a:
+                    break
+        else:
+            if a in lst:
+                while True:
+                    c = lst.pop()
+                    if c == a :
+                        result+='+'
+                        result+='-'
+                        break
+                    else:
+                        st.append(c)
+                        result+='+'
+
+            else:
+                x = 1
+
+    else:
+        if a in lst:
+            while True:
+                d = lst.pop()
+                if d == a :
+                    result += '+'
+                    result += '-'
+                    break
+                else:
+                    st.append(d)
+                    result += '+'
+        else:
+            x = 1
+
+if x == 1:
+    print('NO')
+else:
+    for i in result:
+        print(i)
+
+```
+
+### 백준 13549 숨바꼭질 3
+
+```python
+
+import sys
+input =  sys.stdin.readline
+from collections import deque
+N,K = map(int, input().split())
+q = deque()
+q.append(N)
+visited = [0] * 100001
+ans = -1
+visited[N] = 1
+while q:
+    x = q.popleft()
+    if ans != -1 and visited[x] > ans :
+        break
+    if x == K :
+        ans = visited[x]
+    else:
+        for i in (2*x,x-1, x+1):
+            if i == 2*x :
+                if 0<=i<=100000 and (visited[i] == 0 or visited[i] == visited[x] + 1) :
+                    q.append(i)
+                    visited[i] = visited[x]
+            else:
+                if 0 <= i <= 100000 and (visited[i] == 0 or visited[i] == visited[x] + 1):
+                    q.append(i)
+                    visited[i] = visited[x] + 1
+print(ans-1)
+
+
+```
+
 
 ## 2023 09 21 thursday

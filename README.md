@@ -3918,3 +3918,268 @@ while q:
 
 
 ## 2023 09 21 thursday
+
+### 백준 2589 보물섬
+
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+L, W = map(int, input().split())
+arr = [input() for _ in range(L)]
+ans = 0
+for i in range(L):
+    for j in range(W):
+        if arr[i][j] == 'L':
+            q = deque()
+            q.append((i,j,0))
+            visited = [[0]*W for _ in range(L)]
+            visited[i][j] = 1
+            while q:
+                x,y,k = q.popleft()
+                if k > ans :
+                    ans = k
+                    if ans == L + W - 2:
+                        break
+                for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+                    nx,ny = x+dx,y+dy
+                    if 0<=nx<L and 0<=ny<W and arr[nx][ny] == 'L' and visited[nx][ny] == 0:
+                        q.append((nx,ny,k+1))
+                        visited[nx][ny] = 1
+
+print(ans)
+
+
+```
+
+### swea solving club 5249 최소 신장 트리
+
+```python
+
+def prim(s):
+    # 연결된 노드의 번호를 저장
+    U = []
+    D = [100] * (N+1)
+
+    D[s] = 0
+    for _ in range(N+1):
+        # D에 있는 것중에 최선을 고른다(제일 작은값)
+        minV = 10000
+        for i in range(N+1):
+            if i in U:
+                continue
+            if D[i] < minV:
+                minV = D[i]
+                curN = i
+
+        # curN 결정
+        U.append(curN)
+
+        # curN 와 연결되어있는 노드들의 값을 최선으로 변경
+        for i in range(N+1):
+            if i in U or arr[curN][i] == 0:
+                continue
+            if D[i] > arr[curN][i]:
+                D[i] = arr[curN][i]
+
+    return sum(D)
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N, E = map(int, input().split())
+    arr = [[0] * (N+1) for _ in range(N+1)]
+    for i in range(E):
+        a, b, w = map(int, input().split())
+        arr[a][b] = w
+        arr[b][a] = w
+    print(f'#{tc}',prim(0))
+
+```
+
+### swea solving club 5251 최소 이동 거리
+
+```python
+
+def d(s):
+    # 연결된 노드의 번호를 저장
+    U = []
+    D = [100] * (N+1)
+
+    D[s] = 0
+    for _ in range(N+1):
+        # D에 있는 것중에 최선을 고른다(제일 작은값)
+        minV = 10000
+        for i in range(N+1):
+            if i in U:
+                continue
+            if D[i] < minV:
+                minV = D[i]
+                curN = i
+
+        # curN 결정
+        U.append(curN)
+
+        # curN 와 연결되어있는 노드들의 값을 최선으로 변경
+        for i in range(N+1):
+            if i in U or arr[curN][i] == 0:
+                continue
+            if D[i] > arr[curN][i] + D[curN]:
+                D[i] = arr[curN][i] + D[curN]
+
+    return D[N]
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N, E = map(int, input().split())
+    arr = [[0] * (N+1) for _ in range(N+1)]
+    for i in range(E):
+        a, b, w = map(int, input().split())
+        arr[a][b] = w
+    print(f'#{tc}',d(0))
+
+
+```
+
+### swea solving club 5250 최소 비용
+
+```python
+
+from collections import deque
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int,input().split())) for _ in range(N)]
+    q = deque()
+    visited = [[0] * N for _ in range(N)]
+    q.append((0, 0))
+    visited[0][0] = 1
+    while q:
+        x, y = q.popleft()
+        for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < N and 0 <= ny < N :
+                if arr[x][y] >= arr[nx][ny] :
+                    d =  1
+                else :
+                    d = arr[nx][ny] - arr[x][y] +1
+                if visited[nx][ny] > visited[x][y] + d or visited[nx][ny] == 0:
+                    visited[nx][ny] = visited[x][y] + d
+                    q.append((nx, ny))
+
+    print(f'#{tc}',visited[N-1][N-1]-1)
+
+
+
+```
+
+### swea solving club 1251 하나로
+
+```python
+
+import math
+def prim(s):
+    U = []
+    D = [10000000] * (N)
+
+    D[s] = 0
+    for _ in range(N):
+
+        minV = 10000000
+        for i in range(N):
+            if i in U:
+                continue
+            if D[i] < minV:
+                minV = D[i]
+                curN = i
+
+        U.append(curN)
+
+        for i in range(N):
+            if i in U or arr[curN][i] == 0:
+                continue
+            if D[i] > arr[curN][i]:
+                D[i] = arr[curN][i]
+    A = 0
+    for i in D :
+        A+=i**2
+    return A
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    lstx = list(map(int, input().split()))
+    lsty = list(map(int, input().split()))
+    E = float(input())
+    visited = [0]*N
+    arr = [[0]*N for _ in range(N)]
+    for i in range(N):
+        for j in range(N):
+            if i != j :
+                arr[i][j] = math.sqrt(abs(lstx[i]-lstx[j])**2+abs(lsty[i]-lsty[j])**2)
+                arr[j][i] = arr[i][j]
+    result = prim(0)
+    ans = E * result
+    print(f'#{tc} {round(ans)}')
+
+
+```
+
+### swea solving club 1249 보급로
+
+```python
+
+from collections import deque
+ 
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int,input())) for _ in range(N)]
+    q = deque()
+    visited = [[0] * N for _ in range(N)]
+    q.append((0, 0))
+    visited[0][0] = 1
+    while q:
+        x, y = q.popleft()
+        for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < N and 0 <= ny < N :
+                d = arr[nx][ny]
+                if visited[nx][ny] > visited[x][y] + d or visited[nx][ny] == 0:
+                    visited[nx][ny] = visited[x][y] + d
+                    q.append((nx, ny))
+ 
+    print(f'#{tc}',visited[N-1][N-1]-1)
+
+```
+
+### 백준 
+
+## 2023 09 22 friday
+
+### 백준 
+
+## 2023 09 23 saturday
+
+### 백준
+
+## 2023 09 24 sunday
+
+### 백준
+## 2023 09 25 monday
+
+### 백준
+
+
+## 2023 09 26 tuesday
+
+### 백준
+
+## 2023 09 27 wednesday
+
+### 백준

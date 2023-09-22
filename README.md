@@ -4158,11 +4158,241 @@ for tc in range(1,T+1):
 
 ```
 
-### 백준 
 
 ## 2023 09 22 friday
 
-### 백준 
+### 백준 1182 부분수열의 합
+
+```python
+
+def subset(i,curs):
+    global cnt
+    if i == N and 1 in bit and curs == S :
+        cnt+=1
+
+    if i == N :
+        return
+    elif arr[i]>=0 and curs > S:
+        return
+    else:
+        bit[i] = 1
+        subset(i+1, curs+arr[i])
+        bit[i] = 0
+        subset(i+1, curs )
+
+N, S = map(int,input().split())
+arr = list(map(int, input().split()))
+arr.sort()
+cnt = 0
+bit = [0]*N
+lst = []
+subset(0,0)
+print(cnt)
+
+
+```
+
+### swea solving club 1486 장훈이의 높은 선반
+
+```python
+
+def p(i,curs):
+    global miv
+    if i >= N:
+        return
+    curs += lst[i]
+    if curs >= B :
+        if curs < miv :
+            miv = curs
+    p(i+1,curs-lst[i])
+    p(i+1,curs)
+
+T = int(input())
+for tc in range(1,T+1):
+    N,B = map(int,input().split())
+    lst = list(map(int,input().split()))
+    miv = 10000*21
+    p(0,0)
+    print(f'#{tc}',miv-B)
+
+```
+
+### swea solving club 7465 창용 마을 무리의 개수
+
+```python
+
+
+from collections import deque
+
+T = int(input())
+for tc in range(1,T+1):
+    N,M =map(int, input().split())
+    arr = {i:[] for i in range(1,N+1)}
+    # print(arr)
+    ans = 0
+    for _ in range(M):
+        a,b = map(int, input().split())
+        arr[a].append(b)
+        arr[b].append(a)
+    visited = [False]*(N+1)
+    for i in range(1,N+1):
+        if visited[i] is False:
+            q = deque()
+            q.append(i)
+            ans += 1
+            visited[i] = True
+            while q:
+                x = q.popleft()
+                if arr.get(x):
+                    for y in arr.get(x):
+                        if visited[y] is False:
+                            visited[y] = True
+                            q.append(y)
+    print(f'#{tc}',ans)
+
+```
+
+### swea solving club 1952 수영장
+
+```python
+
+def f(mon, cost):
+    global ans
+    if mon == 12 and cost < ans :
+        ans = cost
+        return
+    if mon >=12 :
+        return
+    if cost > ans:
+        return
+
+    f(mon+1,cost + (D*lst[mon]))
+
+    f(mon+1,cost + M1)
+
+    f(mon+3, cost+M3)
+
+    f(mon+12, cost + Y)
+
+
+T = int(input())
+for tc in range(1,T+1):
+    D,M1,M3,Y = map(int,input().split())
+    lst = list(map(int, input().split()))
+
+    ans = 10000000
+    f(0,0)
+    print(f'#{tc}',ans)
+
+```
+
+### swea solving club 1949 등산로 조성
+
+```python
+
+def f(i,j,cnt):
+    global ans
+    if ans < cnt:
+        ans = cnt
+    for di,dj in [(1,0),(0,1),(-1,0),(0,-1)] :
+        ni,nj = i+di,j+dj
+        if 0<= ni<N and 0<=nj<N and visited[ni][nj] == 0 and arr[i][j] > arr[ni][nj]:
+            visited[ni][nj] = 1
+            f(ni,nj,cnt+1)
+            visited[ni][nj] = 0
+
+T = int(input())
+for tc in range(1,T+1):
+    N,K = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    visited = [[0]*N for _ in range(N)]
+    ans = 0
+    top = 0
+    qq = []
+    for i in arr:
+        if max(i) > top :
+            top = max(i)
+    for i in range(N):
+        for j in range(N):
+            if arr[i][j] == top:
+                qq.append((i,j))
+    for i in range(N):
+        for j in range(N):
+            for k in range(K+1):
+                arr[i][j] -= k
+                if (i, j) in qq:
+                    qq.remove((i, j))
+                    for x,y in qq:
+                        visited[x][y] = 1
+                        f(x,y,1)
+                        visited[x][y] =0
+                    qq.append((i,j))
+                else:
+                    for x, y in qq:
+                        visited[x][y] = 1
+                        f(x, y, 1)
+                        visited[x][y] = 0
+                arr[i][j] += k
+    print(f'#{tc}',ans)
+
+```
+
+### swea solving club 1795 인수의 생일파티
+
+```python
+
+
+def dijk(s,arr):
+    U = []
+    D = [1000000]*(N+1)
+    D[s] = 0
+    for _ in range(1,N+1):
+        # D에 있는 것중에 최선을 고른다(제일 작은값)
+        minV = 1000000
+        for i in range(1,N+1):
+            if i in U:
+                continue
+            if D[i] < minV :
+                minV = D[i]
+                curN = i
+
+        # curN 결정
+        U.append(curN)
+
+        # curN 와 연결되어있는 노드들의 값을 최선으로 변경
+        for i in range(1,N+1):
+            if arr[curN][i] == 0:
+                continue
+            if D[i] > arr[curN][i] + D[curN] :
+                D[i] = arr[curN][i] + D[curN]
+
+    return D
+
+
+T = int(input())
+for tc in range(1,T+1):
+    N, M, S = map(int,input().split())
+    G = [[0]*(N+1) for _ in range(N+1)]
+    B = [[0]*(N+1) for _ in range(N+1)]
+    ans = 0
+    visited = [0]*(N+1)
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        G[a][b] = c
+        B[b][a] = c
+    # print(arr)
+    lst1 = dijk(S,G)
+    lst2 = dijk(S,B)
+    for i in range(1,N+1):
+        s = lst1[i]+lst2[i]
+        if s> ans:
+            ans = s
+
+    print(f'#{tc}',ans)
+
+```
+
+
 
 ## 2023 09 23 saturday
 

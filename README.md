@@ -4415,6 +4415,55 @@ for i in range(M,N+1):
 
 ```
 
+### 백준 1747 소수&팰린드롬
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def ispal(x):
+
+    s = str(x)
+
+    for i in range(len(s)//2):
+
+        if s[i] != s[-1-i]:
+
+            return 0
+
+    else:
+
+      return 1
+
+N =int(input())
+
+lst = [False,False]+[True]*(2000000)
+
+for i in range(2,N+2):
+
+  if lst[i] == True :
+
+    for j in range(i*2,2000002,i):
+
+      lst[j] = False
+
+while True :
+
+  if lst[N] == True and ispal(N) == 1:
+
+    print(N)
+
+    break
+
+  else :
+
+    N+=1
+
+```
+
+### 
+
 ## 2023 09 24 sunday
 
 ### 백준

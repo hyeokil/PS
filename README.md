@@ -4462,7 +4462,25 @@ while True :
 
 ```
 
-### 
+### 백준 13241 최소공배수
+
+```python
+
+
+def gcd(a, b):
+    while b > 0:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+N,M = map(int,input().split())
+print(lcm(N,M))
+
+```
+
+
 
 ## 2023 09 24 sunday
 

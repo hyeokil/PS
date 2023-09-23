@@ -4393,10 +4393,27 @@ for tc in range(1,T+1):
 ```
 
 
-
 ## 2023 09 23 saturday
 
-### 백준
+### 백준 1929 소수 구하기
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+M,N =map(int, input().split())
+lst = [False,False]+[True]*(N+1)
+for i in range(2,N+2):
+  if lst[i] == True :
+    for j in range(i*2,N+2,i):
+      lst[j] = False
+
+for i in range(M,N+1):
+  if lst[i] == True:
+    print(i)
+
+```
 
 ## 2023 09 24 sunday
 

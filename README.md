@@ -4518,7 +4518,22 @@ else:
 
 ```
 
-### 백준
+### 백준 1735 분수 합
+
+```python
+
+def gcd(a, b):
+    while b > 0:
+        a, b = b, a % b
+    return a
+
+a,b = map(int,input().split())
+c,d = map(int,input().split())
+A,B = a*d+b*c,b*d
+e = gcd(A,B)
+print(A//e,B//e)
+
+```
 
 ## 2023 09 25 monday
 

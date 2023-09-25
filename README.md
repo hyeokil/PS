@@ -4537,7 +4537,41 @@ print(A//e,B//e)
 
 ## 2023 09 25 monday
 
-### 백준
+### 백준 2206 벽 부수고 이동하기
+
+```python
+from collections import deque
+
+N, M = map(int, input().split())
+arr = [list(input()) for _ in range(N)]
+visited = [[[0]*2 for _ in range(M)] for _ in range(N)]
+ans = 10000000
+visited[0][0][0] = 1
+q = deque()
+q.append((0,0,0))
+while q:
+    x,y,cnt = q.popleft()
+    if x == N - 1 and y == M - 1:
+        if ans > visited[x][y][cnt] :
+            ans = visited[x][y][cnt]
+            break
+    for di, dj in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+        ni, nj = x + di, y + dj
+        if 0 <= ni < N and 0 <= nj < M and visited[ni][nj][cnt] == 0 :
+            if arr[ni][nj]  == '0':
+                visited[ni][nj][cnt] = visited[x][y][cnt] + 1
+                q.append((ni,nj,cnt))
+            if cnt == 0 and arr[ni][nj] == '1' :
+                visited[ni][nj][1] = visited[x][y][0] + 1
+                q.append((ni, nj, 1))
+
+if ans == 10000000:
+    print(-1)
+else:
+    print(ans)
+
+```
+
 
 
 ## 2023 09 26 tuesday

@@ -4573,10 +4573,46 @@ else:
 ```
 
 
-
 ## 2023 09 26 tuesday
 
-### 백준
+### 백준 2644 촌수계산
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def dfs(x,cnt):
+  global ans
+  if x == b :
+    if ans > cnt :
+      ans = cnt      
+    return
+  if cnt > ans :
+    return
+  for y in arr[x]:
+    if visited[y] == 0:
+      visited[y] = 1
+      dfs(y,cnt+1)
+      visited[y] = 0
+  
+N = int(input())
+a,b = map(int, input().split())
+M = int(input())
+arr = {i:[] for i in range(1, N+1)}
+visited = [0]*(N+1)
+ans = 10001
+for _ in range(M):
+  c,d = map(int, input().split())
+  arr[c].append(d)
+  arr[d].append(c)
+dfs(a,0)
+if ans == 10001:
+  print(-1)
+else:
+  print(ans)
+
+```
 
 ## 2023 09 27 wednesday
 

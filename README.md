@@ -4423,41 +4423,25 @@ import sys
 input = sys.stdin.readline
 
 def ispal(x):
-
     s = str(x)
-
     for i in range(len(s)//2):
-
         if s[i] != s[-1-i]:
-
             return 0
-
     else:
-
       return 1
 
 N =int(input())
-
 lst = [False,False]+[True]*(2000000)
-
 for i in range(2,N+2):
-
   if lst[i] == True :
-
     for j in range(i*2,2000002,i):
-
       lst[j] = False
 
 while True :
-
   if lst[N] == True and ispal(N) == 1:
-
     print(N)
-
     break
-
   else :
-
     N+=1
 
 ```
@@ -4642,6 +4626,36 @@ while q:
             dis[go] = nowdis
             heapq.heappush(q,(nowdis,go))
 print(dis[g])
+
+```
+
+### 백준 1456 거의 소수
+
+```python
+
+import sys
+input = sys.stdin.readline
+N,M = map(int, input().split())
+lst = [False,False]+[True]*(int(M**0.5)+1)
+for i in range(2,int(M**0.5)+1):
+    if i*i > M :
+        continue
+    if lst[i] == True:
+        for j in range(i*2,int(M**0.5)+1,i):
+            lst[j] = False
+ans = 0
+for i in range(int(M**0.5)+1):
+    if lst[i] == True:
+        n = 2
+        while True :
+            if N<=i**n <= M :
+                ans += 1
+                n+= 1
+            elif i**n < N:
+                n+=1
+            else:
+                break
+print(ans)
 
 ```
 

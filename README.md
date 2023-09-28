@@ -4661,7 +4661,35 @@ print(ans)
 
 ## 2023 09 28 thursday
 
-### 백준 
+### 백준 1753 최단경로
+
+```python
+
+import heapq,sys
+input = sys.stdin.readline
+V,E =map(int,input().split())
+S = int(input())
+lst = [[] for _ in range(V+1)]
+for _ in range(E):
+    u,v,w = map(int, input().split())
+    lst[u].append((v,w))
+dis = [float('inf')]*(V+1)
+dis[S] = 0
+q = [(0,S)]
+while q:
+    nowD,now = heapq.heappop(q)
+    for go,godis in lst[now]:
+        curD = godis + nowD
+        if dis[go] > curD :
+            dis[go] = curD
+            heapq.heappush(q,(curD,go))
+for i in range(1,V+1):
+    if dis[i] == float('inf'):
+        print('INF')
+    else:
+        print(dis[i])
+
+```
 
 ## 2023 09 29 friday
 

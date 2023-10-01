@@ -4691,10 +4691,52 @@ for i in range(1,V+1):
 
 ```
 
-## 2023 09 29 friday
+## 2023 10 01 sunday
 
-### 백준 
+### 백준 5014 스타트링크
 
-## 2023 09 30 saturday
+```python
 
-### 백준 
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+F,S,G,U,D = map(int, input().split())
+visited = [0]*(F+1)
+q = deque()
+q.append((S,0))
+visited[S] = 1
+ans = float('inf')
+while q :
+    x, cnt = q.popleft()
+    if x == G :
+        print(cnt)
+        break
+    for y in [x+U,x-D] :
+        if 1<=y<=F and visited[y] ==  0 :
+            q.append((y,cnt+1))
+            visited[y] = 1
+else:
+    print('use the stairs')
+
+```
+
+## 2023 10 01 sunday
+
+### 백준
+
+## 2023 10 01 sunday
+
+### 백준
+
+## 2023 10 01 sunday
+
+### 백준
+
+## 2023 10 01 sunday
+
+### 백준
+
+## 2023 10 01 sunday
+
+### 백준

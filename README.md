@@ -4755,6 +4755,47 @@ while q:
 
 ```
 
+### 백준 1238 파티
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+N,M,X = map(int,input().split())
+arrgo = [[] for _ in range(N+1)]
+arrback = [[] for _ in range(N+1)]
+for _ in range(M):
+    a,b,t= map(int,input().split())
+    arrgo[a].append((b,t))
+    arrback[b].append((a,t))
+distgo = [float('inf')]*(N+1)
+distgo[X] = 0
+distback = [float('inf')]*(N+1)
+distback[X] = 0
+q = [(0,X)]
+while q:
+    nowdis, now= heapq.heappop(q)
+    for go,godis in arrgo[now]:
+        curD = nowdis+godis
+        if distgo[go] > curD :
+            distgo[go] = curD
+            heapq.heappush(q,(curD, go))
+q = [(0,X)]
+while q:
+    nowdis, now= heapq.heappop(q)
+    for go,godis in arrback[now]:
+        curD = nowdis+godis
+        if distback[go] > curD :
+            distback[go] = curD
+            heapq.heappush(q,(curD, go))
+ans = 0
+for i in range(1,N+1):
+    if ans < distback[i]+distgo[i] :
+        ans = distback[i]+distgo[i]
+print(ans)
+
+```
+
 ## 2023 10 01 sunday
 
 ### 백준

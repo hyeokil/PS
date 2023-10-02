@@ -4721,9 +4721,39 @@ else:
 
 ```
 
-## 2023 10 01 sunday
+## 2023 10 02 monday
 
-### 백준
+### 백준 11779 최소비용 구하기 2
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+N = int(input())
+M = int(input())
+arr = [[] for _ in range(N+1)]
+for _ in range(M):
+    a,b,t= map(int,input().split())
+    arr[a].append((b,t))
+S, G = map(int, input().split())
+dist = [float('inf')]*(N+1)
+dist[S] = 0
+q = [(0,S,f'{S}',1)]
+# print(q)
+while q:
+    nowdis, now, lst,cnt= heapq.heappop(q)
+    if now == G :
+        print(dist[now])
+        print(cnt)
+        print(lst)
+        break
+    for go,godis in arr[now]:
+        curD = nowdis+godis
+        if dist[go] > curD :
+            dist[go] = curD
+            heapq.heappush(q,(curD, go,lst+f' {go}',cnt+1))
+
+```
 
 ## 2023 10 01 sunday
 

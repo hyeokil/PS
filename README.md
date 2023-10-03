@@ -4796,9 +4796,30 @@ print(ans)
 
 ```
 
-## 2023 10 01 sunday
+## 2023 10 03 tuesday
 
-### 백준
+### 백준 4948 베르트랑 공준
+
+```python
+
+import sys
+input = sys.stdin.readline
+while True :
+    n = int(input())
+    if n == 0 :
+        break
+    lst = [False,False]+[True]*(2*n)
+    for i in range(2,2*n+1):
+        if lst[i] == True :
+            for j in range(2*i,2*n+1,i):
+                lst[j] = False
+    cnt = 0
+    for i in range(n+1,2*n+1):
+        if lst[i] == True :
+            cnt += 1
+    print(cnt)
+
+```
 
 ## 2023 10 01 sunday
 

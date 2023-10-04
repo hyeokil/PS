@@ -4821,9 +4821,66 @@ while True :
 
 ```
 
-## 2023 10 01 sunday
+## 2023 10 04 wednesday
 
-### 백준
+### 백준 11689 GCD(n,k) = 1
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+result = N
+for i in range(2,int(N**0.5)+1):
+    if N % i == 0 :
+        while N% i == 0 :
+            N //= i
+        result -= result/i
+if N > 1 :
+    result -= result/N
+
+print(int(result))
+
+
+```
+
+### 백준 1016 제곱 ㄴㄴ 수
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+S, B = map(int, input().split())
+check = [1]* (B-S+1)
+for i in range(2,int(B**0.5)+1):
+    p = i**2
+    start_idx = S//p
+    if S%p != 0 :
+        start_idx+=1
+    for j in range(start_idx,B//p + 1):
+        check[int(j*p)-S] = 0
+print(sum(check))
+
+```
+
+### 백준 10610 30  
+
+```python
+
+n = list(map(int,input()))
+
+if 0 not in n :
+    print(-1)
+elif sum(list(n))%3 == 0 :
+    n.sort(reverse=True)
+    ans = map(str,n)
+    print(''.join(ans))
+else:
+    print(-1)
+
+```
 
 ## 2023 10 01 sunday
 

@@ -4921,6 +4921,7 @@ for tc in range(1,T+1):
 
 ```python
 
+# ver1
 import sys
 input = sys.stdin.readline
 
@@ -4974,8 +4975,128 @@ for _ in range(M+K):
         c -= 1
         print(query(1, 0, N-1, b, c))
 
+# ver2
+
+import sys
+input = sys.stdin.readline
+
+
+n, nUpdate, nQuery = map(int, input().split())
+tree = [0] * (2 * n)
+
+for i in range(n):
+    tree[n + i] = int(input())
+for i in range(n - 1, 0, -1):
+    tree[i] = tree[2 * i] + tree[2 * i + 1]
+
+for _ in range(nUpdate + nQuery):
+    query, *temp = map(int, input().split())
+
+    if query == 1:
+        node = n + (temp[0] - 1)
+        tree[node] = temp[1]
+        node //= 2
+
+        while node:
+            tree[node] = tree[2 * node] + tree[2 * node + 1]
+            node //= 2
+
+    else:
+        left = n + (temp[0] - 1)
+        right = n + (temp[1] - 1)
+
+        value = 0
+        while left <= right:
+            if left % 2:
+                value += tree[left]
+                left += 1
+            left //= 2
+
+            if not right % 2:
+                value += tree[right]
+                right -= 1
+            right //= 2
+
+        print(value)
+
+
 ```
 
-## 2023 10 01 sunday
+### 백준 10999 구간 합 구하기 2
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def propagate(node, left, right):
+    if lazy[node]:
+        tree[node] += (right - left + 1) * lazy[node]
+
+        if left != right:
+            lazy[node * 2] += lazy[node]
+            lazy[node * 2 + 1] += lazy[node]
+        lazy[node] = 0
+
+def update(node, start, end, left, right, diff):
+    propagate(node, start, end)
+    if right < start or end < left:
+        return
+
+    if left <= start and end <= right:
+        lazy[node] += diff
+        propagate(node, start, end)
+        return
+
+    mid = (start + end) // 2
+    update(node * 2, start, mid, left, right, diff)
+    update(node * 2 + 1, mid+1, end, left, right, diff)
+    tree[node] = tree[node * 2] + tree[node * 2 + 1]
+    return
+
+def query(node, start, end, left, right):
+    propagate(node, start, end)
+    if right < start or end < left:
+        return 0
+
+    if left <= start and end <= right:
+        return tree[node]
+
+    mid = (start + end) // 2
+    q1 = query(node * 2, start, mid, left, right)
+    q2 = query(node * 2 + 1, mid+1, end, left, right)
+    return q1 + q2
+
+def init(node, start, end):
+    if start == end:
+        tree[node] = arr[start]
+        return tree[node]
+
+    mid = (start + end) // 2
+    tree[node] = init(node * 2, start, mid) + init(node * 2 + 1, mid + 1, end)
+    return tree[node]
+
+N, M, K = map(int, input().split())
+
+tree = [0] * (4 * N)
+lazy = [0] * (4 * N)
+arr = []
+for _ in range(N):
+    arr.append(int(input()))
+init(1, 0, N-1)
+for _ in range(M + K):
+    lst = list(map(int, input().split()))
+    a, b, c = lst[:3]
+    b -= 1
+    c -= 1
+    if a == 1:
+        d = lst[3]
+        update(1, 0, N-1, b, c, d)
+    elif a == 2:
+        print(query(1, 0, N-1, b, c))
+
+```
+
+## 2023 10 06 friday
 
 ### 백준

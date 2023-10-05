@@ -4882,9 +4882,99 @@ else:
 
 ```
 
-## 2023 10 01 sunday
+## 2023 10 05 thursday
 
-### 백준
+### swea 5189 전자카트
+
+```python
+
+def f(i,k,curs):
+    global miv
+    if miv < curs:
+        return
+
+    if k == N-1 :
+        result = curs+arr[i][0]
+        if miv > result :
+            miv = result
+
+        return
+
+    for j in range(1,N):
+        if i != j and used[j] == 0 :
+            used[j] = 1
+            f(j,k+1,curs+arr[i][j])
+            used[j] = 0
+
+T = int(input())
+for tc in range(1,T+1):
+    N = int(input())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    used = [0]*N
+    miv = float('inf')
+    f(0,0,0)
+    print(f'#{tc}',miv)
+
+```
+
+### 백준 2042 구간 합 구하기
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def init(node, start, end):
+    if start == end :
+        tree[node] = lst[start]
+        return
+    mid = (start+end)//2
+    init(2 * node, start, mid)
+    init(2*node +1, mid + 1, end)
+    tree[node] = tree[2*node] + tree[2* node + 1]
+
+def query(node, start, end, left, right):
+    if right < start or end < left:
+        return 0
+
+    if left <= start and end <= right:
+        return tree[node]
+
+    mid = (start + end) // 2
+    q1 = query(2 * node, start, mid, left, right)
+    q2 = query(2 * node + 1, mid + 1, end, left, right)
+    return q1 + q2
+
+def update(node, start, end, idx, diff):
+    if idx < start or end < idx:
+        return
+
+    tree[node] += diff
+
+    if start != end:
+        mid = (start + end) // 2
+        update(2 * node, start, mid, idx, diff)
+        update(2 * node + 1, mid + 1, end, idx, diff)
+
+
+N,M,K = map(int, input().split())
+lst = []
+for _ in range(N):
+    lst.append(int(input()))
+tree = [0]*(4*N)
+init(1, 0, N-1)
+for _ in range(M+K):
+    a,b,c = map(int, input().split())
+    b -= 1
+    if a == 1:
+        diff = c - lst[b]
+        lst[b] = c
+        update(1, 0, N-1, b, diff)
+    elif a == 2 :
+        c -= 1
+        print(query(1, 0, N-1, b, c))
+
+```
 
 ## 2023 10 01 sunday
 

@@ -5099,4 +5099,132 @@ for _ in range(M + K):
 
 ## 2023 10 06 friday
 
-### 백준
+### 백준 1967 트리의 지름
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+
+
+N = int(input())
+arr = [[] for _ in range(N+1)]
+for _ in range(N-1):
+    a,b,c = map(int, input().split())
+    arr[a].append((b,c))
+    arr[b].append((a, c))
+dist = [float('inf')]*(N+1)
+q = [(0, 1)]
+dist[0] = 0
+dist[1] = 0
+
+while q :
+    nowD,now = heapq.heappop(q)
+    for go,goD in arr[now] :
+        curD = nowD + goD
+        if dist[go] > curD:
+            dist[go] = curD
+            heapq.heappush(q,(curD,go))
+S = dist.index(max(dist))
+dis = [float('inf')]*(N+1)
+dis[S] = 0
+dis[0] = 0
+Q = [(0,S)]
+while Q :
+    nD, n = heapq.heappop(Q)
+    for g,gD in arr[n] :
+        cD = nD + gD
+        if dis[g] > cD :
+            dis[g] = cD
+            heapq.heappush(Q,(cD,g))
+if N == 1:
+    print(0)
+else:
+    print(max(dis))
+
+
+```
+
+### 백준 9663 N-Queen
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def f(i):
+    global cnt
+    if i == N:
+        cnt += 1
+        return
+    for j in range(N):
+        if used[j] == 0 and visited1[i+j]==0 and visited2[N-1-i+j]==0 :
+            used[j] = 1
+            visited1[i + j] = 1
+            visited2[N - 1 - i + j] = 1
+            f(i+1)
+            used[j] = 0
+            visited1[i + j] = 0
+            visited2[N - 1 - i + j] = 0
+
+
+N = int(input())
+used = [0]*N
+visited1 = [0]*((N-1)*2+1)
+visited2 = [0]*((N-1)*2+1)
+cnt = 0
+f(0)
+print(cnt)
+
+```
+
+### 백준 15666 N 과 M(12)
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def f(i,k,curs):
+    global temp
+    if i == M :
+        if curs not in temp:
+            temp.append(curs)
+            print(curs)
+        return
+    for j in range(N):
+        if k <= lst[j] :
+            f(i+1,lst[j],curs+f'{str(lst[j])} ')
+
+N, M = map(int, input().split())
+lst = list(map(int, input().split()))
+lst.sort()
+temp = []
+
+f(0,0,'')
+
+```
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름
+
+## 2023 10 06 friday
+
+### 백준 1967 트리의 지름

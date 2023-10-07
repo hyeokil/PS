@@ -5405,6 +5405,36 @@ for _ in range(M):
 
 ```
 
+### swea 1983 조교의 성적 매기기
+
+```python
+
+arr = {
+    0:'A+',
+    1:'A0',
+    2: 'A-',
+    3: 'B+',
+    4: 'B0',
+    5: 'B-',
+    6: 'C+',
+    7: 'C0',
+    8: 'C-',
+    9: 'D0',
+}
+T = int(input())
+for tc in range(1,T+1):
+    N, M = map(int, input().split())
+    lst = []
+    for i in range(1,N+1):
+        a,b,c = map(int, input().split())
+        lst.append((a*35+b*45+c*20,i))
+    lst.sort(reverse=True)
+    for j in range(N):
+        s,x = lst[j]
+        if x ==M:
+            print(arr[j//(N//10)])
+
+```
 
 ## 2023 10 08 sunday
 

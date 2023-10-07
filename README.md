@@ -5289,9 +5289,67 @@ for _ in range(M):
 
 ```
 
-## 2023 10 06 friday
+### 백준 11505 구간 곱 구하기
 
-### 백준 1967 트리의 지름
+```python
+
+import sys
+input = sys.stdin.readline
+
+def init(node, start, end):
+    if start == end :
+        tree[node] = lst[start]
+        return
+    mid = (start+end)//2
+    init(2 * node, start, mid)
+    init(2*node +1, mid + 1, end)
+    tree[node] = tree[2*node] * tree[2* node + 1] % 1000000007
+
+def query(node, start, end, left, right):
+    if right < start or end < left:
+        return 1
+
+    if left <= start and end <= right:
+        return tree[node]
+
+    mid = (start + end) // 2
+    q1 = query(2 * node, start, mid, left, right)
+    q2 = query(2 * node + 1, mid + 1, end, left, right)
+    return q1 * q2 % 1000000007
+
+def update(node, start, end, idx):
+    if idx < start or end < idx:
+        return tree[node]
+    if start == end:
+        tree[node] = c
+        return c
+    mid = (start + end) // 2
+    l=update(2 * node, start, mid, idx)
+    r=update(2 * node + 1, mid + 1, end, idx)
+    tree[node] = l*r%1000000007
+    return tree[node]
+
+N,M,K = map(int, input().split())
+lst = []
+for _ in range(N):
+    lst.append(int(input()))
+tree = [0]*(4*N)
+init(1, 0, N-1)
+for _ in range(M+K):
+    a,b,c = map(int, input().split())
+    b -= 1
+    if a == 1:
+        lst[b] = c
+        update(1, 0, N-1, b)
+    elif a == 2 :
+        c -= 1
+        print(query(1, 0, N-1, b, c))
+
+```
+
+## 2023 10 08 sunday
+
+### 백준 
 
 ## 2023 10 06 friday
 

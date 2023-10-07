@@ -5251,7 +5251,43 @@ for i in range(N):
 
 ```
 
-### 백준 
+### 백준 10868 최솟값
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def init(node, start, end):
+    if start == end :
+        tree[node] = lst[start]
+        return tree[node]
+    mid = (start+end)//2
+    tree[node] = min(init(2 * node, start, mid), init(2*node +1, mid + 1, end))
+    return tree[node]
+def minquery(node, start, end, left, right):
+    if start > right or end < left :
+        return 10000000001
+    if start >= left and end <= right:
+        return tree[node]
+    mid = (start + end) // 2
+    x = minquery(node*2,start,mid,left,right)
+    y = minquery(node*2+1, mid+1,end,left,right)
+    return min(x,y)
+
+N, M = map(int,input().split())
+lst = []
+tree= [0]*(4*N)
+for _ in range(N):
+    lst.append(int(input()))
+init(1,0,N-1)
+
+for _ in range(M):
+    a,b = map(int, input().split())
+    print(minquery(1,0,N-1,a-1,b-1))
+
+
+```
 
 ## 2023 10 06 friday
 

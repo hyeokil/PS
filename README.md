@@ -5205,9 +5205,53 @@ f(0,0,'')
 
 ```
 
-## 2023 10 06 friday
+## 2023 10 07 saturday
 
-### 백준 1967 트리의 지름
+### 백준 1033 칵테일
+
+```python
+import sys
+input = sys.stdin.readline
+
+def gcd(a,b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b,a%b)
+
+def dfs(v):
+    visited[v] = True
+    for i in A[v]:
+        next = i[0]
+        if not visited[next]:
+            D[next] = D[v]*i[2]//i[1]
+            dfs(next)
+
+N = int(input())
+A =  [[]for _ in range(N)]
+visited = [False]*N
+D = [0]*N
+lcm = 1
+
+for _ in range(N-1):
+    a,b,c,d = map(int, input().split())
+    A[a].append((b,c,d))
+    A[b].append((a,d,c))
+    lcm *= (c*d//gcd(c,d))
+
+D[0] = lcm
+dfs(0)
+res_gcd = D[0]
+
+for i in range(1,N):
+    res_gcd = gcd(res_gcd,D[i])
+for i in range(N):
+    print(D[i]//res_gcd, end = ' ')
+
+
+```
+
+### 백준 
 
 ## 2023 10 06 friday
 

@@ -5347,6 +5347,65 @@ for _ in range(M+K):
 
 ```
 
+### 백준 2357 최솟값과 최댓값
+
+```python
+
+
+import sys
+input = sys.stdin.readline
+
+def init1(node, start, end):
+    if start == end :
+        tree1[node] = lst[start]
+        return tree1[node]
+    mid = (start+end)//2
+    tree1[node] = min(init1(2 * node, start, mid), init1(2*node +1, mid + 1, end))
+    return tree1[node]
+
+def init2(node, start, end):
+    if start == end :
+        tree2[node] = lst[start]
+        return tree2[node]
+    mid = (start+end)//2
+    tree2[node] = max(init2(2 * node, start, mid), init2(2*node +1, mid + 1, end))
+    return tree2[node]
+def minquery(node, start, end, left, right):
+    if start > right or end < left :
+        return 10000000001
+    if start >= left and end <= right:
+        return tree1[node]
+    mid = (start + end) // 2
+    x = minquery(node*2,start,mid,left,right)
+    y = minquery(node*2+1, mid+1,end,left,right)
+    return min(x,y)
+def maxquery(node, start, end, left, right):
+    if start > right or end < left :
+        return 0
+    if start >= left and end <= right:
+        return tree2[node]
+    mid = (start + end) // 2
+    x = maxquery(node*2,start,mid,left,right)
+    y = maxquery(node*2+1, mid+1,end,left,right)
+    return max(x,y)
+
+N, M = map(int,input().split())
+lst = []
+tree1= [0]*(4*N)
+tree2= [0]*(4*N)
+for _ in range(N):
+    lst.append(int(input()))
+init1(1,0,N-1)
+init2(1,0,N-1)
+
+for _ in range(M):
+    a,b = map(int, input().split())
+    print(minquery(1,0,N-1,a-1,b-1),maxquery(1,0,N-1,a-1,b-1))
+
+
+```
+
+
 ## 2023 10 08 sunday
 
 ### 백준 

@@ -5436,6 +5436,56 @@ for tc in range(1,T+1):
 
 ```
 
+### swea 1974 스도쿠 검증 
+
+```python
+
+def tri():
+    global ans
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            for k in range(3):
+                for l in range(3):
+                    if arr[i + k][j + l] in lst:
+                        lst.remove(arr[i + k][j + l])
+                    else:
+                        ans = 1
+                        return
+
+
+def one():
+    global ans
+    for i in range(9):
+        lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        lst1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        for j in range(9):
+            if arr[i][j] in lst :
+                lst.remove(arr[i][j])
+            else:
+                ans = 1
+                return
+            if arr[j][i] in lst1 :
+                lst1.remove(arr[j][i])
+            else:
+                ans = 1
+                return
+
+
+T = int(input())
+for tc in range(1,T+1):
+    arr = [list(map(int, input().split())) for _ in range(9)]
+    ans = 0
+    one()
+    if ans == 0:
+        tri()
+    if ans == 0:
+        print(f'#{tc}',1)
+    else:
+        print(f'#{tc}', 0)
+
+```
+
 ## 2023 10 08 sunday
 
 ### 백준 

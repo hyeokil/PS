@@ -5508,6 +5508,23 @@ for _ in range(T):
 
 ```
 
+### 백준 10825 국영수
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+arr = []
+for _ in range(N):
+    name, *score = input().split()
+    arr.append((name,*map(int, score)))
+arr.sort(key= lambda x : (-x[1],x[2],-x[3],x[0]))
+for i in arr:
+    print(i[0])
+
+```
+
 ## 2023 10 06 friday
 
 ### 백준 1967 트리의 지름

@@ -5525,18 +5525,177 @@ for i in arr:
 
 ```
 
-## 2023 10 06 friday
+## 2023 10 10 tuesday
 
-### 백준 1967 트리의 지름
+### 백준 17070 파이프 옮기기 1
 
-## 2023 10 06 friday
+```python
 
-### 백준 1967 트리의 지름
+import sys
+input = sys.stdin.readline
 
-## 2023 10 06 friday
+N = int(input())
+arr = [list(map(int, input().split())) for _ in range(N)]
+q = []
+q.append((0,0,0,1))
+cnt = 0
+while q:
+    i,j,x,y = q.pop()
+    if x == N-1 and y == N-1 :
+        cnt += 1
+    if i == x-1 and j == y-1:
+        for dx,dy in [(0,1),(1,1),(1,0)]:
+            nx,ny = x+dx,y+dy
+            if dx == 1 and dy == 1:
+                if 0 <= nx < N and 0 <= ny < N and arr[nx][ny] == 0 and arr[nx - 1][ny] == 0 and arr[nx][ny - 1] == 0:
+                    q.append((x, y, nx, ny))
+            else:
+                if 0<=nx<N and 0<=ny<N and arr[nx][ny] == 0 :
+                    q.append((x,y,nx,ny))
+    elif i == x and j == y-1:
+        for dx,dy in [(0,1),(1,1)]:
+            nx,ny = x+dx,y+dy
+            if dx== 1 and dy == 1:
+                if 0<=nx<N and 0<=ny<N and arr[nx][ny] == 0 and arr[nx-1][ny] ==0 and arr[nx][ny-1] == 0:
+                    q.append((x,y,nx,ny))
+            else:
+                if 0<=nx<N and 0<=ny<N and arr[nx][ny] == 0 :
+                    q.append((x,y,nx,ny))
+    elif i == x-1 and j == y:
+        for dx,dy in [(1,0),(1,1)]:
+            nx,ny = x+dx,y+dy
+            if dx == 1 and dy == 1:
+                if 0 <= nx < N and 0 <= ny < N and arr[nx][ny] == 0 and arr[nx - 1][ny] == 0 and arr[nx][ny - 1] == 0:
+                    q.append((x, y, nx, ny))
+            else:
+                if 0<=nx<N and 0<=ny<N and arr[nx][ny] == 0 :
+                    q.append((x,y,nx,ny))
 
-### 백준 1967 트리의 지름
 
-## 2023 10 06 friday
+print(cnt)
 
-### 백준 1967 트리의 지름
+```
+
+### 백준 18223 민준이와 마산 그리고 건우
+
+```python
+
+# ver1
+import heapq,sys
+input = sys.stdin.readline
+V, E, P = map(int, input().split())
+arr = [[] for _ in range(V+1)]
+for _ in range(E):
+    a,b,c = map(int, input().split())
+    arr[a].append((b,c))
+    arr[b].append((a, c))
+dist = [float('inf')]*(V+1)
+q=[(0,1)]
+dist[1] = 0
+while q:
+    nowD, now = heapq.heappop(q)
+    for go,goD in arr[now]:
+        curD = nowD + goD
+        if dist[go] > curD :
+            dist[go] = curD
+            heapq.heappush(q,(curD,go))
+
+dist1 = [float('inf')]*(V+1)
+q=[(0,P)]
+dist1[P] = 0
+while q:
+    nowD, now = heapq.heappop(q)
+    for go,goD in arr[now]:
+        curD = nowD + goD
+        if dist1[go] > curD :
+            dist1[go] = curD
+            heapq.heappush(q,(curD,go))
+if dist[P]+dist1[V] == dist[V]:
+    print('SAVE HIM')
+else:
+    print('GOOD BYE')
+
+# ver2
+import heapq,sys
+input = sys.stdin.readline
+V, E, P = map(int, input().split())
+arr = [[] for _ in range(V+1)]
+for _ in range(E):
+    a,b,c = map(int, input().split())
+    arr[a].append((b,c))
+    arr[b].append((a, c))
+dist = [float('inf')]*(V+1)
+q=[(0,1,[1])]
+dist[1] = 0
+x = 0
+while q:
+    nowD, now,way = heapq.heappop(q)
+    if now == V :
+        if P in way:
+            x = 1
+
+    for go,goD in arr[now]:
+        curD = nowD + goD
+        if dist[go] >= curD :
+            dist[go] = curD
+            heapq.heappush(q,(curD,go,way+[go]))
+if x == 1:
+    print('SAVE HIM')
+else:
+    print('GOOD BYE')
+
+
+```
+
+### 백준 11051 이항 계수 2
+
+```python
+
+N, K = map(int, input().split())
+n= 1
+k = 1
+for i in range(1,K+1):
+    n*=N
+    N-=1
+    k*=i
+ans = n//k%10007
+print(ans)
+
+```
+
+### 백준 2775 부녀회장이 될테야
+
+```python
+
+
+T = int(input())
+arr = [[0]*15 for _ in range(15)]
+for i in range(15):
+    arr[0][i] = i
+cnt = 1
+while cnt < 15:
+    for i in range(15):
+        s = 0
+        for j in range(i+1):
+            s+=arr[cnt-1][j]
+        arr[cnt][i] = s
+    cnt += 1
+for _ in range(T):
+    K = int(input())
+    N = int(input())
+    print(arr[K][N])
+
+
+```
+
+## 2023 10 11 wednesday
+
+### 백준 
+
+## 2023 10 12 thursday
+
+### 백준 
+
+## 2023 10 13 friday
+
+### 백준 

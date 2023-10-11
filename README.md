@@ -5690,7 +5690,52 @@ for _ in range(T):
 
 ## 2023 10 11 wednesday
 
-### 백준 
+### 백준 1010 다리 놓기
+
+```python
+
+T = int(input())
+for _ in range(T):
+    K,N = map(int, input().split())
+    n = 1
+    k = 1
+    for i in range(1,K+1):
+        n*=N
+        N-=1
+        k*=i
+    print(n//k)
+
+```
+
+### 백준 1197 최소 스패닝 트리
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+V,E = map(int, input().split())
+arr = [[]for _ in range(V+1)]
+visited = [0]*(V+1)
+for _ in range(E):
+    a,b,c = map(int ,input().split())
+    arr[a].append((b,c))
+    arr[b].append((a,c))
+cnt = 0
+ans = 0
+q = [(0,1)]
+while q:
+    if cnt == V:
+        break
+    D,now = heapq.heappop(q)
+    if visited[now] == 0:
+        visited[now] = 1
+        ans += D
+        cnt += 1
+        for g,d in arr[now]:
+            heapq.heappush(q,(d,g))
+print(ans)
+
+```
 
 ## 2023 10 12 thursday
 

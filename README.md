@@ -5739,6 +5739,37 @@ print(ans)
 
 ## 2023 10 12 thursday
 
+### 백준 1922 네트워크 연결
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+N = int(input())
+M = int(input())
+arr = [[]for _ in range(N+1)]
+visited = [0]*(N+1)
+for _ in range(M):
+    a,b,c = map(int ,input().split())
+    arr[a].append((b,c))
+    arr[b].append((a,c))
+cnt = 0
+ans = 0
+q = [(0,1)]
+while q:
+    if cnt == N:
+        break
+    D,now = heapq.heappop(q)
+    if visited[now] == 0:
+        visited[now] = 1
+        ans += D
+        cnt += 1
+        for g,d in arr[now]:
+            heapq.heappush(q,(d,g))
+print(ans)
+
+```
+
 ### 백준 
 
 ## 2023 10 13 friday

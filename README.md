@@ -5770,8 +5770,44 @@ print(ans)
 
 ```
 
-### 백준 
+## 2023 10 15 sunday
 
-## 2023 10 13 friday
+### 백준 4485 녹색 옷 입은 애가 젤다지?
 
-### 백준 
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+
+T = 0
+while True:
+    T+=1
+    N = int(input())
+    if N == 0 :
+        break
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    dist = [[float('inf')]*N for _ in range(N)]
+    ans = float('inf')
+    q = [(arr[0][0],0,0)]
+
+    while q:
+        nowD,x,y =heapq.heappop(q)
+        if nowD > ans:
+            continue
+        if x == N-1 and y == N-1 :
+            if ans > nowD:
+                ans = nowD
+            continue
+        for di,dj in [(1,0),(0,1),(-1,0),(0,-1)]:
+            ni,nj = x+di,y+dj
+            if 0<=ni<N and 0<=nj<N and dist[ni][nj] > nowD+arr[ni][nj] :
+                dist[ni][nj] = nowD + arr[ni][nj]
+                heapq.heappush(q, (dist[ni][nj],ni,nj))
+    print(f'Problem {T}:',ans)
+
+
+```
+
+###
+
+## 2023 10 16 monday

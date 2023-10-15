@@ -5808,6 +5808,26 @@ while True:
 
 ```
 
-###
+### 백준 2075 N번째 큰 수
+
+```python
+
+import sys, heapq
+input = sys.stdin.readline
+N = int(input())
+arr = []
+for _ in range(N):
+    for num in list(map(int, input().split())):
+        if len(arr)< N:
+            heapq.heappush(arr, num)
+        else:
+            n = heapq.heappop(arr)
+            if n < num:
+                heapq.heappush(arr, num)
+            else:
+                heapq.heappush(arr, n)
+print(heapq.heappop(arr))
+
+```
 
 ## 2023 10 16 monday

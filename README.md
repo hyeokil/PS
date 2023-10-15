@@ -5830,4 +5830,29 @@ print(heapq.heappop(arr))
 
 ```
 
+### 백준 1655 가운데를 말해요
+
+```python
+
+import sys, heapq
+input = sys.stdin.readline
+N = int(input())
+l = []
+r = []
+for i in range(N):
+    num = int(input())
+    if len(l) == len(r):
+        heapq.heappush(l, -num)
+    else:
+        heapq.heappush(r,num)
+    if len(l) > 0 and len(r) > 0 and -l[0] > r[0]:
+        L = -heapq.heappop(l)
+        R = heapq.heappop(r)
+        heapq.heappush(l,-R)
+        heapq.heappush(r,L)
+
+    print(-l[0])
+
+```
+
 ## 2023 10 16 monday

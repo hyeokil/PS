@@ -5856,3 +5856,61 @@ for i in range(N):
 ```
 
 ## 2023 10 16 monday
+
+### 백준 24511 queuestack
+
+```python
+
+from collections import deque
+N = int(input())
+lsta = list(map(int,input().split()))
+lstb = list(map(int,input().split()))
+M = int(input())
+lstc = list(map(int,input().split()))
+lst = deque()
+for j in range(N):
+    if lsta[j] == 0:
+        lst.append(lstb[j])
+for i in lstc:
+    lst.appendleft(i)
+    print(lst.pop(),end=' ')
+
+```
+
+### 백준 17103 골드그바흐 파티션
+
+```python
+
+lst = []
+check = [0]*1000001
+check[0],check[1] = 1,1
+for i in range(2,1000001):
+    if check[i] == 0 :
+        lst.append(i)
+        for j in range(2*i,1000001,i):
+            check[j] = 1
+
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    cnt = 0
+    for i in lst:
+        if i >= N//2+1:
+            break
+        elif check[N-i] == 0 :
+            cnt += 1
+    print(cnt)
+
+```
+
+## 2023 10 17 tuesday
+
+### 백준 24511 queuestack
+
+## 2023 10 18 monday
+
+### 백준 24511 queuestack
+
+## 2023 10 19 monday
+
+### 백준 24511 queuestack

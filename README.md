@@ -5905,7 +5905,81 @@ for _ in range(T):
 
 ## 2023 10 17 tuesday
 
-### 백준 24511 queuestack
+### 백준 1504 특정한 최단 경로
+
+```python
+
+import sys, heapq
+input = sys.stdin.readline
+def f(start,goal):
+    dist = [float('inf')]*(N+1)
+    dist[start] = 0
+    q = [(0,start)]
+    while q:
+        nowd,now = heapq.heappop(q)
+        if now == goal :
+            return 0,dist[goal]
+        for go,god in arr[now]:
+                curd = nowd + god
+                if dist[go] > curd :
+                    dist[go] = curd
+                    heapq.heappush(q, (curd, go))
+    return 1,0
+
+N, E = map(int,input().split())
+arr = [[] for _ in range(N+1)]
+for _ in range(E):
+    a,b,c = map(int,input().split())
+    arr[a].append((b,c))
+    arr[b].append((a,c))
+v1,v2 = map(int,input().split())
+dist = [float('inf')]*(N+1)
+dist[1] = 0
+result1 = 0
+result2 = 0
+f1,f4 = f(1,v1)
+f2,f5 = f(v1,v2)
+f3,f6 = f(v2,N)
+f7,f10 = f(1,v2)
+f8,f11 = f(v2,v1)
+f9,f12 = f(v1,N)
+result1 += f1+f2+f3
+result2 += f7+f8+f9
+if result1 == 0 and result2 == 0:
+    print(min((f4+f5+f6),(f10+f11+f12)))
+elif result1 != 0 and result2 == 0:
+    print(f10+f11+f12)
+elif result2 != 0 and result1 == 0:
+    print(f4+f5+f6)
+elif result1 != 0 and result2 != 0:
+    print(-1)
+
+
+```
+
+### 백준 1509 팰린드롬 분할
+
+```python
+
+import sys
+input= sys.stdin.readline
+
+def main():
+    s = '@'+ input()
+    L = len(s)
+    dp = [2500]*L
+    dp[0] = 0
+    for i in range(2, L*2-1):
+        x,y = i//2, (i+1)//2
+        while x>0 and y<L and s[x] == s[y]:
+            if dp[x-1]+1 < dp[y]:
+                dp[y] = dp[x-1]+1
+            x -= 1
+            y += 1
+    print(dp[-1]-1)
+main()
+
+```
 
 ## 2023 10 18 monday
 

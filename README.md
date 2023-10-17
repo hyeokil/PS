@@ -5981,6 +5981,34 @@ main()
 
 ```
 
+### 백준 2579 계단 오르기
+
+```python
+
+import sys
+input = sys.stdin.readline
+N = int(input())
+lst = []
+for _ in range(N):
+    num = int(input())
+    lst.append(num)
+if N == 1 :
+    print(lst[0])
+elif N == 2:
+    print(lst[0]+lst[1])
+elif N == 3:
+    print(max(lst[0]+lst[2],lst[1]+lst[2]))
+else:
+    dp = [0]*N
+    dp[0] = lst[0]
+    dp[1] = dp[0]+lst[1]
+    dp[2] = max(lst[0]+lst[2],lst[1]+lst[2])
+    for i in range(3,N):
+        dp[i] = max(dp[i-2]+lst[i],dp[i-3]+lst[i-1]+lst[i])
+    print(dp[N-1])
+
+```
+
 ## 2023 10 18 monday
 
 ### 백준 24511 queuestack

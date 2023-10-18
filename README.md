@@ -6009,10 +6009,55 @@ else:
 
 ```
 
-## 2023 10 18 monday
+## 2023 10 18 wednesday
 
-### 백준 24511 queuestack
+### 백준 9465 스티커
 
-## 2023 10 19 monday
+```python
+
+import sys
+input = sys.stdin.readline
+def main():
+    T = int(input())
+    for _ in range(T):
+        N = int(input())
+        sticker = [list(map(int,input().split())) for _ in range(2)]
+        if N == 1:
+            print(max(sticker[0][0],sticker[1][0]))
+        else:
+            dp = [[0]*N for _ in range(2)]
+            dp[0][0] = sticker[0][0]
+            dp[1][0] = sticker[1][0]
+            dp[0][1] = sticker[0][1]+sticker[1][0]
+            dp[1][1] = sticker[0][0]+sticker[1][1]
+            for i in range(2,N):
+                dp[0][i] = max(dp[1][i-2]+sticker[0][i],dp[1][i-1]+sticker[0][i])
+                dp[1][i] = max(dp[0][i-2]+sticker[1][i],dp[0][i-1]+sticker[1][i])
+            print(max(dp[0][N-1],dp[1][N-1]))
+main()
+
+```
+
+### 백준 11053 가장 긴 증가하는 부분 수열
+
+```python
+
+def main():
+    N = int(input())
+    lst = list(map(int, input().split()))
+    dp = [1] * N
+    for i in range(N):
+        a = lst[i]
+        for j in range(i):
+            b = lst[j]
+            if a>b :
+                dp[i] = max(dp[j]+1, dp[i])
+    print(dp)
+
+main()
+
+```
+
+## 2023 10 19 thursday
 
 ### 백준 24511 queuestack

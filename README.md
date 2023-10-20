@@ -6086,6 +6086,34 @@ print(dfs(0,0))
 
 ```
 
-## 2023 10 19 thursday
+## 2023 10 19 friday
 
-### 백준 24511 queuestack
+### 백준 2293 동전 1
+
+```python
+
+N,K = map(int, input().split())
+dp = [0]*(K+1)
+dp[0] = 1
+coins = [int(input()) for _ in range(N)]
+
+for coin in coins:
+    for k in range(coin,K+1):
+        if k - coin >= 0 :
+            dp[k]+=dp[k-coin]
+print(dp[K])
+
+
+```
+
+## 2023 10 19 friday
+
+### 백준 2293 동전 1
+
+## 2023 10 19 friday
+
+### 백준 2293 동전 1
+
+## 2023 10 19 friday
+
+### 백준 2293 동전 1

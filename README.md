@@ -6177,6 +6177,17 @@ public class Main {
 
 ```
 
+### 백준 1543 문서 검색
+
+```python
+
+S = input()
+s = input()
+S = S.replace(s,'@')
+print(S.count('@'))
+
+```
+
 ## 2023 10 19 friday
 
 ### 백준 2293 동전 1

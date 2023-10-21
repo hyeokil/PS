@@ -6106,7 +6106,38 @@ print(dp[K])
 
 ```
 
-## 2023 10 19 friday
+## 2023 10 21 saturday
+
+### 백준 2386 도비의 영어 공부
+
+```java
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        while (true) {
+            String N = sc.nextLine();
+            
+            if (N.equals("#"))
+                System.exit(0);
+            
+            String strArr[] = N.toLowerCase().split("");
+            
+            int count = 0;
+            for (int i = 0; i < strArr.length; i++) {
+                if (N.split(" ")[0].equals(strArr[i]))
+                    count++;
+                
+            }
+            System.out.println(N.split(" ")[0] + " " + (count - 1));
+        }
+    }
+}
+
+```
 
 ### 백준 2293 동전 1
 

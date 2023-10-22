@@ -6210,7 +6210,39 @@ Main()
 
 ```
 
-### 백준 2293 동전 1
+### 백준 4447 좋은놈 나쁜놈
+
+```java
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main{
+	public static void main(String[] args) throws IOException	{
+		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        while (T-- > 0) {
+            String name = br.readLine();
+            int g = 0, b = 0;
+            for (int i = 0; i < name.length(); i++) {
+                switch(name.charAt(i)) {
+                    case 'g' : case 'G' :
+                        g++;
+                        break;
+                    case 'b': case 'B':
+                        b++;
+                        break;
+                }
+            }
+            String print = g == b ? "NEUTRAL" : g < b ? "A BADDY" : "GOOD";
+            System.out.println(name+" is "+ print);
+        }
+    }
+}
+        
+
+```
 
 ## 2023 10 19 friday
 

@@ -6188,7 +6188,27 @@ print(S.count('@'))
 
 ```
 
-## 2023 10 19 friday
+## 2023 10 22 sunday
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def Main():    
+    N = int(input())
+    rope = []
+    greedy = [0]*N
+    for _ in range(N):
+        w = int(input())
+        rope.append(w)
+    rope.sort()
+    for i in range(N):
+        greedy[i] = rope[i]*(N-i)
+    print(max(greedy))
+Main()
+
+```
 
 ### 백준 2293 동전 1
 

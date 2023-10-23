@@ -6244,6 +6244,80 @@ public class Main{
 
 ```
 
-## 2023 10 19 friday
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+```python
+
+def Main():
+    T = int(input())
+    for _ in range(T):
+        N = int(input())
+        lst = list(map(int, input().split()))
+        x = 0
+        ans = 0
+        for i in range(N-1,-1,-1):
+            if lst[i] > x :
+                x = lst[i]
+            ans += x - lst[i]
+        print(ans)
+Main()
+
+```
+
+### 백준 1890 점프
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def f(x,y):
+    if x == N-1 and y == N-1 :
+        return 1
+    if arr[x][y] == 0 :
+        return 0
+    if dp[x][y] != -1 :
+        return dp[x][y]
+    way = 0
+    for dx,dy in [(arr[x][y],0),(0,arr[x][y])]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < N and 0 <= ny < N :
+            way += f(nx, ny)
+    dp[x][y] = way
+    return dp[x][y]
+
+
+N = int(input())
+arr = [list(map(int, input().split())) for _ in range(N)]
+dp = [[-1]*N for _ in range(N)]
+print(f(0,0))
+
+```
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
+
+## 2023 10 23 monday
+
+### 백준 11501 주식
 
 ### 백준 2293 동전 1

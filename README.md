@@ -6296,9 +6296,100 @@ print(f(0,0))
 
 ```
 
-## 2023 10 23 monday
+## 2023 10 24 tuesday
 
-### 백준 11501 주식
+### 백준 11660 구간 합 구하기 5
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N, M = map(int,input().split())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    dp = [[0]*N for _ in range(N)]
+    for i in range(N):
+        dp[i][0] = arr[i][0]
+    for i in range(N):
+        for j in range(1,N):
+            dp[i][j] = dp[i][j-1]+arr[i][j]
+    
+    for _ in range(M):
+        x1, y1, x2, y2 = map(int, input().split())
+        ans = 0
+        for _ in range(x2-x1+1):
+            if 2<=y1 :
+                ans += dp[x1-1][y2-1]-dp[x1-1][y1-2]
+                x1+=1
+            else:
+                ans += dp[x1-1][y2-1]
+                x1+=1
+        print(ans)
+Main()
+
+```
+
+### 백준 1368 물대기
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+
+def Main():
+    N = int(input())
+    watercost = []
+    for _ in range(N):
+        c = int(input())
+        watercost.append(c)
+    costs = [list(map(int, input().split())) for _ in range(N)]
+    visited = [0]*N
+    result = 0
+    cnt = 0
+    digg = 0
+    tmp = 0
+    q = [(0,0)]
+    while q :
+        nowd, now = heapq.heappop(q)
+        if nowd == watercost[now]:
+            digg = now
+            break
+        if cnt == N:
+            result+= min(watercost)
+            break
+        if visited[now] == 0:
+            visited[now] = 1
+            result += nowd
+            cnt += 1
+            for go in range(N):
+                if now != go:
+                    c = min(costs[now][go],watercost[go])
+                    heapq.heappush(q,(c,go))
+    if digg == 0:
+        print(result)
+    else:
+        visited = [0] * N
+        result = 0
+        cnt = 0
+        tmp = 0
+        q = [(watercost[digg], digg)]
+        while q:
+            if cnt == N:
+                break
+            nowd, now = heapq.heappop(q)
+            if visited[now] == 0:
+                visited[now] = 1
+                result += nowd
+                cnt += 1
+                for go in range(N):
+                    if now != go:
+                        c = min(costs[now][go], watercost[go])
+                        heapq.heappush(q, (c, go))
+        print(result)
+
+Main()
+
+```
 
 ## 2023 10 23 monday
 

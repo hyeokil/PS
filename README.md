@@ -6391,6 +6391,37 @@ Main()
 
 ```
 
+### 백준 13251 조약돌 꺼내기
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+M = int(input())
+lst = list(map(int, input().split()))
+K = int(input())
+N = sum(lst)
+n = 1
+k = 1
+for i in range(1,K+1):
+    n*=N
+    N-=1
+    k*=i
+total = n//k
+sc = 0
+for i in lst:
+    n = 1
+    k = 1
+    for j in range(1, K + 1):
+        n *= i
+        i -= 1
+        k *= j
+    sc += n//k
+print(sc/total)
+
+```
+
 ## 2023 10 23 monday
 
 ### 백준 11501 주식

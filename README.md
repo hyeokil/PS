@@ -6422,9 +6422,64 @@ print(sc/total)
 
 ```
 
-## 2023 10 23 monday
+## 2023 10 25 wednesday
 
-### 백준 11501 주식
+### 백준 1722 순열의 순서
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def Main():
+    N = int(input())
+    fac = [0]*(N+1)
+    fac[1] = 1
+    numbers = [i for i in range(N + 1)]
+    for i in range(2, N):
+        fac[i] = fac[i - 1] * i
+    c,*lst = map(int, input().split())
+    if c == 1:
+        ans = []
+        lst[0] -=1
+        for i in range(N-1, 0, -1):
+            if lst[0] == 0:
+                break
+            x = (lst[0] // fac[i])+1
+            ans.append(numbers[x])
+            numbers.pop(x)
+            lst[0]%=fac[i]
+        for i in range(1,len(numbers)):
+            ans.append(numbers[i])
+        print(*ans)
+    else:
+        ans = 1
+        for i in range(N-1):
+            j = numbers.index(lst[i])
+            ans += (j-1)*fac[N-1-i]
+            numbers.pop(j)
+        print(ans)
+Main()
+
+```
+
+### 백준 10826 피보나치 수 4
+
+```python
+
+def Main():
+    N = int(input())
+    fibo = [0]*(N+1)
+    if N == 0:
+        print(0)
+    else:
+        fibo[1] = 1
+        for k in range(2,N+1):
+            fibo[k] = fibo[k-2]+fibo[k-1]
+        print(fibo[N])
+Main()  
+
+```
 
 ## 2023 10 23 monday
 

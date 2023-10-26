@@ -6481,13 +6481,124 @@ Main()
 
 ```
 
-## 2023 10 23 monday
+## 2023 10 26 thursday
 
-### 백준 11501 주식
+### 백준 1717 집합의 표현
 
-## 2023 10 23 monday
+```python
 
-### 백준 11501 주식
+import sys
+input = sys.stdin.readline
+
+def find(a):
+    if a == parent[a]:
+        return a
+    parent[a] = find(parent[a])
+    return parent[a]
+
+
+def union(a, b):
+    a = find(a)
+    b = find(b)
+    if a != b:
+        parent[b] = a
+
+N,M = map(int, input().split())
+parent = [i for i in range(N+1)]
+for _ in range(M):
+    f,a,b = map(int, input().split())
+    if f == 0:
+        union(a,b)
+    else:
+        if find(a) == find(b):
+            print('YES')
+        else:
+            print('NO')
+
+```
+
+### 백준 1976 여행 가자
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def find(a):
+    if a==parent[a]:
+        return a
+    parent[a] = find(parent[a])
+    return parent[a]
+
+def union(a,b):
+    a= find(a)
+    b= find(b)
+    if a!=b :
+        parent[b] = a
+
+N = int(input())
+M = int(input())
+parent = [i for i in range(N+1)]
+for i in range(1,N+1):
+    lst = list(map(int, input().split()))
+    for j in range(N):
+        if lst[j] == 1:
+            union(i,j+1)
+way = list(map(int, input().split()))
+for i in range(1,len(way)):
+    if find(way[i-1]) != find(way[i]):
+        print('NO')
+        break
+else:
+    print('YES')
+
+```
+
+### 백준 1043 거짓말
+
+```python
+
+import sys
+input = sys.stdin.readline
+def find(a):
+    if a == parent[a]:
+        return a
+    parent[a]=find(parent[a])
+    return parent[a]
+
+def union(a,b):
+    a = find(a)
+    b = find(b)
+    if a!= b :
+        parent[b] = a
+
+
+N,M = map(int,input().split())
+parent = [i for i in range(N+1)]
+friendnum,*friends = map(int,input().split())
+for i in range(1,friendnum):
+    union(friends[i-1],friends[i])
+ans = M
+partylst = []
+if friendnum == 0:
+    print(ans)
+else:
+    for _ in range(M):
+        personnum, *persons = map(int,input().split())
+        for i in range(1,personnum):
+            union(persons[i-1],persons[i])
+        partylst.append(persons)
+    for party in partylst:
+        if find(party[0]) == find(friends[0]):
+            ans -= 1
+    print(ans)
+
+
+```
+
+## 2023 10 27 friday
+
+### 백준 
 
 ## 2023 10 23 monday
 

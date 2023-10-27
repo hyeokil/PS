@@ -6598,7 +6598,30 @@ else:
 
 ## 2023 10 27 friday
 
-### 백준 
+### 백준 1947 선물 전달
+
+```python
+
+def Main():
+    N = int(input())
+    dp = [0,1]
+    now = 2
+    mod =1000000000
+    if N == 1:
+        print(0)
+    else:
+        while True :
+            if now == N:
+                break
+            tmp = dp[0]+dp[1]
+            dp[0] = dp[1]
+            dp[1] = tmp*now%mod
+            now+=1
+        print(dp[1]%mod)
+
+Main()
+
+```
 
 ## 2023 10 23 monday
 

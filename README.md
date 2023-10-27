@@ -6623,7 +6623,31 @@ Main()
 
 ```
 
-## 2023 10 23 monday
+### 백준 2847 게임을 만든 동준이
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def Main():
+    N = int(input())
+    scores = []
+    for _ in range(N):
+        n = int(input())
+        scores.append(n)
+    scores.reverse()
+    ans = 0
+    for i in range(1,N):
+        if scores[i-1] <= scores[i] :
+            ans += scores[i]-scores[i-1]+1
+            scores[i] = scores[i-1]-1
+    print(ans)
+Main()
+
+```
+
+## 2023 10 28 saturday
 
 ### 백준 11501 주식
 

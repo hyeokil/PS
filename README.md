@@ -6649,10 +6649,82 @@ Main()
 
 ## 2023 10 28 saturday
 
-### 백준 11501 주식
+### 백준 11060 점프 점프
 
-## 2023 10 23 monday
+```python
 
-### 백준 11501 주식
+def Main():
+    N = int(input())
+    miro = list(map(int, input().split()))
+    dp = [float('inf')]*N
+    dp[0]=0
+    for idx in range(N):
+        for jump in range(1,miro[idx]+1):
+            if idx+jump<N and dp[idx+jump] > dp[idx]+1:
+                dp[idx+jump] = dp[idx]+1
+    if dp[N-1] == float('inf'):
+        print(-1)
+    else:
+        print(dp[N-1])
+Main()
 
-### 백준 2293 동전 1
+```
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+```python
+
+def Main():
+    N = int(input())
+    arr = [input() for _ in range(N)]
+    R = 0
+    C = 0
+    for i in range(N):
+        cntr = 0
+        cntc = 0
+        for j in range(N):
+            if j == N-1 and arr[i][j] != 'X' :
+                if cntr >= 1:
+                    R += 1
+            elif arr[i][j] == 'X' :
+                if cntr >= 2:
+                    R += 1
+                cntr = 0
+            else:
+                cntr += 1
+            if j == N - 1 and arr[j][i] != 'X':
+                if cntc >= 1:
+                    C += 1
+            elif arr[j][i] == 'X' :
+                if cntc >= 2:
+                    C+=1
+                cntc = 0
+            else:
+                cntc += 1
+    print(R,C)
+Main()
+
+```
+
+### 백준 11055 가장 큰 증가하는 부분 수열
+
+```python
+
+def Main():
+    N = int(input())
+    lst = list(map(int, input().split()))
+    dp = [0]*N
+    for i in range(N):
+        dp[i] = lst[i]
+        big = 0
+        for j in range(0,i):
+            if lst[i] > lst[j] :
+                if big < dp[j] :
+                    big = dp[j]
+        dp[i] += big
+    print(max(dp))
+Main()
+
+```

@@ -6728,3 +6728,44 @@ def Main():
 Main()
 
 ```
+
+## 2023 10 30 monday
+
+### 백준 11722 가장 긴 감소하는 부분 수열
+
+```python
+
+def Main():
+    N = int(input())
+    lst = list(map(int, input().split()))
+    dp = [1]*N
+    for i in range(N):
+        long = 0
+        for j in range(i):
+            if lst[i] < lst[j] and dp[j] > long :
+                long = dp[j]
+        dp[i] =long + 1
+    print(max(dp))
+Main()
+
+```
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라

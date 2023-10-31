@@ -6750,9 +6750,45 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 10 31 tuesday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 12865 평범한 배낭
+
+```python
+# ver1
+import sys
+input = sys.stdin.readline
+def Main():
+    N, K = map(int, input().split())
+    things = []
+    for _ in range(N):
+        W, V = map(int, input().split())
+        things.append((W,V))
+    dp = [0]*(K+1)
+    for w,v in things:
+        for i in range(K,w-1,-1):
+            dp[i] = max(dp[i],dp[i-w]+v)
+    print(dp[K])
+Main()
+
+# ver2 
+import sys; input = sys.stdin.readline
+def Main():
+    N, K = map(int, input().split())
+    K+=1
+    bag = {0: 0}
+    data = [tuple(map(int, input().split())) for _ in range(N)]
+    data.sort(reverse=True)
+    for w, v in data:
+        tmp = {}
+        for v_bag, w_bag in bag.items():
+            if bag.get(nv := v + v_bag, K) > (nw := w + w_bag):
+                tmp[nv]=nw
+        bag.update(tmp)
+    print(max(bag.keys()))
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

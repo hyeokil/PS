@@ -6837,10 +6837,9 @@ def Main():
     lst = [0] * (N + 1)
     time = [0] * (N + 1)
     for i in range(1, N + 1):
-        data = list(map(int, input().split()))[:-1]
-        time[i] = data[0]
-        needs = data[1:]
-        for j in needs:
+        T, *data,_ = list(map(int, input().split()))
+        time[i] = T
+        for j in data:
             arr[j].append(i)
             lst[i] += 1
     ans = [0] * (N + 1)

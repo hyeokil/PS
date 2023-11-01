@@ -6790,9 +6790,77 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 01 wednesday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 2252 줄 세우기
+
+```python
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+def Main():
+    N,M = map(int, input().split())
+    arr = [[] for _ in range(N+1)]
+    lst = [0]*(N+1)
+    for _ in range(M):
+        A,B = map(int, input().split())
+        arr[A].append(B)
+        lst[B] += 1
+    q = deque()
+    for i in range(1, N + 1):
+        if lst[i] == 0 :
+            q.append(i)
+    ans = []
+    while q:
+        x = q.popleft()
+        ans.append(x)
+        for y in arr[x]:
+            lst[y] -= 1
+            if lst[y] == 0 :
+                q.append(y)
+    print(*ans)
+Main()
+
+```
+
+### 백준 1516 게임 개발
+
+```python
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+def Main():
+    N = int(input())
+    arr = [[] for _ in range(N + 1)]
+    lst = [0] * (N + 1)
+    time = [0] * (N + 1)
+    for i in range(1, N + 1):
+        data = list(map(int, input().split()))[:-1]
+        time[i] = data[0]
+        needs = data[1:]
+        for j in needs:
+            arr[j].append(i)
+            lst[i] += 1
+    ans = [0] * (N + 1)
+    q = deque()
+    for i in range(1, N + 1):
+        if lst[i] == 0:
+            q.append(i)
+    while q:
+        now = q.popleft()
+        ans[now] += time[now]
+        for b in arr[now]:
+            lst[b] -= 1
+            ans[b] = max(ans[b], ans[now])
+            if lst[b] == 0:
+                q.append(b)
+    for i in range(1, N + 1):
+        print(ans[i])
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

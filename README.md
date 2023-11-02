@@ -6861,9 +6861,89 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 02 thursday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 1948 임계경로
+
+```python
+
+import sys
+from collections import deque
+input = sys.stdin.readline
+def Main():
+    N = int(input())
+    M = int(input())
+    arr = [[] for _ in range(N + 1)]
+    barr = [[] for _ in range(N+1)]
+    lst = [0] * (N + 1)
+    for _ in range(M):
+        a,b,c = map(int,input().split())
+        arr[a].append((b,c))
+        barr[b].append((a,c))
+        lst[b]+=1
+    S,E = map(int, input().split())
+    dist = [0]*(N+1)
+    q =deque()
+    q.append(S)
+    while q:
+        x = q.popleft()
+        for y,yd in arr[x] :
+            lst[y] -= 1
+            dist[y] = max(dist[y],dist[x]+yd)
+            if lst[y] == 0 :
+                q.append(y)
+    print(dist[E])
+    bq = deque()
+    bq.append(E)
+    visited = [0]*(N+1)
+    ans = 0
+    while bq:
+        x = bq.popleft()
+        visited[x] =1
+        for y,god in barr[x] :
+            if dist[x] == god+dist[y] :
+                ans +=1
+                if visited[y] == 0:
+                    bq.append(y)
+                    visited[y] = 1
+    print(ans)
+Main()
+
+```
+ 
+### 백준 1854 K번째 최단경로 찾기
+
+```python
+
+import sys,heapq
+input = sys.stdin.readline
+
+def Main():
+    N,M,K = map(int, input().split())
+    arr = [[] for _ in range(N+1)]
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        arr[a].append((b,c))
+    dist = [[float('inf')] *K for _ in range(N+1)]
+    dist[1][0] = 0
+    q = [(0, 1)]
+    while q:
+        nowd, now = heapq.heappop(q)
+        for go, god in arr[now]:
+            curd = nowd + god
+            if curd < dist[go][K-1]:
+                dist[go][K-1] = curd
+                dist[go].sort()
+                heapq.heappush(q, (curd, go))
+    for i in range(1,N+1):
+        if dist[i][K-1] == float('inf'):
+            print(-1)
+        else:
+            print(dist[i][K-1])
+
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

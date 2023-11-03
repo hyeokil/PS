@@ -6945,9 +6945,102 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 03 friday
 
-### 백준 1652 누울 자리를 찾아라
+### swea 1230 암호문3
+
+```python
+
+def Main():
+    for tc in range(1,11):
+        N = int(input())
+        rcode = list(map(int, input().split()))
+        M = int(input())
+        code = list(input().split())
+        idx = 0
+        while idx < len(code):
+            if code[idx] == 'I':
+                l =rcode[:int(code[idx+1])]
+                r =rcode[int(code[idx+1]):]
+                cidx = int(code[idx+2])
+                codes = list(map(int,code[idx+3:idx+3+cidx]))
+                rcode = l+codes+r
+                idx += 3+cidx
+            elif code[idx] == 'D':
+                cidx = int(code[idx+1])
+                ccnt = int(code[idx+2])
+                for i in range(ccnt):
+                    rcode.pop(cidx+i)
+                idx+=3
+            elif code[idx] == 'A':
+                ccnt = int(code[idx+1])
+                for i in range(ccnt):
+                    rcode.append(int(code[idx+2+i]))
+                idx += 2+ccnt
+        print(f'#{tc}',*rcode[:10])
+Main()
+
+```
+
+### 백준 2631 줄세우기
+
+```python
+
+def Main():
+    N = int(input())
+    nums = []
+    for _ in range(N):
+        n = int(input())
+        nums.append(n)
+    dp = [1]*N
+    for i in range(N):
+        a = nums[i]
+        for j in range(i):
+            b = nums[j]
+            if a>b :
+                dp[i] = max(dp[j]+1,dp[i])
+    print(N-max(dp))
+Main()
+
+```
+
+### 백준 200040 사이클 게임
+
+```python
+
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**7)
+
+def Main():
+    def find(a):
+        if a == parent[a]:
+            return a
+        parent[a]=find(parent[a])
+        return parent[a]
+
+    def union(a,b):
+        a = find(a)
+        b = find(b)
+        if a!=b :
+            parent[b] = a
+            return 0
+        else:
+            return 1
+    N,M = map(int, input().split())
+    parent = [i for i in range(N)]
+    for i in range(1,M+1):
+        a,b = map(int, input().split())
+        if union(a,b) ==1:
+            print(i)
+            break
+    else:
+        print(0)
+Main()
+
+```
+
+
 
 ## 2023 10 29 sunday
 

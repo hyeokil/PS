@@ -7040,7 +7040,95 @@ Main()
 
 ```
 
+## 2023 11 04 saturday
 
+### 백준 1547 공
+
+```python
+
+def Main():
+    N = int(input())
+    ans = 1
+    for _ in range(N):
+        a,b = map(int,input().split())
+        if a == ans:
+            ans = b
+        elif b == ans :
+            ans = a
+    print(ans)
+Main()
+
+```
+
+### 백준 16562 친구비
+
+```python
+
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**7)
+def find(a):
+    if a == parent[a]:
+        return a
+    parent[a] = find(parent[a])
+    return parent[a]
+
+def union(a,b):
+    a = find(a)
+    b = find(b)
+    if a!=b :
+        parent[b] = a
+
+N,M,K =map(int, input().split())
+money = [0]+list(map(int, input().split()))
+parent = [i for i in range(N+1)]
+dp = [float('inf')]*(N+1)
+for _ in range(M):
+    a,b = map(int, input().split())
+    union(a,b)
+for i in range(1,N+1):
+    if find(i) == i :
+        dp[i] = min(money[i],dp[i])
+    else:
+        dp[find(i)] = min(money[i],dp[find(i)])
+ans = 0
+for i in dp :
+    if i != float('inf'):
+        ans += i
+if ans <= K :
+    print(ans)
+else:
+    print('Oh no')
+
+```
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
+
+## 2023 10 29 sunday
+
+### 백준 1652 누울 자리를 찾아라
 
 ## 2023 10 29 sunday
 

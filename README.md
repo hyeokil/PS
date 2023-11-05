@@ -7102,9 +7102,86 @@ else:
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 05 sunday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 14503 로봇 청소기
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N, M =map(int,input().split())
+    r,c,d = map(int,input().split())
+    room = [list(map(int, input().split())) for _ in range(N)]
+    stack =[(r,c,d)]
+    ans = 0
+    while stack :
+        x,y,l = stack.pop()
+        if room[x][y] == 0 :
+            ans += 1
+            room[x][y] = -1
+        if l == 0:
+            for dx,dy in [(0,-1),(1,0),(0,1),(-1,0)]:
+                nx,ny=dx+x,dy+y
+                l+=3
+                l%=4
+                if 0<=nx<N and 0<=ny<M and room[nx][ny] == 0:
+                    stack.append((nx,ny,l))
+                    break
+            else:
+                nx,ny = x+1,y
+                if 0<=nx<N and 0<=ny<M and room[nx][ny] != 1:
+                    stack.append((nx,ny,l))
+                else:
+                    break
+        elif l == 1:
+            for dx, dy in [(-1, 0),(0, -1), (1, 0), (0, 1)]:
+                nx, ny = dx + x, dy + y
+                l += 3
+                l %= 4
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] == 0:
+                    stack.append((nx, ny, l))
+                    break
+            else:
+                nx, ny = x , y-1
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] != 1:
+                    stack.append((nx, ny, l))
+                else:
+                    break
+
+        elif l == 2:
+            for dx, dy in [(0, 1), (-1, 0),(0, -1), (1, 0)]:
+                nx, ny = dx + x, dy + y
+                l += 3
+                l %= 4
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] == 0:
+                    stack.append((nx, ny, l))
+                    break
+            else:
+                nx, ny = x-1, y
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] != 1:
+                    stack.append((nx, ny, l))
+                else:
+                    break
+        elif l == 3:
+            for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                nx, ny = dx + x, dy + y
+                l += 3
+                l %= 4
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] == 0:
+                    stack.append((nx, ny, l))
+                    break
+            else:
+                nx, ny = x, y + 1
+                if 0 <= nx < N and 0 <= ny < M and room[nx][ny] != 1:
+                    stack.append((nx, ny, l))
+                else:
+                    break
+    print(ans)
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

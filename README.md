@@ -7183,6 +7183,28 @@ Main()
 
 ```
 
+### 백준 1822 차집합
+
+```python
+
+def Main():
+    A,B =map(int, input().split())
+    lstA =list(map(int,input().split()))
+    lstB=set(map(int,input().split()))
+    ans = 0
+    anslist= []
+    for a in lstA:
+        if a not in lstB:
+            ans+=1
+            anslist.append(a)
+    print(ans)
+    if ans != 0:
+        anslist.sort()
+        print(*anslist)
+Main()
+
+```
+
 ## 2023 10 29 sunday
 
 ### 백준 1652 누울 자리를 찾아라

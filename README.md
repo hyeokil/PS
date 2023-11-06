@@ -7205,9 +7205,64 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 06 monday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 3665 최종 순위
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def Main():
+    T = int(input())
+    for tc in range(T):
+        N = int(input())
+        lastlst = list(map(int,input().split()))
+        indegree = [0] * (N + 1)
+        for i,v in enumerate(lastlst):
+            indegree[v] = i
+        M = int(input())
+        original = [*indegree]
+        for m in range(M):
+            a,b = map(int, input().split())
+            if original[a] < original[b] :
+                indegree[a] += 1
+                indegree[b] -= 1
+            else :
+                indegree[a] -= 1
+                indegree[b] += 1
+        ans = [0]*N
+        for i,v in enumerate(indegree):
+            if ans[v] != 0 :
+                print('IMPOSSIBLE')
+                break
+            else:
+                ans[v] = i
+        else:
+            print(*ans)
+Main()
+
+```
+
+### 백준 11758 CCW
+
+```python
+
+def Main():
+    x1,y1 = map(int, input().split())
+    x2,y2 = map(int, input().split())
+    x3,y3 = map(int, input().split())
+    ans=(x1*y2+x2*y3+x3*y1)-(x2*y1+x3*y2+x1*y3)
+    if ans > 0 :
+        print(1)
+    elif ans == 0 :
+        print(ans)
+    else:
+        print(-1)
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

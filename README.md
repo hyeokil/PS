@@ -7264,9 +7264,88 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 07 tuesday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 1707 이분 그래프
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+def Main():
+    T = int(input())
+    for tc in range(T):
+        V,E = map(int,input().split())
+        arr = [[]for _ in range(V+1)]
+        visited = [-1]*(V+1)
+        for e in range(E):
+            u,v = map(int,input().split())
+            arr[u].append(v)
+            arr[v].append(u)
+        q = deque()
+        isB = 1
+        for i in range(1,V+1):
+            if len(arr[i]) >0 and visited[i] == -1:
+                q.append(i)
+                visited[i] = 1
+                while q :
+                    x = q.popleft()
+                    if isB == 2:
+                        break
+                    for y in arr[x]:
+                        if visited[y] == -1 :
+                            visited[y] = (visited[x]+1)%2
+                            q.append(y)
+                        elif visited[y] == visited[x]:
+                            isB = 2
+                            break
+        if  isB == 1:
+            print('YES')
+        else:
+            print('NO')
+
+Main()
+
+```
+
+### 백준 25308 방사형 그래프
+
+```python
+
+import math,sys
+sys.setrecursionlimit(10**8)
+
+def f(k,s):
+    global ans
+    if len(s)>=3:
+        a = lst[int(s[-1])]
+        b = lst[int(s[-2])]
+        c = lst[int(s[-3])]
+        if a*c*math.sqrt(2) > b*(a+c) :
+            return
+    if k == 8:
+        if lst[int(s[-2])]*lst[int(s[0])]*math.sqrt(2) > lst[int(s[-1])]*(lst[int(s[-2])]+lst[int(s[0])]):
+            return
+        if lst[int(s[-1])]*lst[int(s[1])]*math.sqrt(2) > lst[int(s[0])]*(lst[int(s[-1])]+lst[int(s[1])]):
+            return
+        ans += 1
+        return
+
+    for i in range(8):
+        if visited[i] == 0 :
+            visited[i] = 1
+            f(k+1,s+str(i))
+            visited[i] = 0
+
+lst =list(map(int,input().split()))
+visited = [0]*8
+ans = 0
+f(0,'')
+print(ans)
+
+```
 
 ## 2023 10 29 sunday
 

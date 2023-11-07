@@ -7347,6 +7347,37 @@ print(ans)
 
 ```
 
+### 백준 15663 N과 M (9)
+
+```python
+
+import sys
+sys.setrecursionlimit(10**7)
+
+def f(k,s):
+    if k == M:
+        ans.add(tuple(s))
+        return
+    for i in range(N):
+        if visited[i] == False:
+            visited[i] = True
+            f(k+1,s+[lst[i]])
+            visited[i] = False
+
+
+N,M = map(int, input().split())
+visited = [False]*N
+lst = list(map(int,input().split()))
+ans = set()
+f(0,[])
+ans = list(ans)
+ans.sort()
+for an in ans :
+    print(*an)
+
+
+```
+
 ## 2023 10 29 sunday
 
 ### 백준 1652 누울 자리를 찾아라

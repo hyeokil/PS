@@ -7378,9 +7378,116 @@ for an in ans :
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 08 wednesday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 15664 N과 M (10)
+
+```python
+
+import sys
+sys.setrecursionlimit(10**7)
+
+def f(k,s):
+    if k == M:
+        ans.add(tuple(s))
+        return
+    for i in range(N):
+        if visited[i] == False :
+            if s:
+                if s[-1]<=lst[i]:
+                    visited[i] = True
+                    f(k + 1, s + [lst[i]])
+                    visited[i] = False
+            else:
+                visited[i] = True
+                f(k+1,s+[lst[i]])
+                visited[i] = False
+
+
+N,M = map(int, input().split())
+visited = [False]*N
+lst = list(map(int,input().split()))
+ans = set()
+f(0,[])
+ans = list(ans)
+ans.sort()
+for an in ans :
+    print(*an)
+
+```
+
+### 백준 15664 N과 M (11)
+
+```python
+
+# ver1
+import sys
+sys.setrecursionlimit(10**7)
+
+def f(k,s):
+    if k == M:
+        ans.add(tuple(s))
+        return
+    for i in range(N):
+        f(k+1,s+[lst[i]])
+
+
+N,M = map(int, input().split())
+lst = list(map(int,input().split()))
+ans = set()
+f(0,[])
+ans = list(ans)
+ans.sort()
+for an in ans :
+    print(*an)
+
+
+# ver2
+def Main():
+    N,M = map(int, input().split())
+    lst = sorted(set(map(int,input().split())))
+    lst = [ str(i) for i in lst]
+    lst_ = [' '+i for i in lst]
+    for _ in range(M-1):
+        lst = [i+j for i in lst for j in lst_]
+    print('\n'.join(lst))
+Main()
+
+```
+
+### 백준 6603 로또
+
+```python
+
+import sys
+sys.setrecursionlimit(10**7)
+input = sys.stdin.readline
+
+def f(k,s):
+    if k == 6:
+        print(*s)
+        return
+    for i in range(N):
+        if visited[i] == False:
+            if k == 0 :
+                visited[i] = True
+                f(k + 1, s + [lst[i]])
+                visited[i] = False
+            else:
+                if s[-1]<lst[i] :
+                    visited[i] = True
+                    f(k+1, s+[lst[i]])
+                    visited[i] = False
+
+while True :
+    N,*lst = map(int,input().split())
+    if N == 0 :
+        break
+    visited =[False]*N
+    f(0,[])
+    print('')
+
+```
 
 ## 2023 10 29 sunday
 

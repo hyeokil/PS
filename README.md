@@ -7489,9 +7489,153 @@ while True :
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 09 thursday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 11657 타임머신
+
+```python
+
+# ver1
+import sys
+input = sys.stdin.readline
+
+def Main():
+    N,M = map(int,input().split())
+    arr = []
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        arr.append((a,b,c))
+    dist = [float('inf')]*(N+1)
+    dist[1] = 0
+    iscycle = False
+    for i in range(N):
+        for s,e,w in arr :
+            if dist[s] != float('inf'):
+                curd = dist[s]+ w
+                if dist[e] > curd:
+                    dist[e] = curd
+                    if i == N-1:
+                        iscycle = True
+    if iscycle :
+        print(-1)
+    else:
+        for i in range(2,N+1):
+            if dist[i] == float('inf'):
+                print(-1)
+            else:
+                print(dist[i])
+Main()
+
+# ver2
+import sys
+input = sys.stdin.readline
+
+def Main():
+    N,M = map(int,input().split())
+    arr = [[] for _ in range(N+1)]
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        arr[a].append((b,c))
+    dist = [float('inf')]*(N+1)
+    dist[1] = 0
+    iscycle = False
+    for i in range(N):
+        for x in range(1,N+1):
+            if dist[x] !=float('inf'):
+                for y,w in arr[x] :
+                    curd = dist[x]+ w
+                    if dist[y] > curd:
+                        dist[y] = curd
+                        if i == N-1:
+                            iscycle = True
+    if iscycle :
+        print(-1)
+    else:
+        for i in range(2,N+1):
+            if dist[i] == float('inf'):
+                print(-1)
+            else:
+                print(dist[i])
+Main()
+
+```
+
+### 백준 1219 오민식의 고민
+
+```python
+
+# ver1
+def Main():
+    N,S,E,M = map(int,input().split())
+    arr = [[] for _ in range(N)]
+    dist = [[-float('inf'),0] for _ in range(N)]
+    for m in range(M):
+        a,b,c = map(int,input().split())
+        arr[a].append((b,-c))
+    money = list(map(int,input().split()))
+    dist[S][0] = money[S]
+    for i in range(N*2):
+        for x in range(N):
+            if dist[x][0] != -float('inf'):
+                for y,w in arr[x] :
+                    curd = dist[x][0]+w + money[y]
+                    if dist[y][0] < curd :
+                        if i >= N-1:
+                            dist[y][1] = 1
+                        dist[y][0] = curd
+                    if dist[x][1] == 1 :
+                        dist[y][1]=1
+
+    if dist[E][0] == -float('inf'):
+        print('gg')
+    elif dist[E][1] == 1 :
+        print('Gee')
+    else:
+        print(dist[E][0])
+Main()
+
+
+# ver2
+def Main():
+    N,S,E,M = map(int,input().split())
+    arr = [[] for _ in range(N)]
+    dist = [-float('inf')]*N
+    darr = [[] for _ in range(N)]
+    for m in range(M):
+        a,b,c = map(int,input().split())
+        arr[a].append((b,-c))
+        darr[a].append(b)
+    money = list(map(int,input().split()))
+    dist[S] = money[S]
+    iscycle = 0
+    for i in range(N):
+        for x in range(N):
+            if dist[x] != -float('inf'):
+                for y,w in arr[x] :
+                    curd = dist[x]+w + money[y]
+                    if dist[y] < curd :
+                        dist[y] = curd
+                        if i == N-1:
+                            visited= [False]*N
+                            visited[x] = True
+                            stack = darr[x]
+                            while stack :
+                                now = stack.pop()
+                                if now == E :
+                                    iscycle = 1
+                                    break
+                                visited[now] = True
+                                for go, god in arr[now] :
+                                    if visited[go] == False:
+                                        stack.append(go)
+    if dist[E] == -float('inf'):
+        print('gg')
+    elif iscycle == 1 :
+        print('Gee')
+    else:
+        print(dist[E])
+Main()
+```
 
 ## 2023 10 29 sunday
 

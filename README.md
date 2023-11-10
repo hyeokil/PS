@@ -7637,9 +7637,27 @@ def Main():
 Main()
 ```
 
-## 2023 10 29 sunday
+## 2023 11 10 friday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 11478 서로 다른 부분 문자열의 개수
+
+```python
+
+def Main():
+    def f(i):
+        res = set()
+        for j in range(len(S)-i+1):
+            res.add(S[j:j+i])
+        return len(res)
+    
+    S = input()
+    ans = 0
+    for i in range(1,len(S)+1):
+        ans += f(i)
+    print(ans)
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

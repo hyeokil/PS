@@ -7659,9 +7659,21 @@ Main()
 
 ```
 
-## 2023 10 29 sunday
+## 2023 11 11 saturday
 
-### 백준 1652 누울 자리를 찾아라
+### 백준 11057 오르막 수
+
+```python
+
+def Main():
+    N = int(input())
+    dp = 1
+    for i in range(1,10):
+        dp = dp*(N+i)//i
+    print(dp%10007)
+Main()
+
+```
 
 ## 2023 10 29 sunday
 

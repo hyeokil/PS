@@ -7675,6 +7675,30 @@ Main()
 
 ```
 
+### 백준 11404 플로이드
+
+```python
+
+def Main():
+    N = int(input())
+    M = int(input())
+    dist =[[float('inf')]*N for _ in range(N)]
+    for i in range(N):
+        dist[i][i] = 0
+    for _ in range(M):
+        a,b,c = map(int,input().split())
+        if dist[a-1][b-1] > c:
+            dist[a - 1][b - 1] = c
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                dist[j][k] = min(dist[j][k],dist[j][i]+dist[i][k])
+    for i in dist:
+        print(*i)
+Main()
+
+```
+
 ## 2023 10 29 sunday
 
 ### 백준 1652 누울 자리를 찾아라

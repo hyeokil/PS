@@ -7679,6 +7679,8 @@ Main()
 
 ```python
 
+import sys
+input = sys.stdin.readline
 def Main():
     N = int(input())
     M = int(input())
@@ -7693,8 +7695,11 @@ def Main():
         for j in range(N):
             for k in range(N):
                 dist[j][k] = min(dist[j][k],dist[j][i]+dist[i][k])
-    for i in dist:
-        print(*i)
+    for i in range(N):
+        for j in range(N):
+            if dist[i][j] == float('inf'):
+                dist[i][j] =0
+        print(*dist[i])
 Main()
 
 ```

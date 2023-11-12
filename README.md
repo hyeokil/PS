@@ -7736,6 +7736,46 @@ print(ans)
 
 ```
 
+### 백준 18185 라면 사기 (small)
+
+```python
+
+def one(n):
+    global ans
+    ans += lst[n]*3
+def two(n):
+    global ans
+    m = min(lst[n],lst[n+1])
+    lst[n] -= m
+    lst[m] -= m
+    ans += m*5
+def tri(n):
+    global ans
+    m= min(lst[n],lst[n+1], lst[n+2])
+    lst[n]-=m
+    lst[n + 1]-=m
+    lst[n + 2]-=m
+    ans += 7*m
+
+N = int(input())
+lst = list(map(int, input().split()))+[0,0]
+ans = 0
+for i in range(N):
+    if lst[i+1] > lst[i+2]:
+        m = min(lst[i],lst[i+1]-lst[i+2])
+        lst[i]-=m
+        lst[i+1]-=m
+        ans += 5*m
+        tri(i)
+        one(i)
+    else:
+        tri(i)
+        two(i)
+        one(i)
+print(ans)
+
+```
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기

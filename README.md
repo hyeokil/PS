@@ -7776,9 +7776,80 @@ print(ans)
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 13 monday
 
-### 백준 16637 괄호 추가하기
+### 백준 11835 Skyline
+
+```python
+
+def Main():
+    def f1(j):
+        return 3*lst[j]
+    def f2(j):
+        m = min(lst[j],lst[j+1])
+        lst[j]-=m
+        lst[j+1]-=m
+        return 5*m
+    def f3(j):
+        m = min(lst[j],lst[j+1],lst[j+2])
+        lst[j] -=m
+        lst[j+1]-=m
+        lst[j+2]-=m
+        return 7*m
+
+    N = int(input())
+    lst= list(map(int,input().split()))+[0,0]
+    ans = 0
+    for i in range(N):
+        if lst[i+1] > lst[i+2]:
+            m = min(lst[i],lst[i+1]-lst[i+2])
+            lst[i]-=m
+            lst[i+1]-=m
+            ans+=5*m
+            ans += f3(i)+f1(i)
+        else:
+            ans+= f3(i)+f2(i)+f1(i)
+    print(ans)
+Main()
+
+```
+
+### 백준 2660 회장뽑기
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N = int(input())
+    arr = [[float('inf')]*(N+1) for _ in range(N+1)]
+    for i in range(1,N+1):
+        arr[i][i] = 0
+    ans = []
+    while True :
+        a,b = map(int,input().split())
+        if a == -1 :
+            break
+        arr[a][b] = 1
+        arr[b][a] = 1
+
+    for k in range(1,N+1):
+        for i in range(1, N + 1):
+            for j in range(1, N + 1):
+                arr[i][j] = min(arr[i][j],arr[i][k]+arr[k][j])
+    result = float('inf')
+    for i in range(1,N+1):
+        if result > max(arr[i][1:]):
+            result = max(arr[i][1:])
+
+    for i in range(1,N+1):
+        if result == max(arr[i][1:]):
+            ans.append(i)
+    print(result,len(ans))
+    print(*ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

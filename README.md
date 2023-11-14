@@ -7851,9 +7851,79 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 14 tuesday
 
-### 백준 16637 괄호 추가하기
+### 백준 2108 통계학
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N = int(input())
+    lst = []
+    lstp = [0]*4001
+    lstm = [0]*4000
+    for i in range(N):
+        a = int(input())
+        if a >=0:
+            lstp[a] += 1
+        else:
+            lstm[a] +=1
+        lst.append(a)
+    lst.sort()
+    print(round(sum(lst)/N))
+    print(lst[N//2])
+    md = max(max(lstm),max(lstp))
+    res = []
+    for i in range(-4000,0):
+        if lstm[i] == md:
+            res.append(i)
+    for i in range(4001):
+        if lstp[i] == md:
+            res.append(i)
+    if len(res) > 1 :
+        print(res[1])
+    else:
+        print(res[0])
+    print(lst[-1]-lst[0])
+Main()
+
+```
+
+### 백준 14940 쉬운 최단거리
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+def Main():
+    N, M = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    ans = [[0]*M for _ in range(N)]
+    q = deque()
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 2:
+                q.append((i,j))
+                break
+    while q:
+        x,y = q.popleft()
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny = dx+x,dy+y
+            if 0<=nx<N and 0<=ny<M and arr[nx][ny] == 1 and ans[nx][ny]==0:
+                ans[nx][ny] = ans[x][y]+1
+                q.append((nx,ny))
+    for i in range(N):
+        for j in range(M):
+            if arr[i][j] == 1 and ans[i][j] == 0:
+                ans[i][j] = -1
+        print(*ans[i])
+
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

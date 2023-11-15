@@ -7925,9 +7925,49 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 15 wednesday
 
-### 백준 16637 괄호 추가하기
+### 백준 1003 피보나치 함수
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    T = int(input())
+    for _ in range(T):
+        N = int(input())
+        zero, one = 1, 0 
+        for i in range(N):
+            zero, one = one, zero + one
+        print(zero, one)
+Main()
+
+```
+
+### 백준 1654 랜선 자르기
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    K, N = map(int, input().split())
+    lst = [int(input()) for _ in range(K)]
+    s,e = 1,max(lst)
+    while s<=e:
+        mid = (s+e)//2
+        cnt = 0
+        for i in lst:
+            cnt += i//mid
+        if cnt >= N:
+            s = mid+1
+        else:
+            e = mid-1
+    print(e)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

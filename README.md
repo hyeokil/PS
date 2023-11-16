@@ -7969,9 +7969,107 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 16 thursday
 
-### 백준 16637 괄호 추가하기
+### 백준 1005 ACM Craft
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+def Main():
+    T = int(input())
+    for tc in range(T):
+        N,K = map(int,input().split())
+        time = [0]+list(map(int,input().split()))
+        arr = [[]for _ in range(N+1)]
+        degree = [0]*(N+1)
+        for kk in range(K):
+            a,b = map(int,input().split())
+            arr[a].append(b)
+            degree[b] += 1
+        G = int(input())
+        dist = [0]*(N+1)
+        q = deque()
+        for i in range(1,N+1):
+            if degree[i] == 0:
+                q.append(i)
+        while q :
+            x = q.popleft()
+            dist[x] += time[x]
+            for y in arr[x]:
+                degree[y] -= 1
+                dist[y] = max(dist[y],dist[x])
+                if degree[y] == 0:
+                    q.append(y)
+        print(dist[G])
+Main()
+
+```
+
+### 백준 11725 트리의 부모 찾기
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+def Main():
+    N = int(input())
+    arr = [[] for _ in range(N+1)]
+    for _ in range(N-1):
+        a,b = map(int,input().split())
+        arr[a].append(b)
+        arr[b].append(a)
+    ans = [0]*(N+1)
+    visited = [False]*(N+1)
+    q = deque()
+    q.append(1)
+    visited[1] = True
+    while q:
+        x = q.popleft()
+        for y in arr[x] :
+            if visited[y] == False:
+                ans[y] = x
+                visited[y] = True
+                q.append(y)
+    for i in range(2,N+1):
+        print(ans[i])
+Main()
+
+```
+
+### 백준 1068 트리
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+
+def Main():
+    N = int(input())
+    arr = list(map(int,input().split()))
+    B = int(input())
+    q = deque()
+    q.append(B)
+    while q:
+        x = q.popleft()
+        arr[x] = -2
+        for y in range(N) :
+            if arr[y] == x :
+                arr[y] = -2
+                q.append(y)
+    ans = 0
+    for i in range(N):
+        if arr[i] != -2 and i not in arr:
+            ans+=1
+    print(ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

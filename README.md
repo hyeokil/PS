@@ -8071,9 +8071,61 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 17 friday
 
-### 백준 16637 괄호 추가하기
+### 백준 1991 트리 순회
+
+```python
+
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**7)
+def preorder(root):
+    if root != '.':
+        print(root,end='')
+        preorder(tree[root][0])
+        preorder(tree[root][1])
+def inorder(root):
+    if root != '.':
+        inorder(tree[root][0])
+        print(root, end='')
+        inorder(tree[root][1])
+def postorder(root):
+    if root != '.':
+        postorder(tree[root][0])
+        postorder(tree[root][1])
+        print(root, end='')
+
+
+N = int(input())
+tree = {}
+for _ in range(N):
+    a,b,c = input().split()
+    tree[a] = [b,c]
+preorder('A')
+print()
+inorder('A')
+print()
+postorder('A')
+
+```
+
+### 백준 14501 퇴사
+
+```python
+
+def Main():
+    N = int(input())
+    lst = [tuple(map(int,input().split())) for _ in range(N)]
+    ans = [0]*(N+1)
+    for i in range(N):
+        for j in range(i+lst[i][0],N+1):
+            if ans[j] < ans[i]+lst[i][1]:
+                ans[j] = ans[i]+lst[i][1]
+    print(ans[-1])
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

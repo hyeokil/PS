@@ -8127,9 +8127,70 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 18 saturday
 
-### 백준 16637 괄호 추가하기
+### 백준 5972 택배 배송
+
+```python
+
+import sys, heapq
+input = sys.stdin.readline
+
+def Main():
+    N,M = map(int, input().split())
+    arr = [[]for _ in range(N+1)]
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        arr[a].append((b,c))
+        arr[b].append((a, c))
+    dist = [float('inf')]*(N+1)
+    dist[1] = 0
+    q = [(0,1)]
+    while q:
+        nowd, now = heapq.heappop(q)
+        if now==N:
+            print(nowd)
+            break                
+        for go,god in arr[now] :
+            curd = nowd+god
+            if dist[go] > curd:
+                dist[go] = curd
+                heapq.heappush(q,(curd,go))
+Main()
+
+```
+
+### 백준 14284 간선 이어가기 2
+
+```python
+
+import sys, heapq
+input = sys.stdin.readline
+def Main():
+    N,M = map(int, input().split())
+    arr = [[]for _ in range(N+1)]
+    for _ in range(M):
+        a,b,c = map(int, input().split())
+        arr[a].append((b,c))
+        arr[b].append((a, c))
+    s,e = map(int,input().split())
+    dist = [float('inf')]*(N+1)
+    dist[s] = 0
+    q = [(0,s)]
+    while q:
+        nowd, now = heapq.heappop(q)
+        if now == e :
+            print(nowd)
+            break
+        for go,god in arr[now] :
+            curd = nowd+god
+            if dist[go] > curd:
+                dist[go] = curd
+                heapq.heappush(q,(curd,go))
+Main()
+
+
+```
 
 ## 2023 11 12 sunday
 

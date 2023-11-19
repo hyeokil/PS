@@ -8192,9 +8192,42 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 19 sunday
 
-### 백준 16637 괄호 추가하기
+### 백준 1731 추론
+
+```python
+
+def Main():
+    N = int(input())
+    lst = []
+    for _ in range(N):
+        num = int(input())
+        lst.append(num)
+    p = lst[1]-lst[0]
+    t = lst[1]//lst[0]
+    if lst[2] == lst[1]*t:
+        print(lst[-1]*t)
+    else:
+        print(lst[-1]+p)
+    
+Main()
+
+```
+
+### 백준 1834 나머지와 몫이 같은 수
+
+```python
+
+def Main():
+    N = int(input())
+    ans = 0
+    for i in range(1,N):
+        ans+=N*i+i
+    print(ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

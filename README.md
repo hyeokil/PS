@@ -7704,6 +7704,8 @@ Main()
 
 ```
 
+
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기
@@ -8229,9 +8231,59 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 20 monnday
 
-### 백준 16637 괄호 추가하기
+### 백준 17478 재귀함수가 뭔가요?
+
+```python
+
+def f(n):
+    if n == N:
+        print('____'*n+'"재귀함수가 뭔가요?"')
+        print('____'*n+'"재귀함수는 자기 자신을 호출하는 함수라네"')
+        print('____'*n+'라고 답변하였지.')
+        return
+    print('____'*n+'"재귀함수가 뭔가요?"')
+    print('____'*n+'"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.')
+    print('____'*n+"마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.")
+    print('____'*n+'그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어."')
+    f(n+1)
+    print('____'*n+"라고 답변하였지.")
+    return
+N = int(input())
+print('어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.')
+f(0)
+
+```
+
+### 백준 1956 운동
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N,M = map(int, input().split())
+    dist = [[float('inf')]*(N+1)for _ in range(N+1)]
+    for _ in range(M):
+        a, b,c = map(int,input().split())
+        if dist[a][b] > c:
+            dist[a][b] = c
+    for k in range(1,N+1):
+        for i in range(1,N+1):
+            for j in range(1,N+1):
+                dist[i][j] = min(dist[i][j],dist[i][k]+dist[k][j])
+    ans = float('inf')
+    for i in range(1,N+1):
+        if dist[i][i] < ans :
+            ans = dist[i][i]
+    if ans == float('inf'):
+        print(-1)
+    else:
+        print(ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

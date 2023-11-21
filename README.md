@@ -8285,9 +8285,49 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 21 tuesday
 
-### 백준 16637 괄호 추가하기
+### 백준 5691 평균 중앙값 문제
+
+```python
+
+while True :
+    a,b =map(int, input().split())
+    if a==0 and b ==0 :
+        break
+    c = max(a,b)-min(a,b)
+    print(min(a,b)-c)
+
+```
+
+### 백준 16165 걸그룹 마스터 준석이 
+
+```python
+
+def Main():
+    N,M = map(int,input().split())
+    dic = {}
+    for i in range(N):
+        group = input()
+        dic[group] = []
+        n = int(input())
+        for j in range(n):
+            name = input()
+            dic[group].append(name)
+        dic[group].sort()
+    for i in range(M):
+        nm = input()
+        q = int(input())
+        if q == 0:
+            for j in dic[nm]:
+                print(j)
+        else:
+            for k in dic.keys():
+                if nm in dic[k]:
+                    print(k)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

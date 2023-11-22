@@ -8401,36 +8401,40 @@ Main()
 
 
 # ver2
-from collections import deque
 import sys
 input =sys.stdin.readline
+from collections import deque
 
-def f():
+def Main():
+    N, M = map(int, input().split())
+    x1, y1, x2, y2 = map(int, input().split())
+    arr = [list(input()) for _ in range(N)]
     q = deque()
-    q.append((x1 - 1, y1 - 1,0))
-    visited = [[False]*M for _ in range(N)]
-    visited[x1-1][y1-1] = True
-    while q:
-        x,y,cnt = q.popleft()
+    q.append((x1 - 1, y1 - 1))
+    visited = [[0]*M for _ in range(N)]
+    visited[x1-1][y1-1] = 1
+    ans = 0
+    while q and ans == 0:
+        x,y = q.popleft()
         for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
             nx,ny=dx+x,dy+y
             if nx < 0 or nx >= N or ny < 0 or ny >= M:
                 continue
-            if visited[nx][ny]:
+            if visited[nx][ny] != 0:
                 continue
             visited[nx][ny] =True
+            # break가 맨 위로 오니까 맞는다 이유가 뭘까..?
             if arr[nx][ny] == '#':
-                return cnt + 1
+                ans = visited[x][y]
+                break
             elif arr[nx][ny] == '0':
-                q.appendleft((nx, ny, cnt))
+                visited[nx][ny]=visited[x][y]
+                q.appendleft((nx, ny))
             else:
-                q.append((nx, ny, cnt + 1))
-
-
-N, M = map(int,input().split())
-x1,y1,x2,y2 = map(int,input().split())
-arr = [list(input()) for _ in range(N)]
-print(f())
+                visited[nx][ny] = visited[x][y]+1
+                q.append((nx, ny))
+    print(ans)
+Main()
 
 ```
 

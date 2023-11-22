@@ -8365,6 +8365,75 @@ Main()
 
 ```
 
+### 백준 14497 주난의 난
+
+```python
+
+# ver1
+from collections import deque
+import sys
+input =sys.stdin.readline
+
+def Main():
+    N, M = map(int,input().split())
+    x1,y1,x2,y2 = map(int,input().split())
+    arr = [list(input()) for _ in range(N)]
+    q = deque()
+    q.append((x1 - 1, y1 - 1))
+    visited = [[-1]*M for _ in range(N)]
+    visited[x1-1][y1-1] = 0
+    while q:
+        x,y = q.popleft()
+        if arr[x][y] == '#' :
+            continue
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny=dx+x,dy+y
+            if 0<=nx<N and 0<=ny<M and arr[nx][ny] == '1':
+                if visited[nx][ny] == -1 or visited[nx][ny] > visited[x][y]+1:
+                    visited[nx][ny] = visited[x][y]+1
+                    q.append((nx,ny))
+            elif 0<=nx<N and 0<=ny<M and arr[nx][ny] != '1':
+                if visited[nx][ny] == -1 or visited[nx][ny] > visited[x][y]:
+                    visited[nx][ny] =visited[x][y]
+                    q.append((nx,ny))
+    print(visited[x2-1][y2-1]+1)
+Main()
+
+
+# ver2
+from collections import deque
+import sys
+input =sys.stdin.readline
+
+def f():
+    q = deque()
+    q.append((x1 - 1, y1 - 1,0))
+    visited = [[False]*M for _ in range(N)]
+    visited[x1-1][y1-1] = True
+    while q:
+        x,y,cnt = q.popleft()
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny=dx+x,dy+y
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if visited[nx][ny]:
+                continue
+            visited[nx][ny] =True
+            if arr[nx][ny] == '#':
+                return cnt + 1
+            elif arr[nx][ny] == '0':
+                q.appendleft((nx, ny, cnt))
+            else:
+                q.append((nx, ny, cnt + 1))
+
+
+N, M = map(int,input().split())
+x1,y1,x2,y2 = map(int,input().split())
+arr = [list(input()) for _ in range(N)]
+print(f())
+
+```
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기

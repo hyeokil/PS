@@ -6219,8 +6219,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main{
-	public static void main(String[] args) throws IOException	{
-		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+ public static void main(String[] args) throws IOException {
+  BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
         while (T-- > 0) {
             String name = br.readLine();
@@ -8329,9 +8329,41 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 22 wednesday
 
-### 백준 16637 괄호 추가하기
+### 백준 2979 트럭 주차
+
+```python
+
+def Main():
+    A,B,C = map(int, input().split())
+    bus =[]
+    s = float('inf')
+    e = 0
+    for _ in range(3):
+        a,b = map(int, input().split())
+        bus.append((a,b))
+        if a < s:
+            s = a
+        if b > e :
+            e = b
+    ans = 0
+    for i in range(s,e+1):
+        tmp = 0
+        for j in range(3):
+            if bus[j][0] <= i < bus[j][1]:
+                tmp+= 1
+        if tmp == 1:
+            ans+=A
+        elif tmp == 2:
+            ans += B*2
+        elif tmp == 3:
+            ans+=C*3
+    print(ans)
+
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

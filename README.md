@@ -8422,7 +8422,6 @@ def Main():
                 continue
             if visited[nx][ny] != 0:
                 continue
-            visited[nx][ny] =True
             # break가 맨 위로 오니까 맞는다 이유가 뭘까..?
             if arr[nx][ny] == '#':
                 ans = visited[x][y]
@@ -8438,9 +8437,80 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 23 thursday
 
-### 백준 16637 괄호 추가하기
+### 백준 1240 노드사이의 거리
+
+```python
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+def Main():
+    N,M = map(int, input().split())
+    arr = [[] for _ in range(N+1)]
+    for _ in range(N-1):
+        a,b,c = map(int,input().split())
+        arr[a].append((b,c))
+        arr[b].append((a,c))
+    for _ in range(M):
+        s,e = map(int,input().split())
+        q= deque()
+        q.append((s,0))
+        visited = [0]*(N+1)
+        visited[s] = 1
+        while q :
+            x,v = q.popleft()
+            if x == e :
+                print(v)
+                break
+            for y,w in arr[x]:
+                if visited[y] == 0 :
+                    q.append((y,v+w))
+                    visited[y] = 1
+Main()
+
+```
+
+### 백준 1261 알고스팟
+
+```python 
+
+import sys
+input =sys.stdin.readline
+from collections import deque
+
+def Main():
+    M,N = map(int, input().split())
+    arr = [list(input()) for _ in range(N)]
+    q = deque()
+    q.append((0, 0))
+    visited = [[0]*M for _ in range(N)]
+    visited[0][0] = 1
+    ans = 0
+    X = 0
+    while q and X == 0:
+        x,y = q.popleft()
+        for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+            nx,ny=dx+x,dy+y
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+            if visited[nx][ny] != 0:
+                continue
+            if nx == N-1 and ny == M-1 :
+                ans = visited[x][y]-1
+                X = 1
+                break
+            elif arr[nx][ny] == '0':
+                visited[nx][ny]=visited[x][y]
+                q.appendleft((nx, ny))
+            else:
+                visited[nx][ny] = visited[x][y]+1
+                q.append((nx, ny))
+    print(ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

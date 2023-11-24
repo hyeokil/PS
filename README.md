@@ -8550,7 +8550,15 @@ Main()
 
 ```
 
+### 백준 2355 시그마
 
+```python
+
+# 가우스 식에대해서 처음 알게 됨
+A,B = map(int, input().split())
+print((A+B)*(max(A,B)-min(A,B)+1)//2)
+
+```
 
 ## 2023 11 12 sunday
 

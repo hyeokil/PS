@@ -8512,9 +8512,45 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 24 friday
 
-### 백준 16637 괄호 추가하기
+### 백준 1864 문어 숫자
+
+```python
+
+def Main():
+    while True :
+        S = list(input())
+        if S[0] == '#':
+            break
+        S.reverse()
+        ans = 0
+        for i in range(len(S)):
+            if S[i] == '-':
+                a = 0
+            elif S[i] == '\\':
+                a = 1
+            elif S[i] == '(':
+                a=2
+            elif S[i] == '@':
+                a = 3
+            elif S[i] == '?':
+                a = 4
+            elif S[i] == '>':
+                a = 5
+            elif S[i] == '&':
+                a = 6
+            elif S[i] == '%':
+                a = 7
+            elif S[i] == '/':
+                a = -1
+            ans+=a*8**i
+        print(ans)
+Main()
+
+```
+
+
 
 ## 2023 11 12 sunday
 

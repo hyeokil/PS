@@ -8630,6 +8630,83 @@ Main()
 
 ```
 
+### 백준 2665 미로만들기
+
+```python
+
+# ver1
+import sys
+input = sys.stdin.readline
+from collections import deque
+def Main():
+    N = int(input())
+    miro = [list(input()) for _ in range(N)]
+    q = deque()
+    q.append((0,0,0))
+    visited = [[False]*N for _ in range(N)]
+    visited[0][0] = True
+    ans = -1
+    if N == 1 :
+        ans = 0
+        print(ans)
+    else :
+        while q and ans == -1:
+            x,y,c =  q.popleft()
+            for dx,dy in [(1,0),(0,1),(-1,0),(0,-1)]:
+                nx,ny =dx+x,dy+y
+                if 0>nx or 0>ny or N<=nx or N<=ny :
+                    continue
+                if visited[nx][ny] == True:
+                    continue
+                visited[nx][ny]= True
+                if nx == N-1 and ny == N-1 :
+                    ans = c
+                    break
+                elif miro[nx][ny] == '1':
+                    # appendleft의 힘..
+                    q.appendleft((nx,ny,c))
+                else:
+                    q.append((nx,ny,c+1))
+        print(ans)
+Main()
+
+# ver2
+## 생각만 하던 힙큐 
+import sys
+from heapq import heappush, heappop
+input = sys.stdin.readline
+
+
+def sol():
+    q = []
+    heappush(q, (0, 0, 0))
+    while q:
+        num, si, sj = heappop(q)
+        for d in range(4):
+            ei = si + di[d]
+            ej = sj + dj[d]
+            if 0 <= ei < N and 0 <= ej < N:
+                if arr[ei][ej] == '1' and tmp[ei][ej] > num:
+                    tmp[ei][ej] = num
+                    heappush(q, (num, ei, ej))
+                if arr[ei][ej] == '0' and tmp[ei][ej] > num + 1:
+                    tmp[ei][ej] = num + 1
+                    heappush(q, (num+1, ei, ej))
+
+
+N = int(input())
+arr = [list(input()) for _ in range(N)]
+
+tmp = [[N*N]*N for _ in range(N)]
+tmp[0][0] = 0
+di = [1, 0, -1, 0]
+dj = [0, 1, 0, -1]
+sol()
+
+print(tmp[N-1][N-1])
+
+```
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기

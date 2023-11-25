@@ -8560,9 +8560,75 @@ print((A+B)*(max(A,B)-min(A,B)+1)//2)
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 25 saturday
 
-### 백준 16637 괄호 추가하기
+### 백준 16401 과자 나눠주기
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    M, N = map(int, input().split())
+    snacks = list(map(int, input().split()))
+    s= 1
+    e = int(1e9)
+    ans = 0
+    while s<=e:
+        mid = (s+e)//2
+        cnt = 0
+        for snack in snacks:
+            cnt += snack//mid
+        if cnt >= M:
+            ans = max(ans,mid)
+            s = mid+1
+        else:
+            e = mid-1
+    print(ans)
+Main()
+
+```
+
+### 백준 7562 나이트의 이동
+
+```python
+
+import sys
+input = sys.stdin.readline
+from collections import deque
+def Main():
+    T = int(input())
+    for tc in range(T):
+        N = int(input())
+        x1,y1 = map(int,input().split())
+        x2,y2 = map(int, input().split())
+        q = deque()
+        q.append((x1,y1,0))
+        visited = [[False]*N for _ in range(N)]
+        visited[x1][y1] = True
+        ans = -1
+        if x1 == x2 and y1==y2 :
+            ans = 0
+            print(ans)
+            continue
+        while q and ans == -1:
+            x,y,c =  q.popleft()
+            for dx,dy in [(-2,-1),(-2,1),(2,-1),(2,1),(-1,-2),(1,-2),(-1,2),(1,2)]:
+                nx,ny =dx+x,dy+y
+                if 0>nx or 0>ny or N<=nx or N<=ny :
+                    continue
+                if visited[nx][ny] == True:
+                    continue
+                visited[nx][ny]= True
+                if nx == x2 and ny == y2 :
+                    ans = c+1
+                    break
+                else:
+                    q.append((nx,ny,c+1))
+        print(ans)
+Main()
+
+```
 
 ## 2023 11 12 sunday
 

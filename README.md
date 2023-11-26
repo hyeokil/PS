@@ -8726,6 +8726,17 @@ Main()
 
 ```
 
+### 백준 20352 Circus
+
+```python
+
+import math
+N = int(input())
+r = math.sqrt(N/math.pi)
+print(2*r*math.pi)
+
+```
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기

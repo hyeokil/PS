@@ -8802,6 +8802,33 @@ for tc in range(int(input())):
 
 ```
 
+### 백준 1202 보석 도둑
+
+```python
+
+import heapq,sys
+input = sys.stdin.readline
+
+def Main():
+    N,K = map(int,input().split())
+    lst = [tuple(map(int, input().split())) for _ in range(N)]
+    bags = [int(input()) for _ in range(K)]
+    bags.sort()
+    lst.sort()
+    ans = 0
+    tmp = []
+    for bag in bags:
+        while lst and lst[0][0] <= bag:
+            heapq.heappush(tmp,-lst[0][1])
+            heapq.heappop(lst)
+        if tmp:
+            ans -= heapq.heappop(tmp)
+    print(ans)
+Main()
+
+
+```
+
 ## 2023 11 12 sunday
 
 ### 백준 16637 괄호 추가하기

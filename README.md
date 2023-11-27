@@ -8737,9 +8737,70 @@ print(2*r*math.pi)
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 27 monday
 
-### 백준 16637 괄호 추가하기
+### 백준 2295 세 수의 합
+
+```python
+
+import sys
+input = sys.stdin.readline
+def Main():
+    N = int(input())
+    lst = [int(input()) for _ in range(N)]
+    lst.sort()
+    lst_plus = set()
+    for i in lst:
+        for j in lst:
+            lst_plus.add(i+j)
+    ans = -1
+    for i in range(N-1,-1,-1):
+        for j in range(i+1):
+            if lst[i]-lst[j] in lst_plus:
+                ans = lst[i]
+                break
+        if ans != -1:
+            break
+    print(ans)
+Main()
+
+```
+
+### 백준 4195 친구 네트워크
+
+```python
+
+import sys
+input= sys.stdin.readline
+
+def find(a):
+    if parent[a] != a:
+        parent[a] = find(parent[a])
+    return parent[a]
+
+def union(a,b):
+    a = find(a)
+    b = find(b)
+    if a!= b:
+        parent[b] = a
+        num[a] += num[b]
+    print(num[a])
+
+
+for tc in range(int(input())):
+    N = int(input())
+    parent,num = {},{}
+    for NN in range(N):
+        a,b = input().split()
+        if a not in parent:
+            parent[a] = a
+            num[a] = 1
+        if b not in parent:
+            parent[b] = b
+            num[b] = 1
+        union(a,b)
+
+```
 
 ## 2023 11 12 sunday
 

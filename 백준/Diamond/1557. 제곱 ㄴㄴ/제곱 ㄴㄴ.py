@@ -6,11 +6,11 @@ def f(n):
 
 N = int(input())
 s, e = 0, 2000000000
-M = [0]*1000001
+M = [0]*50000
 M[1] = 1
-for i in range(1,1000001):
+for i in range(1,50000):
     if M[i]:
-        for j in range(i*2,1000001,i):
+        for j in range(i*2,50000,i):
             M[j] -= M[i]
 while s<e-1:
     mid = (s+e)//2

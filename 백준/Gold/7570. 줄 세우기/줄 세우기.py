@@ -1,15 +1,10 @@
+# 수가 이미 나왔는지 확인 할 필요가 없었다,,
 def Main():
     N = int(input())
     lst = list(map(int, input().split()))
-    check = [False]*(N+2)
-    check[N+1] = True
-    dp = [1]*(N+1)
+    dp = [0]*(N+1)
     for i in lst:
-        check[i] = True
-        if check[i+1] == False :
-            dp[i] = dp[i-1] +1
-        else:
-            dp[i] = dp[i-1]
+        dp[i] = dp[i-1] +1
     print(N-max(dp))
 
 Main()

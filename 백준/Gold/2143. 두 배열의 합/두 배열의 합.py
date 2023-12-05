@@ -7,21 +7,17 @@ def Main():
     lstA = list(map(int,input().split()))
     M = int(input())
     lstB = list(map(int, input().split()))
-    prefixA = [0]
-    prefixB = [0]
-    for i in lstA:
-        prefixA.append(prefixA[-1]+i)
-    for i in lstB:
-        prefixB.append(prefixB[-1]+i)
     dic = defaultdict(int)
     ans = 0
-    for i in range(1,N+1):
-        for j in range(i):
-            V = prefixA[i] - prefixA[j]
+    for i in range(N):
+        V= 0
+        for j in range(i,N):
+            V += lstA[j]
             dic[V] += 1
-    for i in range(1,M+1):
-        for j in range(i):
-            V = prefixB[i] - prefixB[j]
+    for i in range(M):
+        V = 0
+        for j in range(i,M):
+            V += lstB[j]
             ans += dic[T-V]
     print(ans)
 Main()

@@ -8,21 +8,6 @@ def partial(arr, sArr, i, v):
     partial(arr,sArr,i+1,v)
     partial(arr,sArr,i+1,v+arr[i])
 
-def binarySearch(n):
-    cnt = 0
-    s= 0
-    e = lenR
-    while s<e :
-        mid = (s+e)//2
-        if lstR[mid] == n :
-            cnt = parR[lstR[mid]]
-            return cnt
-        elif lstR[mid] < n:
-            s = mid +1
-        else:
-            e = mid
-    return cnt
-
 
 N, S = map(int, input().split())
 lst = list(map(int, input().split()))
@@ -33,11 +18,11 @@ parL = {}
 parR = {}
 partial(L,parL,0,0)
 partial(R,parR,0,0)
-lstR = sorted(parR.keys())
-lenR = len(parR)
 ans = 0
 for i in parL:
-    ans += parL[i]*binarySearch(S-i)
+    V = S-i
+    if V in parR :
+        ans += parL[i]*parR[V]
 if S == 0:
     print(ans-1)
 else:

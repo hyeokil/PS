@@ -1,14 +1,11 @@
 def Main():
     N = int(input())
-    ans = 0
-    for i in range(1,N+1):
-        if i < 100 :
-            ans += 1
-        elif i != 1000:
-            s = str(i)
-            s1 = int(s[0]) - int(s[1])
-            s2 = int(s[1]) - int(s[2])
-            if s1 == s2 :
+    if N < 100 :
+        print(N)
+    else:
+        ans = 99
+        for i in range(100,N+1):
+            if ((i//10)%10)*2 == i//100 + i%10 :
                 ans += 1
-    print(ans)
+        print(ans)
 Main()

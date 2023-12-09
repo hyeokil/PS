@@ -2,6 +2,12 @@ import sys
 input = sys.stdin.readline
 sys.setrecursionlimit(10**7)
 
+def findSize():
+    size = 1
+    while size <2*N:
+        size*=2
+    return size
+
 def init(node, start, end):
     if start == end :
         tree[node] = start
@@ -34,7 +40,8 @@ def update(node,start,end,idx):
 
 N = int(input())
 lst = list(map(int, input().split()))
-tree = [0]*(4*N)
+Size = findSize()
+tree = [0]*Size
 init(1,0,N-1)
 for m in range(int(input())):
     query = list(map(int,input().split()))

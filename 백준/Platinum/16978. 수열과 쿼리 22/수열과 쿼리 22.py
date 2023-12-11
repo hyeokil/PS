@@ -1,4 +1,4 @@
-import sys,heapq
+import sys
 input = sys.stdin.readline
 
 
@@ -28,26 +28,27 @@ for m in range(M):
     if lst[0] == 1:
         q1.append((lst[1],lst[2]))
     else:
-        heapq.heappush(q2,(lst[1],lst[2],lst[3],idx))
+        q2.append((lst[1],lst[2],lst[3],idx))
         idx += 1
         ans.append(0)
+q2.sort(key=lambda e: e[0],reverse=True)
 while q2 :
-    cnt, A, B, ix = heapq.heappop(q2)
+    cnt, A, B, ix = q2.pop()
     if cnt == 0:
         ans[ix] = Sum(B)-Sum(A-1)
     else:
-        heapq.heappush(q2,(cnt,A,B,ix))
+        q2.append((cnt,A,B,ix))
         break
 for i in range(1,len(q1)):
     a,b = q1[i]
     Modify(a,b-arr[a])
     arr[a] = b
     while q2:
-        cnt, A, B, ix = heapq.heappop(q2)
+        cnt, A, B, ix = q2.pop()
         if cnt == i:
             ans[ix] = Sum(B) - Sum(A - 1)
         else:
-            heapq.heappush(q2, (cnt, A, B, ix))
+            q2.append((cnt,A,B,ix))
             break
 for i in ans:
     print(i)

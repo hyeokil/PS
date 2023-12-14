@@ -18,7 +18,6 @@ def Main():
         for i in range(len(cnt)):
             for j in range(cnt[i]//2):
                 ans+=setS[i]
-        ansR = reversed(ans)
-        ans += res +''.join([*ansR])
+        ans += res +ans[::-1]
         print(ans)
 Main()

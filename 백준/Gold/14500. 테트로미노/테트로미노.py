@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 def f1(x,y):
     A,B = 0,0
     if y+3<M :

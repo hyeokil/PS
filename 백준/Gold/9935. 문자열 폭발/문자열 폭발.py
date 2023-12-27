@@ -6,8 +6,7 @@ def Main():
     for s in S:
         st.append(s)
         if ''.join(st[-bomb_size:]) == bomb :
-            for i in range(bomb_size):
-                st.pop()
+            del st[-bomb_size:]
     if st :
         print(''.join(st))
     else:

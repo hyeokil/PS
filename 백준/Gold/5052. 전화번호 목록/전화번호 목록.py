@@ -5,13 +5,10 @@ def Main():
         N = int(input())
         nums = [input().rstrip() for _ in range(N)]
         nums.sort()
-        toggle = True
         for i in range(N-1):
             if nums[i] == nums[i+1][:len(nums[i])]:
-                toggle = False
+                print('NO')
                 break
-        if toggle :
-            print('YES')
         else:
-            print('NO')
+            print('YES')
 Main()

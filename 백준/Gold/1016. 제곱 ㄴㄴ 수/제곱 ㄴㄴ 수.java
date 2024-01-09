@@ -3,10 +3,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         long S = scanner.nextLong();
         long B = scanner.nextLong();
-
         long[] check = new long[(int) (B - S + 1)];
         for (int i = 0; i < check.length; i++) {
             check[i] = 1;

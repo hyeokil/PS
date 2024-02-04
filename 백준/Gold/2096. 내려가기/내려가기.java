@@ -18,8 +18,9 @@ public class Main {
                     b=Integer.parseInt(st.nextToken()),
                     c=Integer.parseInt(st.nextToken());
             int A = a + max(maxA, maxB), B = b + max(max(maxA, maxB), maxC), C = c + max(maxB, maxC);
-            int D = a + min(minA, minB), E = b + min(min(minA, minB), minC), F = c + min(minB, minC);
-            maxA = A;maxB = B;maxC = C;minA = D;minB = E;minC = F;
+            maxA = A;maxB = B;maxC = C;
+            A = a + min(minA, minB); B = b + min(min(minA, minB), minC); C = c + min(minB, minC);
+            minA = A;minB = B;minC = C;
 
         }
         bw.write(Integer.toString(max(max(maxA,maxB),maxC))+" "+min(min(minA,minB),minC));

@@ -14,28 +14,17 @@ public class Main {
         if (N + M - 1 > K) {
             bw.write("NO");
         } else {
-            int[][] lst = new int[N][M];
+            StringBuilder sb = new StringBuilder();
+            sb.append("YES\n");
             for (int i = 1; i <= N; i++) {
-                lst[i-1][0] = i;
-            }
-            bw.write("YES");
-            bw.newLine();
-            for (int i = 0; i < N; i++) {
-                for (int j = 1; j < M; j++) {
-                    lst[i][j] = lst[i][j - 1] + 1;
+                for (int j = i; j < M+i; j++) {
+                    String tmp = " ";
+                    if (j==M+i){tmp="";}
+                    sb.append(j).append(tmp);
                 }
+                sb.append("\n");
             }
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
-                    String tmp =" ";
-                    if (j == M - 1) {
-                        tmp="";
-                    }
-                    bw.write(Integer.toString(lst[i][j])+tmp);
-                }
-                bw.newLine();
-            }
-
+            bw.write(String.valueOf(sb));
         }
 
         bw.close();

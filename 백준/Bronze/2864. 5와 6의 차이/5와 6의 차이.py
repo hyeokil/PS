@@ -1,0 +1,8 @@
+S1,S2 = input().split()
+N1 = S1.replace('6','5')
+N2 = S2.replace('6','5')
+ans1 = int(N1)+int(N2)
+N1 = S1.replace('5','6')
+N2 = S2.replace('5','6')
+ans2 = int(N1)+int(N2)
+print(ans1,ans2)

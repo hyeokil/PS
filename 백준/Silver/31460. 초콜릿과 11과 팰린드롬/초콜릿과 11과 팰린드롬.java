@@ -8,22 +8,22 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         int T = Integer.parseInt(br.readLine());
-        String ans ;
         while (T-- > 0) {
             N = Integer.parseInt(br.readLine());
-            ans="";
-            if (N == 1) {ans += "0";}
+            if (N == 1) {
+                sb.append("0\n");}
             else {
-                ans+="1";
-                for (int i = 0; i < N - 2; i++) {
-                    ans += "2";
+                sb.append("1");
+                for (int i = 2; i < N; i++) {
+                    sb.append("2");;
                 }
-                ans += "1";
+                sb.append("1\n");
             }
-            bw.write(ans);
-            bw.newLine();
+
         }
+        bw.write(String.valueOf(sb));
         bw.close();
     }
 

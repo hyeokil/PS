@@ -1,9 +1,12 @@
+import sys
+input = sys.stdin.readline
 from collections import deque
+
 
 arr = []
 ans = 0
 for i in range(4):
-    arr.append(deque(list(input())))
+    arr.append(deque(list(input().rstrip())))
 for i in range(int(input())):
     A,B = map(int,input().split())
     A-=1

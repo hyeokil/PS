@@ -1,5 +1,9 @@
+import sys
+input = sys.stdin.readline
+
+
 R,C,N=map(int,input().split())
-arr = [input() for _ in range(R)]
+arr = [input().rstrip() for _ in range(R)]
 ans = [["O"]*C for _ in range(R)]
 for i in range(R):
     for j in range(C):

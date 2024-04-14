@@ -1,6 +1,5 @@
 import sys
 
-
 def Main():
     input = sys.stdin.readline
     N = int(input())
@@ -15,9 +14,11 @@ def Main():
             if check[i]:
                 res[a]+=1
                 res[i]-=1
+    ans =""
     for i in range(N):
         if i==N-1:
-            print(res[arr[i]],end="")
+            ans += str(res[arr[i]])
         else:
-            print(res[arr[i]],end=" ")
+            ans += str(res[arr[i]])+" "
+    print(ans)
 Main()

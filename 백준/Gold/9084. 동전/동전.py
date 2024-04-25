@@ -11,8 +11,7 @@ def Main():
         dp[0]=1
         for coin in coins:
             for i in range(coin,M+1):
-                if dp[i-coin] > 0:
-                    dp[i]+=dp[i-coin]
+                dp[i]+=dp[i-coin]
         print(dp[M])
 
 Main()

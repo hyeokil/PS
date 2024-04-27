@@ -1,10 +1,10 @@
 import sys
 input = sys.stdin.readline
 
-def f(arr,x,y):
+def f(x,y):
     for i in range(3):
         for j in range(3):
-            arr[x+i][y+j]= abs(arr[x+i][y+j]-1)
+            A[x+i][y+j]= abs(A[x+i][y+j]-1)
 
 
 
@@ -15,7 +15,7 @@ ans = 0
 for i in range(N):
     for j in range(M):
         if A[i][j]!=B[i][j] and i+2<N and j+2<M:
-            f(A,i,j)
+            f(i,j)
             ans+=1
 if A==B:
     print(ans)

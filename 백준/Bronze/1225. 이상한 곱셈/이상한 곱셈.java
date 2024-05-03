@@ -6,13 +6,13 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        char[] A = st.nextToken().toCharArray();
-        char[] B = st.nextToken().toCharArray();
-        Long ans = 0L;
-        for (char a : A) {
-            for (char b : B) {
-                ans += Character.getNumericValue(a) * Character.getNumericValue(b);
+        String[] input = br.readLine().split(" ");
+        String A = input[0];
+        String B = input[1];
+        long ans = 0;
+        for (int i = 0; i < A.length(); i++) {
+            for (int j = 0; j < B.length(); j++) {
+                ans += (A.charAt(i)-'0')*(B.charAt(j)-'0');
 
             }
         }

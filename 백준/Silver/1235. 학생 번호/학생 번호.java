@@ -16,6 +16,9 @@ public class Main {
         while (true) {
             HashSet<String> set = new HashSet<>();
             for (int i = 0; i < list.size(); i++) {
+                if (set.contains(list.get(i).substring(L-ans,L))) {
+                    break;
+                }
                 set.add(list.get(i).substring(L-ans,L));
             }
             if (set.size() == list.size()) {

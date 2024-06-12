@@ -8829,7 +8829,59 @@ Main()
 
 ```
 
-## 2023 11 12 sunday
+## 2023 11 25 saturday
 
-### 백준 16637 괄호 추가하기
+### 백준 1092 배
+
+```python
+
+import sys
+input = sys.stdin.readline
+
+def Main():
+    N = int(input())
+    crane = list(map(int,input().split()))
+    M = int(input())
+    box = list(map(int,input().split()))
+    crane.sort()
+    box.sort()
+    if crane[-1]<box[-1]:
+        print(-1)
+    else:
+        lst = [0]*N
+        idx = 0
+        for i in range(N):
+            if idx ==M:break
+            while idx<M and crane[i] >= box[idx] :
+                lst[i]+=1
+                idx+=1
+        ans = [0]*N
+        S = 0
+        for i in range(N-1,-1,-1):
+            S += lst[i]
+            ans[i] = S//(N-i)+(S%(N-i)!=0)
+        print(max(ans))
+Main()
+
+```
+
+### 백준 19941 햄버거 분배
+
+```python
+
+def Main():
+    N,K = map(int,input().split())
+    S = input()
+    visited = [False]*N
+    ans = 0
+    for i in range(N):
+        if S[i] == "P":
+            for j in range(i-K,i+K+1):
+                if 0<=j<N and S[j]=="H" and not visited[j]:
+                    visited[j] = True
+                    break
+    print(sum(visited))
+Main()
+
+```
 

@@ -12,8 +12,8 @@ public class Main {
         int K = Integer.parseInt(st.nextToken());
         int ans = 0;
         while (Integer.bitCount(N) > K) {
-            ans += 1;
-            N += 1;
+            ans += N&(-N);
+            N += N&(-N);
         }
         System.out.println(ans);
     }

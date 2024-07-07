@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String S;
+        StringBuilder ans = new StringBuilder();
         int cnt = 0;
         HashMap<String, Integer> map = new HashMap<>();
         while ((S = br.readLine()) != null && !S.isEmpty()) {
@@ -24,8 +25,9 @@ public class Main {
         List<String> keys = new ArrayList<>(map.keySet());
         Collections.sort(keys);
         for (String key : keys) {
-            System.out.println(key+" "+String.format("%.4f",(float)map.get(key)/cnt*100));
+            ans.append(key+" "+String.format("%.4f",(float)map.get(key)/cnt*100)+"\n");
         }
+        System.out.println(ans);
     }
 }
 

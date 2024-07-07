@@ -15,11 +15,7 @@ public class Main {
         int cnt = 0;
         HashMap<String, Integer> map = new HashMap<>();
         while ((S = br.readLine()) != null && !S.isEmpty()) {
-            if (map.containsKey(S)) {
-                map.put(S, map.get(S) + 1);
-            }else {
-                map.put(S, 1);
-            }
+            map.put(S,map.getOrDefault(S,0)+1);
             cnt++;
         }
         List<String> keys = new ArrayList<>(map.keySet());

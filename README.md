@@ -8885,3 +8885,13 @@ Main()
 
 ```
 
+## 2024 07 30 tuesday
+
+### 백준 24078 余り (Remainder)
+
+```python
+
+x=int(input())
+print(x%21)
+
+```

@@ -8895,3 +8895,15 @@ x=int(input())
 print(x%21)
 
 ```
+
+### 백준 4299 AFC 윔블던
+
+```python
+
+a,b=map(int,input().split())
+if a>=b and (a+b)%2==0:
+    print((a+b)//2,(a-b)//2)
+else: 
+    print(-1)
+
+```

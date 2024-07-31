@@ -8907,3 +8907,20 @@ else:
     print(-1)
 
 ```
+
+## 2024 07 31 wednesday
+
+### 백준 5341 Pyramids
+
+```python
+
+while True :
+    a=int(input())
+    if a==0:
+        break
+    s=0
+    for i in range(a+1):
+        s+= i
+    print(s)
+
+```

@@ -14,14 +14,17 @@ public class Main {
             if (K >= (i - 1)) {
                 K -= (i - 1);
                 ans[s] = i;
-                s += 1;
+                s++;
             } else {
                 ans[e] = i;
-                e -= 1;
+                e--;
             }
         }
-        System.out.println(Arrays.toString(ans).replace("[","").replace("]","").replaceAll(",",""));
-
+        StringBuilder sb = new StringBuilder();
+        for (int i : ans) {
+            sb.append(i).append(" ");
+        }
+        System.out.println(sb);
 
     }
 }

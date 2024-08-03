@@ -8,14 +8,14 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         long K = Long.parseLong(st.nextToken()), res = 0L,tmp=0L,ans;
-        List<Long> list = new ArrayList<Long>();
+        long[] list = new long[N];
         st = new StringTokenizer(br.readLine());
         for (int i=0; i<N; i++) {
-            list.add(Long.parseLong(st.nextToken()));
+            list[i] = (Long.parseLong(st.nextToken()));
         }
-        Collections.sort(list);
+        Arrays.sort(list);
         for (int i=1; i<N; i++) {
-            tmp=(list.get(0)*i)+(list.get(i)*(N-i));
+            tmp=(list[0]*i)+(list[i]*(N-i));
             res = Math.max(res, tmp);
         }
         ans = K%res==0?K/res:K/res+1;

@@ -23,15 +23,17 @@ public class Main {
                 if (map.containsKey(Q[4])) {
                     for (int j : map.remove(Q[2])) {
                         map.get(Q[4]).add(j);
-                        S[j] = Q[4];
                     }
                 } else {
                     map.put(Q[4],map.remove(Q[2]));
-                    for (int j : map.get(Q[4])) {
-                        S[j] = Q[4];
-                    }
                 }
             } else if (Q[0] == '2') {
+                for (char j : map.keySet()) {
+                    for (int k : map.get(j)) {
+                        S[k] = j;
+                    }
+                }
+
                 ans.append(Arrays.toString(S).replace("[","").replace("]","").replaceAll(", ","")+"\n");
             }
         }

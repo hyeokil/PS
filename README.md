@@ -1,4 +1,4 @@
-# PIS(Problems I Solved)
+# PS(Problem Solving)
 
 ## 2023 08 17 thursday
 

@@ -10,20 +10,19 @@ public class Main {
         StringBuilder ans = new StringBuilder();
         int[][] arr = new int[N+1][N+1];
         for (int i = 0; i <= N; i++) {
-            Arrays.fill(arr[i], 101);
+            Arrays.fill(arr[i], 1000);
             arr[i][i] = 0;
         }
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken())
                     ,b = Integer.parseInt(st.nextToken());
-            arr[a][b] = 1;
-            arr[b][a] = 1;
+            arr[a][b] =arr[b][a] = 1;
         }
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                for (int k = 1; k <= N; k++) {
-                    arr[i][j] = arr[j][i] = Math.min(arr[i][j],arr[i][k] + arr[k][j]);
+                for (int k = j+1; k <= N; k++) {
+                    arr[j][k] = arr[k][j] = Math.min(arr[j][k],arr[j][i] + arr[i][k]);
                 }
             }
         }

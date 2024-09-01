@@ -22,25 +22,19 @@ public class Main {
         }
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                if (arr[i][j] == 1) {
-                    for (int k = 1; k <= N; k++) {
-                        if (arr[j][k] !=0) {
-                            arr[i][k] = Math.min(arr[i][k], arr[j][k]+1);
-                            arr[k][i] = arr[i][k];
-                        }
-                    }
+                for (int k = 1; k <= N; k++) {
+                    arr[i][j] = arr[j][i] = Math.min(arr[i][j],arr[i][k] + arr[k][j]);
                 }
             }
         }
         int min = Integer.MAX_VALUE
                 ,a=0,b=0;
         for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                if (i==j) continue;
+            for (int j = i+1; j <= N; j++) {
                 int tmp = 0;
                 for (int k = 1; k <= N; k++) {
                     if (min<=tmp) break;
-                    tmp +=Math.min(arr[i][k],arr[j][k])*2;
+                    tmp +=Math.min(arr[i][k],arr[j][k]);
                 }
                 if (min>tmp) {
                     min = tmp;
@@ -49,6 +43,6 @@ public class Main {
                 }
             }
         }
-        System.out.println(a+" "+b+" "+min);
+        System.out.println(a+" "+b+" "+min*2);
     }
 }

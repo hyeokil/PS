@@ -1,4 +1,6 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Main {
     static int n, k, q;
@@ -6,23 +8,25 @@ public class Main {
     static char[] who = new char[10001];
     static int[] chk = new int[26];
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder ans = new StringBuilder();
 
-        n = sc.nextInt();
-        k = sc.nextInt();
-        q = sc.nextInt();
+        String[] input = br.readLine().split(" ");
+        n = Integer.parseInt(input[0]);
+        k = Integer.parseInt(input[1]);
+        q = Integer.parseInt(input[2]);
 
         for (int i = 1; i <= k; i++) {
-            int a = sc.nextInt();
-            char b = sc.next().charAt(0);
+            String[] data = br.readLine().split(" ");
+            int a = Integer.parseInt(data[0]);
+            char b = data[1].charAt(0);
             num[i] = a;
             who[i] = b;
         }
 
         if (num[q] == 0) {
             System.out.println("-1");
-            sc.close();
             return;
         }
 
@@ -36,10 +40,10 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             if (chk[i] == 0) {
-                System.out.print((char) (i + 'A') + " ");
+                ans.append((char) (i + 'A')).append(" ");
             }
         }
 
-        sc.close();
+        System.out.println(ans);
     }
 }

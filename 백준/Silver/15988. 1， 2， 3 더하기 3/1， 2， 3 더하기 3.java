@@ -7,12 +7,9 @@ public class Main {
         int T = Integer.parseInt(br.readLine());
         StringBuilder ans = new StringBuilder();
         long[] dp = new long[1000001];
-        dp[0] = 1;
-        for (int i = 1; i <= 1000000; i++) {
-            long a=dp[i-1],b=0,c=0;
-            if (i>1) b = dp[i - 2];
-            if (i>2) c = dp[i - 3];
-            dp[i] = (a+b+c)%1000000009;
+        dp[1] = 1;dp[2]=2;dp[3]=4;
+        for (int i = 4; i <= 1000000; i++) {
+            dp[i] = (dp[i-1]+dp[i-2]+dp[i-3])%1000000009;
         }
         while (T-- > 0) {
             int N = Integer.parseInt(br.readLine());

@@ -6,21 +6,22 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int ans = 1;
         int N = Integer.parseInt(br.readLine());
-        int[][] arr = new int[N][2];
+        PriorityQueue<int[]> pq1 = new PriorityQueue<>((o1, o2) -> o1[0]-o2[0]);
         for (int i = 0; i < N; i++) {
             String[] s = br.readLine().split(" ");
-            arr[i] = new int[] {Integer.parseInt(s[1]), Integer.parseInt(s[2])};
+            pq1.offer(new int[] {Integer.parseInt(s[1]), Integer.parseInt(s[2])});
         }
-        Arrays.sort(arr, (o1, o2) -> Arrays.compare(o1,o2) );
         PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1]-o2[1]);
-        pq.offer(new int[]{arr[0][0], arr[0][1]});
-        for (int i = 1; i < N; i++) {
-            if (arr[i][0] >= pq.peek()[1]) {
-                pq.remove();
-            } else {
-                ans++;
+        while (!pq1.isEmpty()) {
+            int[] p1 = pq1.poll();
+            if (!pq.isEmpty()) {
+                if (pq.peek()[1] <= p1[0]) {
+                    pq.remove();
+                } else {
+                    ans++;
+                }
             }
-            pq.add(new int[]{arr[i][0], arr[i][1]});
+            pq.offer(p1);
         }
         System.out.println(ans);
     }

@@ -2,18 +2,33 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-        public static void main(String[] args) throws IOException {
+    static class Node implements Comparable<Node> {
+        int v;
+        int t;
+        public Node(int v, int t) {
+            this.v = v;
+            this.t = t;
+        }
+        @Override
+        public int compareTo(Node o) {
+            return v != o.v ? v - o.v : t - o.t;
+        }
+
+
+    }
+    public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine()),ans=0,cnt=0;
-        List<int[]> nodes = new ArrayList<>();
+        List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            nodes.add(new int[]{Integer.parseInt(st.nextToken()),1});
-            nodes.add(new int[]{Integer.parseInt(st.nextToken()),0});
+            nodes.add(new Node(Integer.parseInt(st.nextToken()),1));
+            nodes.add(new Node(Integer.parseInt(st.nextToken()),0));
         }
-        nodes.sort(Arrays::compare);
-        for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i)[1] == 1) {
+        Collections.sort(nodes);
+        for (Node node : nodes) {
+            if (node.t == 1) {
                 cnt++;
                 ans = Math.max(ans, cnt);
             } else {
